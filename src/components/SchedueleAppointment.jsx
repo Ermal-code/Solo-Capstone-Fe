@@ -3,55 +3,98 @@ import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import "./calendar.css";
 import moment from "moment";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
+import {
+  addNewAppointment,
+  getDoctorOrClinicAppointments,
+} from "../api/appointmentApi";
+import { getUserById } from "../api/usersApi";
+import { hoursOfDay, convertToFullDate } from "../helpers/dateHandlers";
 
 const SchedueleAppointment = () => {
-  const hoursOfDay = () => {
-    let date1 = moment("March 16, 2021 9:00").format("LT");
-
-    let newDate = moment("March 16, 2021 9:00").add(30, "minutes");
-
-    let arr = [date1.toString()];
-    for (let i = 0; i < 18; i++) {
-      let date = moment(newDate).format("LT");
-      arr.push(date.toString());
-      newDate = moment(newDate).add(30, "minutes");
-    }
-    return arr;
-  };
-  const fullDate = () => {
-    let date1 = moment(value).format("LL");
-
-    return date1 + " " + hour;
-  };
+  const [doctor, setDoctor] = useState(null);
+  const [doctorAppointments, setDoctorAppointments] = useState([]);
   const [value, setValue] = useState(new Date());
-  const [hours, setHours] = useState(hoursOfDay);
-  const [hour, setHour] = useState(hours[0]);
-  const [hoursDate, setHoursDate] = useState(fullDate);
+  const [hours, setHours] = useState([]);
+  const [hour, setHour] = useState(null);
+  const [fullDate, setFullDate] = useState("");
+
+  const submitAppointment = async () => {
+    try {
+      const response = await addNewAppointment({
+        startDate: fullDate,
+        doctor: "604ba7e31a95b940948ae915",
+        patient: "604ba8a9674a9f4eb8625da8",
+        type: "online",
+        reason: "Follow up",
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getDoctorAppointments = async () => {
+    const response = await getDoctorOrClinicAppointments(
+      "604ba7e31a95b940948ae915"
+    );
+    if (response.statusText === "OK") {
+      const appointments = response.data;
+      setDoctorAppointments(appointments);
+    } else {
+      alert("Something went wrong");
+    }
+  };
+
+  const getDoctor = async () => {
+    const response = await getUserById("604ba7e31a95b940948ae915");
+    if (response.statusText === "OK") {
+      const doctor = response.data;
+      setDoctor(doctor);
+    } else {
+      alert("Something went wrong");
+    }
+  };
 
   useEffect(() => {
-    setHoursDate(fullDate);
-  }, [value, hour]);
+    getDoctor();
+    getDoctorAppointments();
+  }, []);
+
+  useEffect(() => {
+    setFullDate(convertToFullDate(value, hour));
+    setHours(hoursOfDay(value, doctor, doctorAppointments));
+  }, [value, hour, doctor]);
 
   return (
-    <div>
-      <Calendar value={value} onChange={setValue} />
+    <Container>
+      <Row className="mt-5">
+        <Col md={5}>
+          <Calendar value={value} onChange={setValue} minDate={new Date()} />
+        </Col>
+
+        <Col md={7}>
+          <Row>
+            {hours.map((h, index) => (
+              <Col md={3} key={index} className="mb-4 getBiger">
+                <p className="hoursOfDay mb-0" onClick={() => setHour(h)}>
+                  {h}
+                </p>
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </Row>
+      <Button onClick={() => submitAppointment()}>Submit</Button>
+      <br />
       {moment(value).format("LL")}
       <br />
-      <Row>
-        {hours.map((h, index) => (
-          <Col md={3} key={index} className="mb-4 getBiger">
-            <p className="hoursOfDay" onClick={() => setHour(h)}>
-              {h}
-            </p>
-          </Col>
-        ))}
-      </Row>
+      {fullDate}
       <br />
-      {hoursDate}
+      {moment(fullDate).format()}
       <br />
-      {moment(`${hoursDate}`).format()}
-    </div>
+      {moment(fullDate).format("dddd")}
+    </Container>
   );
 };
 

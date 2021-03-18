@@ -1,3 +1,5 @@
+import axios from "../helpers/authRefresh";
+
 export const loginUser = async (body) => {
   const response = await fetch(
     `${process.env.REACT_APP_BE_URL}/api/users/login`,
@@ -6,6 +8,16 @@ export const loginUser = async (body) => {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(body),
+    }
+  );
+  return response;
+};
+
+export const getUserById = async (id) => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_BE_URL}/api/users/${id}`,
+    {
+      withCredentials: true,
     }
   );
   return response;
