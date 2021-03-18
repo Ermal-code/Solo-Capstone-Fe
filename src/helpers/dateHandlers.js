@@ -23,39 +23,44 @@ export const hoursOfDay = (value, doctor, doctorAppointments) => {
     : [];
 
   if (dayOfTheWeek.length > 0) {
-    const startHour = convertToFullDate(value, dayOfTheWeek[0].startHour);
+    let hoursArray = [];
 
-    const endHour = convertToFullDate(value, dayOfTheWeek[0].endHour);
+    for (let i = 0; i < dayOfTheWeek.length; i++) {
+      const startHour = convertToFullDate(value, dayOfTheWeek[i].startHour);
 
-    const workingHours = howManyHours(startHour, endHour);
+      const endHour = convertToFullDate(value, dayOfTheWeek[i].endHour);
 
-    let startingHour = moment(startHour).format("LT");
+      const workingHours = howManyHours(startHour, endHour);
 
-    let addHalfHour = moment(startHour).add(30, "minutes");
+      let startingHour = moment(startHour).format("LT");
 
-    let arr = [startingHour.toString()];
+      let addHalfHour = moment(startHour).add(30, "minutes");
 
-    for (let i = 0; i < workingHours * 2; i++) {
-      let hour = moment(addHalfHour).format("LT");
-      arr.push(hour.toString());
-      addHalfHour = moment(addHalfHour).add(30, "minutes");
+      let arr = [startingHour.toString()];
+
+      for (let j = 0; j < workingHours * 2; j++) {
+        let hour = moment(addHalfHour).format("LT");
+        arr.push(hour.toString());
+        addHalfHour = moment(addHalfHour).add(30, "minutes");
+      }
+
+      const selectedDayAppointments = doctorAppointments
+        .filter(
+          (appointment) =>
+            moment(appointment.startDate).format("LL") ===
+            moment(value).format("LL")
+        )
+        .map((appointment) => moment(appointment.startDate).format("LT"));
+
+      if (selectedDayAppointments.length > 0) {
+        arr = arr.filter(
+          (appointment) => !selectedDayAppointments.includes(appointment)
+        );
+      }
+      hoursArray = [...hoursArray, ...arr];
     }
 
-    const selectedDayAppointments = doctorAppointments
-      .filter(
-        (appointment) =>
-          moment(appointment.startDate).format("LL") ===
-          moment(value).format("LL")
-      )
-      .map((appointment) => moment(appointment.startDate).format("LT"));
-
-    if (selectedDayAppointments.length > 0) {
-      arr = arr.filter(
-        (appointment) => !selectedDayAppointments.includes(appointment)
-      );
-    }
-
-    return arr;
+    return hoursArray;
   } else {
     return [];
   }
