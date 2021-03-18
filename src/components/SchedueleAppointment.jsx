@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import "./calendar.css";
-import moment from "moment";
+// import moment from "moment";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import {
   addNewAppointment,
@@ -86,14 +86,14 @@ const SchedueleAppointment = () => {
         </Col>
       </Row>
       <Button onClick={() => submitAppointment()}>Submit</Button>
-      <br />
+      {/* <br />
       {moment(value).format("LL")}
       <br />
       {fullDate}
       <br />
       {moment(fullDate).format()}
       <br />
-      {moment(fullDate).format("dddd")}
+      {moment(fullDate).format("dddd")} */}
     </Container>
   );
 };
