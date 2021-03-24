@@ -20,5 +20,16 @@ export const getUserById = async (id) => {
       withCredentials: true,
     }
   );
+
+  return response;
+};
+
+export const registerUser = async (body) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BE_URL}/api/users/register`,
+    body,
+    { headers: { "Content-Type": "application/json" }, withCredentials: true }
+  );
+
   return response;
 };

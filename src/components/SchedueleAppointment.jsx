@@ -28,31 +28,37 @@ const SchedueleAppointment = () => {
         type: "online",
         reason: "Follow up",
       });
-      console.log(response);
+      if (response.status === 201) {
+        console.log(response);
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
   const getDoctorAppointments = async () => {
-    const response = await getDoctorOrClinicAppointments(
-      "604ba7e31a95b940948ae915"
-    );
-    if (response.statusText === "OK") {
-      const appointments = response.data;
-      setDoctorAppointments(appointments);
-    } else {
-      alert("Something went wrong");
+    try {
+      const response = await getDoctorOrClinicAppointments(
+        "604ba7e31a95b940948ae915"
+      );
+      if (response.statusText === "OK") {
+        const appointments = response.data;
+        setDoctorAppointments(appointments);
+      }
+    } catch (error) {
+      console.log(error.response.data);
     }
   };
 
   const getDoctor = async () => {
-    const response = await getUserById("604ba7e31a95b940948ae915");
-    if (response.statusText === "OK") {
-      const doctor = response.data;
-      setDoctor(doctor);
-    } else {
-      alert("Something went wrong");
+    try {
+      const response = await getUserById("604ba7e31a95b940948ae915");
+      if (response.statusText === "OK") {
+        const doctor = response.data;
+        setDoctor(doctor);
+      }
+    } catch (error) {
+      console.log(error.response.data);
     }
   };
 
@@ -86,14 +92,6 @@ const SchedueleAppointment = () => {
         </Col>
       </Row>
       <Button onClick={() => submitAppointment()}>Submit</Button>
-      {/* <br />
-      {moment(value).format("LL")}
-      <br />
-      {fullDate}
-      <br />
-      {moment(fullDate).format()}
-      <br />
-      {moment(fullDate).format("dddd")} */}
     </Container>
   );
 };

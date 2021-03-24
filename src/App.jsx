@@ -4,6 +4,7 @@ import "./App.css";
 import Login from "./components/Login";
 import SchedueleAppointment from "./components/SchedueleAppointment";
 import RegisterDoctorOrClinic from "./components/RegisterDoctorOrClinic";
+import RegisterPatient from "./components/RegisterPatient";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/home" exact component={SchedueleAppointment} />
         <Route path="/register" exact component={RegisterDoctorOrClinic} />
+        <Route path="/registerPatient" exact component={RegisterPatient} />
       </Router>
     </div>
   );
