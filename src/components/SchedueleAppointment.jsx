@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
-import "./calendar.css";
-// import moment from "moment";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import {
   addNewAppointment,
   getDoctorOrClinicAppointments,
 } from "../api/appointmentApi";
-import { getUserById } from "../api/usersApi";
 import { hoursOfDay, convertToFullDate } from "../helpers/dateHandlers";
 
-const SchedueleAppointment = () => {
-  const [doctor, setDoctor] = useState(null);
+const SchedueleAppointment = ({ profile }) => {
   const [doctorAppointments, setDoctorAppointments] = useState([]);
   const [value, setValue] = useState(new Date());
   const [hours, setHours] = useState([]);
@@ -50,36 +46,24 @@ const SchedueleAppointment = () => {
     }
   };
 
-  const getDoctor = async () => {
-    try {
-      const response = await getUserById("604ba7e31a95b940948ae915");
-      if (response.statusText === "OK") {
-        const doctor = response.data;
-        setDoctor(doctor);
-      }
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  };
-
   useEffect(() => {
-    getDoctor();
     getDoctorAppointments();
   }, []);
 
   useEffect(() => {
     setFullDate(convertToFullDate(value, hour));
-    setHours(hoursOfDay(value, doctor, doctorAppointments));
-  }, [value, hour, doctor]);
+    setHours(hoursOfDay(value, profile, doctorAppointments));
+  }, [value, hour, profile]);
 
   return (
-    <Container>
-      <Row className="mt-5">
-        <Col md={5}>
+    <>
+      <div className="mt-5">
+        <pre>{JSON.stringify(profile, null, 2)}</pre>
+        <div className="mb-3 d-flex justify-content-center">
           <Calendar value={value} onChange={setValue} minDate={new Date()} />
-        </Col>
+        </div>
 
-        <Col md={7}>
+        <div>
           <Row>
             {hours.map((h, index) => (
               <Col md={3} key={index} className="mb-4 getBiger">
@@ -89,10 +73,10 @@ const SchedueleAppointment = () => {
               </Col>
             ))}
           </Row>
-        </Col>
-      </Row>
+        </div>
+      </div>
       <Button onClick={() => submitAppointment()}>Submit</Button>
-    </Container>
+    </>
   );
 };
 

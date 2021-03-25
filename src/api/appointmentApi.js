@@ -11,8 +11,7 @@ export const addNewAppointment = async (body) => {
 
 export const getDoctorOrClinicAppointments = async (id) => {
   const response = await axios.get(
-    `${process.env.REACT_APP_BE_URL}/api/appointments/doctorOrClinicAppointments/${id}`,
-    { withCredentials: true }
+    `${process.env.REACT_APP_BE_URL}/api/appointments/doctorOrClinicAppointments/${id}`
   );
   return response;
 };

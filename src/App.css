@@ -15,3 +15,36 @@
   transform: scale(1.1) translate(2%);
   transition: 0.4s ease;
 }
+
+.profileAvatar {
+  border-radius: 50%;
+  border: 10px solid #b9e9b2;
+  max-height: 150px;
+  object-fit: cover;
+}
+
+.profileInfoCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profileSectionSelector {
+  background-color: #eaf5e9;
+  padding: 5px 15px;
+  color: gray;
+  border-top: 2px solid #b9e9b2;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.profileSectionSelector:hover {
+  cursor: pointer;
+}
+
+.profileSectionBorder {
+  background-color: #d6fcd2;
+  border-bottom: 4px solid #b9e9b2;
+  border-right: 2px solid #b9e9b2;
+  border-left: 2px solid #b9e9b2;
+  color: black;
+}
