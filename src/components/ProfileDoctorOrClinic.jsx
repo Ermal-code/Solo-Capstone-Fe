@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { getUserById } from "../api/usersApi";
 import AboutSection from "./AboutSection";
 import ProfileInfoCard from "./ProfileInfoCard";
+import ReviewSection from "./ReviewSection";
 import SchedueleAppointment from "./SchedueleAppointment";
 import SectionSelector from "./SectionSelector";
 
@@ -37,8 +38,9 @@ const ProfileDoctorOrClinic = () => {
               sectionSelector={sectionSelector}
               setSectionSelector={setSectionSelector}
             />
-            <div className="profileSection">
+            <div className="profileSection shadow">
               {sectionSelector === 1 && <AboutSection profile={profile} />}
+              {sectionSelector === 3 && <ReviewSection profile={profile} />}
             </div>
           </Col>
           <Col md={5}>

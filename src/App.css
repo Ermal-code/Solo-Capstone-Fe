@@ -54,3 +54,11 @@
   border-radius: 15px;
   border-top-left-radius: 0;
 }
+
+.reviewText {
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  background-color: #f8fff7;
+  margin-left: 50px;
+  padding: 7px 15px;
+}

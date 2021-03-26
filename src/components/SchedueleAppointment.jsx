@@ -58,7 +58,6 @@ const SchedueleAppointment = ({ profile }) => {
   return (
     <>
       <div className="mt-5">
-        <pre>{JSON.stringify(profile, null, 2)}</pre>
         <div className="mb-3 d-flex justify-content-center">
           <Calendar value={value} onChange={setValue} minDate={new Date()} />
         </div>

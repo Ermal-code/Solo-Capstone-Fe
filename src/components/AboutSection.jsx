@@ -1,4 +1,5 @@
 import React from "react";
+import { groupBy } from "../helpers/helperFuctions";
 
 const AboutSection = ({ profile }) => {
   return (
@@ -33,19 +34,32 @@ const AboutSection = ({ profile }) => {
         </p>
       )}
       <h5 className="mt-4">Working days and hours</h5>
-      {profile.workingHours.map((day, index) => (
-        <div
-          key={`${day.day}${day.startHour}${index}`}
-          className="d-flex justify-content-start mb-2"
-        >
-          <p className="mb-0">
-            <strong>{day.day}:</strong>
-          </p>
-          <p className="mb-0 ml-2">
-            {day.startHour} - {day.endHour}
-          </p>
-        </div>
-      ))}
+      {groupBy(profile.workingHours, profile.workingHours[0], "day").map(
+        (day, index) => (
+          <div
+            key={`${day[0].day}${day[0].startHour}${index}`}
+            className={`d-flex justify-content-start  mb-2 ${
+              day.length > 1 ? "align-items-center" : ""
+            }`}
+          >
+            <p className="mb-0 ">
+              <strong>{day[0].day}:</strong>
+            </p>
+            <div>
+              {day.map((hours, i) => (
+                <p key={`${hours.startHour}${i}`} className="mb-0 ml-2">
+                  {hours.startHour} - {hours.endHour}
+                  {/* {day.length > 1
+                    ? day.length - 1 === i
+                      ? `${hours.startHour} - ${hours.endHour}`
+                      : `${hours.startHour} - ${hours.endHour},`
+                    : ` ${hours.startHour} - ${hours.endHour}`} */}
+                </p>
+              ))}
+            </div>
+          </div>
+        )
+      )}
       <h5 className="mt-4">Website</h5>
       {profile.website ? (
         <a href={profile.website}>{profile.website}</a>
