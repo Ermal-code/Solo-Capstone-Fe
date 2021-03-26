@@ -30,6 +30,7 @@
 }
 
 .profileSectionSelector {
+  margin-bottom: 0;
   background-color: #eaf5e9;
   padding: 5px 15px;
   color: gray;
@@ -43,8 +44,13 @@
 
 .profileSectionBorder {
   background-color: #d6fcd2;
-  border-bottom: 4px solid #b9e9b2;
   border-right: 2px solid #b9e9b2;
   border-left: 2px solid #b9e9b2;
   color: black;
+}
+.profileSection {
+  background-color: #d6fcd2;
+  border: 2px solid #b9e9b2;
+  border-radius: 15px;
+  border-top-left-radius: 0;
 }

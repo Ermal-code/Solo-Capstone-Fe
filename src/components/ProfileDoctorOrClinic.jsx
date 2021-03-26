@@ -37,8 +37,10 @@ const ProfileDoctorOrClinic = () => {
               sectionSelector={sectionSelector}
               setSectionSelector={setSectionSelector}
             />
+            <div className="profileSection">
+              {sectionSelector === 1 && <AboutSection profile={profile} />}
+            </div>
           </Col>
-          {sectionSelector === 1 && <AboutSection profile={profile} />}
           <Col md={5}>
             <SchedueleAppointment profile={profile} />
           </Col>
