@@ -9,11 +9,7 @@ const ProfileInfoCard = ({ profile }) => {
       style={{ border: "2px solid black", borderRadius: "15px" }}
     >
       <Col md={4}>
-        <img
-          src={profile.image}
-          className="img-fluid profileAvatar"
-          alt="User avatar"
-        />
+        <img src={profile.image} className="profileAvatar" alt="User avatar" />
       </Col>
       <Col md={8} className="profileInfoCard">
         <h3>

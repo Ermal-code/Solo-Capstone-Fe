@@ -27,7 +27,8 @@ textarea {
 .profileAvatar {
   border-radius: 50%;
   border: 10px solid #b9e9b2;
-  max-height: 150px;
+  height: 150px;
+  width: 150px;
   object-fit: cover;
 }
 
