@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import { isLoggedIn } from "../helpers/helperFuctions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../api/usersApi";
 
 const Header = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -63,6 +64,9 @@ const Header = () => {
                   {showDropDown && (
                     <div className="navbarDropDown shadow">
                       <ul>
+                        <li onClick={() => history.push("/profile/me")}>
+                          Profile
+                        </li>
                         <li>Account</li>
                         <li>Appointments</li>
                         <li

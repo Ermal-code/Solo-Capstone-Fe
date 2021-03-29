@@ -7,17 +7,20 @@ import ProfileInfoCard from "./ProfileInfoCard";
 import ReviewSection from "./ReviewSection";
 import SchedueleAppointment from "./SchedueleAppointment";
 import SectionSelector from "./SectionSelector";
+import { useParams } from "react-router-dom";
 
 const ProfileDoctorOrClinic = () => {
+  const params = useParams();
   const [profile, setProfile] = useState(null);
   const [sectionSelector, setSectionSelector] = useState(1);
   const [doctorAppointments, setDoctorAppointments] = useState([]);
 
   const getProfile = async () => {
     try {
-      const response = await getUserById("604ba7e31a95b940948ae915");
+      const response = await getUserById(params.id);
       if (response.statusText === "OK") {
         const user = response.data;
+        getDoctorAppointments(user._id);
         setProfile(user);
       }
     } catch (error) {
@@ -25,11 +28,9 @@ const ProfileDoctorOrClinic = () => {
     }
   };
 
-  const getDoctorAppointments = async () => {
+  const getDoctorAppointments = async (id) => {
     try {
-      const response = await getDoctorOrClinicAppointments(
-        "604ba7e31a95b940948ae915"
-      );
+      const response = await getDoctorOrClinicAppointments(id);
       if (response.statusText === "OK") {
         const appointments = response.data;
         setDoctorAppointments(appointments);
@@ -40,14 +41,13 @@ const ProfileDoctorOrClinic = () => {
   };
   useEffect(() => {
     getProfile();
-    getDoctorAppointments();
-  }, []);
+  }, [params.id]);
 
   return (
     <div>
       {profile && (
         <Row>
-          <Col md={7}>
+          <Col lg={7}>
             <ProfileInfoCard profile={profile} />
             <SectionSelector
               profile={profile}
@@ -64,7 +64,7 @@ const ProfileDoctorOrClinic = () => {
               )}
             </div>
           </Col>
-          <Col md={5}>
+          <Col lg={5}>
             <SchedueleAppointment
               profile={profile}
               doctorAppointments={doctorAppointments}

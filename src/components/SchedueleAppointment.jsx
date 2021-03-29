@@ -4,19 +4,21 @@ import Calendar from "react-calendar";
 import { Row, Col, Button } from "react-bootstrap";
 import { addNewAppointment } from "../api/appointmentApi";
 import { hoursOfDay, convertToFullDate } from "../helpers/dateHandlers";
+import { useSelector } from "react-redux";
 
 const SchedueleAppointment = ({ profile, doctorAppointments }) => {
   const [value, setValue] = useState(new Date());
   const [hours, setHours] = useState([]);
   const [hour, setHour] = useState(null);
   const [fullDate, setFullDate] = useState("");
+  const user = useSelector((state) => state.user);
 
   const submitAppointment = async () => {
     try {
       const response = await addNewAppointment({
         startDate: fullDate,
-        doctor: "604ba7e31a95b940948ae915",
-        patient: "604ba8a9674a9f4eb8625da8",
+        doctor: profile._id,
+        patient: user._id,
         type: "online",
         reason: "Follow up",
       });
@@ -43,7 +45,7 @@ const SchedueleAppointment = ({ profile, doctorAppointments }) => {
         <div>
           <Row>
             {hours.map((h, index) => (
-              <Col md={3} key={index} className="mb-4 getBiger">
+              <Col xs={4} sm={3} key={index} className="mb-4 getBiger">
                 <p className="hoursOfDay mb-0" onClick={() => setHour(h)}>
                   {h}
                 </p>

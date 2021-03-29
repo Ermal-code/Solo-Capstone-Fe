@@ -155,3 +155,8 @@ textarea {
 .addRating i:hover {
   cursor: pointer;
 }
+
+.fas.fa-check:hover,
+.fas.fa-times:hover {
+  cursor: pointer;
+}

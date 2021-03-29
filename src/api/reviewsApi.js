@@ -7,7 +7,6 @@ export const getReviews = async (id, setReviews) => {
       `${process.env.REACT_APP_BE_URL}/api/reviews/${id}`
     );
     if (response.statusText === "OK") {
-      console.log(response.data);
       setReviews(response.data.reverse());
     }
   } catch (error) {

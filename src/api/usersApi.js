@@ -33,3 +33,13 @@ export const registerUser = async (body) => {
 
   return response;
 };
+
+export const addRate = async (userId, body) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BE_URL}/api/users/${userId}/addRating`,
+    body,
+    { headers: { "Content-Type": "application/json" }, withCredentials: true }
+  );
+
+  return response;
+};
