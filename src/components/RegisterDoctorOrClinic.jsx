@@ -68,7 +68,7 @@ const RegisterDoctorOrClinic = () => {
             } catch (error) {
               console.log(error.response.data);
               const errors = error.response.data;
-              setRegisterErrors([...errors.errors]);
+              setRegisterErrors(errors);
               console.log(registerErrors);
             }
           }}
@@ -306,7 +306,7 @@ const RegisterDoctorOrClinic = () => {
                                         key={`${specialization._id}and${index}`}
                                         value={specialization._id}
                                       >
-                                        {specialization.specialization}
+                                        {specialization.field}
                                       </option>
                                     )
                                   )}

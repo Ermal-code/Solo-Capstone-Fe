@@ -32,14 +32,14 @@ export const hoursOfDay = (value, doctor, doctorAppointments) => {
 
       const workingHours = howManyHours(startHour, endHour);
 
-      let startingHour = moment(startHour).format("LT");
+      let startingHour = moment(startHour).format("HH:mm");
 
       let addHalfHour = moment(startHour).add(30, "minutes");
 
       let arr = [startingHour.toString()];
 
       for (let j = 0; j < workingHours * 2; j++) {
-        let hour = moment(addHalfHour).format("LT");
+        let hour = moment(addHalfHour).format("HH:mm");
         arr.push(hour.toString());
         addHalfHour = moment(addHalfHour).add(30, "minutes");
       }
@@ -50,7 +50,7 @@ export const hoursOfDay = (value, doctor, doctorAppointments) => {
             moment(appointment.startDate).format("LL") ===
             moment(value).format("LL")
         )
-        .map((appointment) => moment(appointment.startDate).format("LT"));
+        .map((appointment) => moment(appointment.startDate).format("HH:mm"));
 
       if (selectedDayAppointments.length > 0) {
         arr = arr.filter(

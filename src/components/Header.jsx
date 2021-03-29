@@ -67,7 +67,13 @@ const Header = () => {
                         <li onClick={() => history.push("/profile/me")}>
                           Profile
                         </li>
-                        <li>Account</li>
+                        <li
+                          onClick={() =>
+                            history.push("/editProfile/" + user._id)
+                          }
+                        >
+                          Account
+                        </li>
                         <li>Appointments</li>
                         <li
                           onClick={() => {

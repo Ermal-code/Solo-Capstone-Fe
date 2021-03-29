@@ -43,3 +43,12 @@ export const addRate = async (userId, body) => {
 
   return response;
 };
+
+export const editProfile = async (body) => {
+  const response = await axios.put(
+    `${process.env.REACT_APP_BE_URL}/api/users/me`,
+    body,
+    { headers: { "Content-Type": "application/json" }, withCredentials: true }
+  );
+  return response;
+};

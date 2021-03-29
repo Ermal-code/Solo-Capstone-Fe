@@ -34,8 +34,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
 
   const rateUser = async () => {
     try {
-      const response = await addRate(profile._id, { rate: rating });
-      console.log(response);
+      await addRate(profile._id, { rate: rating });
     } catch (error) {
       console.log(error.response);
       if (error.response) {

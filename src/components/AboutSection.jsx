@@ -29,8 +29,24 @@ const AboutSection = ({ profile }) => {
 
       {profile.languages && profile.languages.length > 0 ? (
         <>
+          {profile.specialization.map((specialization, index) => (
+            <strong key={`${specialization._id}index${index}`}>
+              {index === profile.specialization.length - 1
+                ? ` ${specialization.field}`
+                : ` ${specialization.field},`}
+            </strong>
+          ))}
+
           <h5 className="mt-4">Spoken languages</h5>
-          <p>{profile.languages}</p>
+          <p>
+            {profile.languages.map((language, index) => (
+              <strong>
+                {index === profile.languages.length - 1
+                  ? ` ${language}`
+                  : ` ${language},`}
+              </strong>
+            ))}
+          </p>
         </>
       ) : (
         user &&
@@ -44,10 +60,10 @@ const AboutSection = ({ profile }) => {
         )
       )}
 
-      {profile.clinicOrHopsital && (
+      {profile.clinicOrHospital && (
         <>
           <h5 className="mt-4">Hospital/Clinic:</h5>
-          <p>{profile.clinicOrHopsital}</p>
+          <p>{profile.clinicOrHospital}</p>
         </>
       )}
       <h5 className="mt-4">Working days and hours</h5>
