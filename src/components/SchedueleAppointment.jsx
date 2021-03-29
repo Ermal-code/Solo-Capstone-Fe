@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import { Row, Col, Button } from "react-bootstrap";
-import {
-  addNewAppointment,
-  getDoctorOrClinicAppointments,
-} from "../api/appointmentApi";
+import { addNewAppointment } from "../api/appointmentApi";
 import { hoursOfDay, convertToFullDate } from "../helpers/dateHandlers";
 
-const SchedueleAppointment = ({ profile }) => {
-  const [doctorAppointments, setDoctorAppointments] = useState([]);
+const SchedueleAppointment = ({ profile, doctorAppointments }) => {
   const [value, setValue] = useState(new Date());
   const [hours, setHours] = useState([]);
   const [hour, setHour] = useState(null);
@@ -31,24 +27,6 @@ const SchedueleAppointment = ({ profile }) => {
       console.log(error.response.data);
     }
   };
-
-  const getDoctorAppointments = async () => {
-    try {
-      const response = await getDoctorOrClinicAppointments(
-        "604ba7e31a95b940948ae915"
-      );
-      if (response.statusText === "OK") {
-        const appointments = response.data;
-        setDoctorAppointments(appointments);
-      }
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  };
-
-  useEffect(() => {
-    getDoctorAppointments();
-  }, []);
 
   useEffect(() => {
     setFullDate(convertToFullDate(value, hour));

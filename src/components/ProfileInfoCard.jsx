@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import { roundedAvg } from "../helpers/helperFuctions";
 
 const ProfileInfoCard = ({ profile }) => {
   return (
@@ -22,29 +23,19 @@ const ProfileInfoCard = ({ profile }) => {
           Specialist in:
           {profile.specialization.map((specialization, index) => (
             <strong key={`${specialization._id}index${index}`}>
-              {profile.specialization.length > 1
-                ? ` ${
-                    index === profile.specialization.length - 1
-                      ? `${specialization.field}`
-                      : `${specialization.field},`
-                  }`
-                : ` ${specialization.field}`}
+              {index === profile.specialization.length - 1
+                ? ` ${specialization.field}`
+                : ` ${specialization.field},`}
             </strong>
           ))}
         </h5>
         {(profile.role === "doctor" || profile.role === "clinic") && (
-          <div className="mt-3" style={{ color: "#b9e9b2" }}>
+          <div className="mt-3" style={{ color: "#fcba03" }}>
             {[1, 2, 3, 4, 5].map((star) => (
               <i
                 key={`keyOfStar${star}`}
                 className={`${
-                  star <=
-                  Math.round(
-                    profile.rating
-                      .map((rate) => rate.rate)
-                      .reduce((acc, current) => acc + current, 0) /
-                      profile.rating.length
-                  )
+                  star <= roundedAvg(profile.rating.map((rate) => rate.rate))
                     ? "fas"
                     : "far"
                 } fa-star fa-2x`}

@@ -1,3 +1,11 @@
+body {
+  color: #303030;
+}
+
+textarea {
+  resize: none;
+}
+
 .hoursOfDay {
   background: rgb(48, 125, 151);
   color: white;
@@ -46,7 +54,7 @@
   background-color: #d6fcd2;
   border-right: 2px solid #b9e9b2;
   border-left: 2px solid #b9e9b2;
-  color: black;
+  color: #303030;
 }
 .profileSection {
   background-color: #d6fcd2;
@@ -61,4 +69,89 @@
   background-color: #f8fff7;
   margin-left: 50px;
   padding: 7px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accountInfo {
+  padding: 0px 15px;
+  color: #a09a9b;
+  line-height: 18px;
+  position: relative;
+}
+
+.accountInfoLight {
+  padding: 0px 15px;
+  color: #303030;
+  background-color: white;
+  line-height: 18px;
+  position: relative;
+}
+
+.accountInfo:hover,
+.accountInfoLight:hover {
+  cursor: pointer;
+}
+
+.accountInfo:hover p {
+  color: white;
+}
+
+.accountInfo p,
+.accountInfoLight p {
+  margin-bottom: 0;
+}
+
+.accountInfo p:last-of-type,
+.accountInfoLight p:last-of-type {
+  font-size: 14px;
+}
+
+.accountInfo img,
+.accountInfoLight img {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+}
+
+.navbarDropDown {
+  color: #a09a9b;
+  position: absolute;
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 999;
+  top: 43px;
+  right: 0;
+  left: 0;
+}
+
+.navbarDropDown li {
+  padding: 7px 15px;
+}
+
+.navbarDropDown li:hover {
+  color: #303030;
+  cursor: pointer;
+  background-color: #a09a9b28;
+}
+
+.navbarDropDown ul {
+  list-style: none;
+  padding-left: 0;
+  line-height: 30px;
+}
+
+.fas.fa-ellipsis-h {
+  padding: 5px 5px;
+}
+.fas.fa-ellipsis-h:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: rgba(143, 143, 143, 0.37);
+}
+
+.addRating i:hover {
+  cursor: pointer;
 }
