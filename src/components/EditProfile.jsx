@@ -31,11 +31,7 @@ const EditProfile = () => {
   return (
     user && (
       <Row>
-        <Col
-          sm={{ span: 10, offset: 1 }}
-          md={{ span: 8, offset: 2 }}
-          lg={{ span: 6, offset: 3 }}
-        >
+        <Col sm={{ span: 10, offset: 1 }} md={{ span: 8, offset: 2 }}>
           <Formik
             initialValues={{
               name: user.name,

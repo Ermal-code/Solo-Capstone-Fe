@@ -1,13 +1,13 @@
 import axios from "axios";
 import authAxios from "../helpers/authRefresh";
 
-export const getExperiences = async (userId, setExperiences) => {
+export const getEducations = async (userId, setEducations) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_BE_URL}/api/experiences/${userId}`
+      `${process.env.REACT_APP_BE_URL}/api/educations/${userId}`
     );
     if (response.statusText === "OK") {
-      setExperiences(response.data.reverse());
+      setEducations(response.data.reverse());
     }
   } catch (error) {
     console.log(error.response.data);
@@ -15,36 +15,32 @@ export const getExperiences = async (userId, setExperiences) => {
   }
 };
 
-export const addExperience = async (body) => {
+export const addEducation = async (body) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_BE_URL}/api/experiences`,
+    `${process.env.REACT_APP_BE_URL}/api/educations`,
     body,
     { withCredentials: true }
   );
   return response;
 };
 
-export const editExperience = async (body, experienceId) => {
+export const editEducation = async (body, educationId) => {
   const response = await axios.put(
-    `${process.env.REACT_APP_BE_URL}/api/experiences/${experienceId}`,
+    `${process.env.REACT_APP_BE_URL}/api/Educations/${educationId}`,
     body,
     { withCredentials: true }
   );
   return response;
 };
 
-export const deleteExperience = async (
-  experienceId,
-  userId,
-  setExperiences
-) => {
+export const deleteEducation = async (educationId, userId, setEducations) => {
   try {
     const response = await authAxios.delete(
-      `${process.env.REACT_APP_BE_URL}/api/experiences/${experienceId}`,
+      `${process.env.REACT_APP_BE_URL}/api/experiences/${educationId}`,
       { withCredentials: true }
     );
     if (response.status === 203) {
-      getExperiences(userId, setExperiences);
+      getEducations(userId, setEducations);
     }
   } catch (error) {
     console.log(error.response.data);
