@@ -8,6 +8,7 @@ import ReviewSection from "./ReviewSection";
 import SchedueleAppointment from "./SchedueleAppointment";
 import SectionSelector from "./SectionSelector";
 import { useParams } from "react-router-dom";
+import ExperienceSection from "./ExperienceSection";
 
 const ProfileDoctorOrClinic = () => {
   const params = useParams();
@@ -56,6 +57,10 @@ const ProfileDoctorOrClinic = () => {
             />
             <div className="profileSection shadow">
               {sectionSelector === 1 && <AboutSection profile={profile} />}
+              {sectionSelector === 2 && (
+                <ExperienceSection userId={profile._id} />
+              )}
+
               {sectionSelector === 3 && (
                 <ReviewSection
                   profile={profile}

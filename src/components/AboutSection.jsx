@@ -29,18 +29,10 @@ const AboutSection = ({ profile }) => {
 
       {profile.languages && profile.languages.length > 0 ? (
         <>
-          {profile.specialization.map((specialization, index) => (
-            <strong key={`${specialization._id}index${index}`}>
-              {index === profile.specialization.length - 1
-                ? ` ${specialization.field}`
-                : ` ${specialization.field},`}
-            </strong>
-          ))}
-
           <h5 className="mt-4">Spoken languages</h5>
           <p>
             {profile.languages.map((language, index) => (
-              <strong>
+              <strong key={`${language}and${index}`}>
                 {index === profile.languages.length - 1
                   ? ` ${language}`
                   : ` ${language},`}
@@ -90,7 +82,9 @@ const AboutSection = ({ profile }) => {
       {profile.website ? (
         <>
           <h5 className="mt-4">Website</h5>
-          <a href={profile.website}>{profile.website}</a>
+          <a href={profile.website} target="_blank">
+            {profile.website}
+          </a>
         </>
       ) : (
         user &&
