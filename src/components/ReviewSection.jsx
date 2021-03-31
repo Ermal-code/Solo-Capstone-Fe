@@ -4,12 +4,14 @@ import { FormControl, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ReviewText from "./ReviewText";
 import { addRate } from "../api/usersApi";
+import Loader from "./Loader";
 
 const ReviewSection = ({ profile, doctorAppointments }) => {
   const [reviews, setReviews] = useState([]);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   const user = useSelector((state) => state.user);
 
@@ -44,7 +46,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
   };
 
   useEffect(() => {
-    getReviews(profile._id, setReviews);
+    getReviews(profile._id, setReviews, setLoader);
   }, []);
 
   return (
@@ -53,64 +55,67 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
         <div></div>
       ) : (
         <div className="px-4 py-3">
-          {user && (
-            <div className="mb-4 d-flex justify-content-between">
-              {profile.rating.find((rate) => rate.user === user._id) ||
-              rating ? (
-                <div className="addRating">
-                  You rated this {profile.role} with:{" "}
-                  {[1, 2, 3, 4, 5].map((star) => (
+          {user &&
+            doctorAppointments.find(
+              (appointment) => appointment.patient._id === user._id
+            ) && (
+              <div className="mb-4 d-flex justify-content-between">
+                {profile.rating.find((rate) => rate.user === user._id) ||
+                rating ? (
+                  <div className="addRating">
+                    You rated this {profile.role} with:{" "}
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <i
+                        key={`keyOfStarand${star}`}
+                        className={`${
+                          star <= getRating() ? "fas" : "far"
+                        } fa-star fa-2x`}
+                        style={{ color: "#fcba03" }}
+                        onClick={() => {
+                          setRating(star);
+                          setShowConfirm(true);
+                        }}
+                      ></i>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="addRating">
+                    You have yet to rate this {profile.role}
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <i
+                        key={`keyOfStarOfOf${star}`}
+                        className={`far fa-star fa-2x`}
+                        style={{ color: "#fcba03" }}
+                        onClick={() => {
+                          setRating(star);
+                          setShowConfirm(true);
+                        }}
+                      ></i>
+                    ))}
+                  </div>
+                )}
+                {showConfirm && (
+                  <div>
                     <i
-                      key={`keyOfStarand${star}`}
-                      className={`${
-                        star <= getRating() ? "fas" : "far"
-                      } fa-star fa-2x`}
-                      style={{ color: "#fcba03" }}
+                      className="fas fa-times fa-2x mr-3"
+                      style={{ color: "tomato" }}
                       onClick={() => {
-                        setRating(star);
-                        setShowConfirm(true);
+                        setShowConfirm(false);
+                        setRating(null);
                       }}
                     ></i>
-                  ))}
-                </div>
-              ) : (
-                <div className="addRating">
-                  You have yet to rate this {profile.role}
-                  {[1, 2, 3, 4, 5].map((star) => (
                     <i
-                      key={`keyOfStarOfOf${star}`}
-                      className={`far fa-star fa-2x`}
-                      style={{ color: "#fcba03" }}
+                      className="fas fa-check fa-2x"
                       onClick={() => {
-                        setRating(star);
-                        setShowConfirm(true);
+                        rateUser();
+                        setShowConfirm(false);
                       }}
+                      style={{ color: "green" }}
                     ></i>
-                  ))}
-                </div>
-              )}
-              {showConfirm && (
-                <div>
-                  <i
-                    className="fas fa-times fa-2x mr-3"
-                    style={{ color: "tomato" }}
-                    onClick={() => {
-                      setShowConfirm(false);
-                      setRating(null);
-                    }}
-                  ></i>
-                  <i
-                    className="fas fa-check fa-2x"
-                    onClick={() => {
-                      rateUser();
-                      setShowConfirm(false);
-                    }}
-                    style={{ color: "green" }}
-                  ></i>
-                </div>
-              )}
-            </div>
-          )}
+                  </div>
+                )}
+              </div>
+            )}
           <FormControl
             as="textarea"
             aria-label="With textarea"
@@ -127,8 +132,8 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
                     (appointment) => appointment.patient._id === user._id
                   )
                   ? reviewText
-                  : "You should have at least one appointment with this doctor to be able to leave rate and review"
-                : "You need to log in to leave a rate and review"
+                  : `You should have at least one appointment with this ${profile.role} to be able to leave rating or review`
+                : "You need to log in to leave rating or review"
             }
             onChange={(e) => setReviewText(e.currentTarget.value)}
           />
@@ -147,14 +152,18 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
           </Button>
         </div>
       )}
-      {reviews.map((review, index) => (
-        <ReviewText
-          review={review}
-          key={`${review._id}and${index}`}
-          user={user}
-          getReviews={() => getReviews(profile._id, setReviews)}
-        />
-      ))}
+      {loader ? (
+        <Loader />
+      ) : (
+        reviews.map((review, index) => (
+          <ReviewText
+            review={review}
+            key={`${review._id}and${index}`}
+            user={user}
+            getReviews={() => getReviews(profile._id, setReviews)}
+          />
+        ))
+      )}
     </div>
   );
 };

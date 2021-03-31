@@ -1,16 +1,20 @@
 import axios from "axios";
 import authAxios from "../helpers/authRefresh";
 
-export const getReviews = async (id, setReviews) => {
+export const getReviews = async (id, setReviews, setLoader) => {
   try {
+    setLoader && setLoader(true);
     const response = await axios.get(
       `${process.env.REACT_APP_BE_URL}/api/reviews/${id}`
     );
     if (response.statusText === "OK") {
       setReviews(response.data.reverse());
+      setLoader && setLoader(false);
     }
   } catch (error) {
     console.log(error.response.data);
+    setLoader && setLoader(false);
+    return error.response.data;
   }
 };
 

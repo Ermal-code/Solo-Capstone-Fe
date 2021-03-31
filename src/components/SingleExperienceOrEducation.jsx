@@ -32,7 +32,7 @@ const SingleExperienceOrEducation = ({
         </h6>
       </Col>
       <Col xs="7" sm="8">
-        <h5 className="mb-1">
+        <h5 className="mb-0">
           {experience ? experience.role : education.school}
         </h5>
         <p className="mb-0">

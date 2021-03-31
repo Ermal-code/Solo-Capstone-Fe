@@ -9,7 +9,7 @@ const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
           sectionSelector === 1 ? "profileSectionBorder" : ""
         }`}
       >
-        About
+        <i className="fas fa-address-card"></i> About
       </h5>
       {profile.role === "doctor" ? (
         <h5
@@ -18,7 +18,7 @@ const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
             sectionSelector === 2 ? " profileSectionBorder " : ""
           }`}
         >
-          Experiences
+          <i className="fas fa-hat-wizard"></i> Experiences
         </h5>
       ) : (
         <h5
@@ -27,7 +27,7 @@ const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
             sectionSelector === 2 ? " profileSectionBorder " : ""
           }`}
         >
-          Staff
+          <i className="fas fa-users"></i> Staff
         </h5>
       )}
       <h5
@@ -36,7 +36,7 @@ const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
           sectionSelector === 3 ? " profileSectionBorder " : ""
         }`}
       >
-        Reviews
+        <i className="fas fa-comments"></i> Reviews
       </h5>
     </div>
   );

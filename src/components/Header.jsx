@@ -30,11 +30,21 @@ const Header = () => {
   }, []);
 
   return (
-    <Navbar bg="dark" variant="dark" className="pt-0">
+    <Navbar variant="dark" className="py-0 navBarHeader">
       <Container>
-        <div className="d-flex justify-content-between w-100">
+        <div
+          className={`d-flex justify-content-between w-100 ${
+            isLoggedIn() === "false" && "align-items-center"
+          }`}
+        >
           <Link to="/">
-            <Navbar.Brand>Navbar</Navbar.Brand>
+            <Navbar.Brand className="mt-1">
+              <img
+                src={`${process.env.PUBLIC_URL}/EasyDoctorNavBar.png`}
+                alt="logo"
+                height="40px"
+              />
+            </Navbar.Brand>
           </Link>
           <Nav>
             {isLoggedIn() === "false" ? (
@@ -65,16 +75,20 @@ const Header = () => {
                     <div className="navbarDropDown shadow">
                       <ul>
                         <li onClick={() => history.push("/profile/me")}>
-                          Profile
+                          <i className="fas fa-user-alt"></i> Profile
                         </li>
                         <li
                           onClick={() =>
                             history.push("/editProfile/" + user._id)
                           }
                         >
-                          Account
+                          <i className="fas fa-user-cog"></i> Account
                         </li>
-                        <li>Appointments</li>
+                        {user.role !== "patient" && (
+                          <li>
+                            <i className="fas fa-calendar-alt"></i> Appointments
+                          </li>
+                        )}
                         <li
                           onClick={() => {
                             localStorage.setItem("LoggedIn", false);
@@ -83,7 +97,7 @@ const Header = () => {
                             });
                           }}
                         >
-                          Log out
+                          <i className="fas fa-door-open"></i> Log out
                         </li>
                       </ul>
                     </div>

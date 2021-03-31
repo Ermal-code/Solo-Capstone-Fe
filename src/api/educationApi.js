@@ -1,16 +1,19 @@
 import axios from "axios";
 import authAxios from "../helpers/authRefresh";
 
-export const getEducations = async (userId, setEducations) => {
+export const getEducations = async (userId, setEducations, setLoader) => {
   try {
+    setLoader && setLoader(true);
     const response = await axios.get(
       `${process.env.REACT_APP_BE_URL}/api/educations/${userId}`
     );
     if (response.statusText === "OK") {
       setEducations(response.data.reverse());
+      setLoader && setLoader(false);
     }
   } catch (error) {
     console.log(error.response.data);
+    setLoader && setLoader(false);
     return error.response.data;
   }
 };
