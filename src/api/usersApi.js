@@ -52,3 +52,28 @@ export const editProfile = async (body) => {
   );
   return response;
 };
+
+export const logOutUser = async () => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_BE_URL}/api/users/logout`,
+      {},
+      { withCredentials: true }
+    );
+    return response;
+  } catch (error) {
+    console.log(error.response);
+    return error.response.data;
+  }
+};
+
+export const addPicture = async (body) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BE_URL}/api/users/addProfilePic`,
+    body,
+    {
+      withCredentials: true,
+    }
+  );
+  return response;
+};

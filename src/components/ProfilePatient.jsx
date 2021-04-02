@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import PatientAppointments from "./PatientAppointments";
 import PatientSidebar from "./PatientSidebar";
 
 const ProfilePatient = ({ profile }) => {
+  const [selectedSection, setSelectedSection] = useState(1);
   return (
     <div>
       <Row>
-        <PatientSidebar profile={profile} />
-        <Col md={8}></Col>
+        <PatientSidebar
+          profile={profile}
+          setSelectedSection={setSelectedSection}
+          selectedSection={selectedSection}
+        />
+        <Col
+          md={9}
+          className="ml-0 shadow"
+          style={{ borderBottomRightRadius: "15px", background: "#93bcc5" }}
+        >
+          {selectedSection === 2 && <PatientAppointments />}
+        </Col>
       </Row>
-      <pre>{JSON.stringify(profile, null, 2)}</pre>
     </div>
   );
 };

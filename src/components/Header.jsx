@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link, withRouter, useHistory } from "react-router-dom";
+import { Link, withRouter, useHistory, useLocation } from "react-router-dom";
 import { isLoggedIn } from "../helpers/helperFuctions";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../api/usersApi";
+import { getUserById, logOutUser } from "../api/usersApi";
 
 const Header = () => {
+  const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -92,9 +93,21 @@ const Header = () => {
                         <li
                           onClick={() => {
                             localStorage.setItem("LoggedIn", false);
+                            if (
+                              location.pathname === "/profile/me" &&
+                              user.role === "patient"
+                            ) {
+                              history.push("/");
+                            } else if (
+                              location.pathname === "/profile/me" &&
+                              (user.role === "doctor" || user.role === "clinic")
+                            ) {
+                              history.push("/profile/" + user._id);
+                            }
                             dispatch({
                               type: "UNSET_USER",
                             });
+                            logOutUser();
                           }}
                         >
                           <i className="fas fa-door-open"></i> Log out

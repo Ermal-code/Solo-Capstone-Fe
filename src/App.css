@@ -73,10 +73,39 @@ textarea {
 
 .profileAvatar {
   border-radius: 50%;
-  border: 10px solid #b9e9b2;
+  border: 5px solid #101227;
   height: 150px;
   width: 150px;
   object-fit: cover;
+}
+
+.addProfileImage {
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.415);
+  border-radius: 50%;
+  display: none;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.imageContainer:hover .addProfileImage {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addProfileImage:hover i {
+  transform: scale(3);
+  transition: 0.6s ease;
 }
 
 .profileInfoCard {
@@ -189,6 +218,72 @@ textarea {
   list-style: none;
   padding-left: 0;
   line-height: 30px;
+}
+.patientSidebar {
+  background-color: #26a4cf;
+  border-bottom-left-radius: 15px;
+  color: white;
+  height: 80vh;
+}
+
+.sideBarSelector ul {
+  padding: 0 10px;
+  list-style: none;
+  color: rgb(226, 220, 220);
+}
+
+.sideBarSelector li {
+  margin-bottom: 0.7rem;
+}
+
+.sideBarSelector li:hover {
+  cursor: pointer;
+  color: white;
+  transform: scale(1.03);
+  transition: 0.4s ease;
+}
+
+.sideBarSelectedItem {
+  color: white;
+  border-right: 3px solid white;
+}
+
+.appointmentTable thead {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+.appointmentTable thead th {
+  border-left: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.415);
+}
+
+.appointmentTable thead th:last-of-type {
+  border-right: 1px solid white;
+}
+
+.appointmentTable tbody tr {
+  border-bottom: 1px solid white;
+}
+
+.appointmentTable tbody tr td {
+  border-left: 1px solid white;
+  color: white;
+}
+
+.appointmentTable tbody tr td:last-of-type {
+  border-right: 1px solid white;
+}
+
+.appointmentTable tbody tr:hover {
+  border: 2px solid white;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.415);
+  transform: scaleX(1.01);
+  transition: 0.4s ease;
+}
+
+.appointmentTable tbody tr:hover td {
+  color: #303030;
 }
 
 .fas.fa-ellipsis-h {

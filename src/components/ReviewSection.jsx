@@ -155,14 +155,16 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
       {loader ? (
         <Loader />
       ) : (
-        reviews.map((review, index) => (
-          <ReviewText
-            review={review}
-            key={`${review._id}and${index}`}
-            user={user}
-            getReviews={() => getReviews(profile._id, setReviews)}
-          />
-        ))
+        <div className="my-5">
+          {reviews.map((review, index) => (
+            <ReviewText
+              review={review}
+              key={`${review._id}and${index}`}
+              user={user}
+              getReviews={() => getReviews(profile._id, setReviews)}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
