@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { roundedAvg } from "../helpers/helperFuctions";
+import IdPin from "./IdPin";
 import ModalUploadPicture from "./ModalUploadPicture";
 
 const ProfileInfoCard = ({ profile }) => {
@@ -12,12 +13,11 @@ const ProfileInfoCard = ({ profile }) => {
   const handleShow = () => setShow(true);
 
   return (
-    <div>
+    <div className="profileCardContainer shadow mt-5">
+      <IdPin />
       <ModalUploadPicture show={show} handleClose={handleClose} />
-      <Row
-        className="mt-5 p-3"
-        style={{ border: "2px solid black", borderRadius: "15px" }}
-      >
+      <Row className="p-5 ">
+        <Col xs={12} className="idBackground"></Col>
         <Col md={4}>
           <div className="imageContainer">
             <img
@@ -46,8 +46,13 @@ const ProfileInfoCard = ({ profile }) => {
               </strong>
             ))}
           </h5>
+        </Col>
+        <Col xs={12}>
           {(profile.role === "doctor" || profile.role === "clinic") && (
-            <div className="mt-3" style={{ color: "#fcba03" }}>
+            <div
+              className="mt-3 d-flex justify-content-end"
+              style={{ color: "#fcba03" }}
+            >
               {[1, 2, 3, 4, 5].map((star) => (
                 <i
                   key={`keyOfStar${star}`}

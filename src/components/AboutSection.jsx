@@ -34,10 +34,7 @@ const AboutSection = ({ profile }) => {
       {profile.languages && profile.languages.length > 0 ? (
         <>
           <h5 className="mt-4">
-            <i
-              className="fas fa-language mb-0"
-              style={{ fontSize: "28px" }}
-            ></i>{" "}
+            <i className="fas fa-language" style={{ fontSize: "28px" }}></i>{" "}
             Spoken languages
           </h5>
           <div className="d-flex">

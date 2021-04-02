@@ -94,6 +94,7 @@ textarea {
   display: flex;
   justify-content: center;
   border-radius: 50%;
+  margin-top: -70px;
 }
 
 .imageContainer:hover .addProfileImage {
@@ -108,10 +109,63 @@ textarea {
   transition: 0.6s ease;
 }
 
+.profileCardContainer {
+  background-color: white;
+  border-radius: 15px;
+}
+
 .profileInfoCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.doctorIdCard {
+  position: relative;
+}
+
+.doctorIdCard div {
+  background-color: white;
+  position: absolute;
+  top: -20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 30px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.doctorIdCard div div {
+  position: absolute;
+  top: 8px;
+  background-color: #f3f2ef;
+  height: 10px;
+  width: 60%;
+  box-shadow: inset 2px 2px 1px #1012278b, inset -2px -1px 1px #1012278b;
+  border-radius: 15px;
+  z-index: 999;
+}
+
+.doctorIdCard div div div {
+  height: 60px;
+  background-color: rgb(199, 199, 199);
+  box-shadow: inset 0 0.5rem 1rem #1012278b, inset 0 -0.5rem 1rem #1012278b;
+  top: -52px;
+  transform: rotate(5deg);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.idBackground {
+  background: linear-gradient(
+    175deg,
+    rgba(0, 0, 0, 0) 34%,
+    rgba(52, 167, 210, 1) 56%,
+    rgba(35, 145, 186, 1) 76%
+  );
+  height: 80px;
 }
 
 .profileSectionSelector {
