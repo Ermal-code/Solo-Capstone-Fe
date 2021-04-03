@@ -34,7 +34,7 @@ const ProfileInfoCard = ({ profile }) => {
         </Col>
         <Col md={8} className="profileInfoCard">
           <h3>
-            {profile.name} {profile.surname}
+            Dr. {profile.name} {profile.surname}
           </h3>
           <h5>
             Specialist in:
@@ -48,23 +48,21 @@ const ProfileInfoCard = ({ profile }) => {
           </h5>
         </Col>
         <Col xs={12}>
-          {(profile.role === "doctor" || profile.role === "clinic") && (
-            <div
-              className="mt-3 d-flex justify-content-end"
-              style={{ color: "#fcba03" }}
-            >
-              {[1, 2, 3, 4, 5].map((star) => (
-                <i
-                  key={`keyOfStar${star}`}
-                  className={`${
-                    star <= roundedAvg(profile.rating.map((rate) => rate.rate))
-                      ? "fas"
-                      : "far"
-                  } fa-star fa-2x`}
-                ></i>
-              ))}
-            </div>
-          )}
+          <div
+            className="mt-3 d-flex justify-content-end"
+            style={{ color: "#fcba03" }}
+          >
+            {[1, 2, 3, 4, 5].map((star) => (
+              <i
+                key={`keyOfStar${star}`}
+                className={`${
+                  star <= roundedAvg(profile.rating.map((rate) => rate.rate))
+                    ? "fas"
+                    : "far"
+                } fa-star fa-2x`}
+              ></i>
+            ))}
+          </div>
         </Col>
       </Row>
     </div>

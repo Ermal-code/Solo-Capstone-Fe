@@ -42,67 +42,71 @@ const ExperienceSection = ({ userId }) => {
         getEducations={() => getEducations(userId, setEducations)}
       />
 
-      {loader && <Loader />}
+      {loader ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="d-flex justify-content-between">
+            <h4 className="mt-4">
+              <i className="fas fa-briefcase"></i> Experience
+            </h4>
+            {user && userId === user._id && (
+              <h6
+                className="mt-4"
+                onClick={() => {
+                  setIsExperience(true);
+                  handleShow();
+                }}
+              >
+                Add experience
+              </h6>
+            )}
+          </div>
+          {experiences.map((experience, index) => (
+            <SingleExperienceOrEducation
+              key={`${experience._id}${index}`}
+              experience={experience}
+              handleShow={handleShow}
+              userId={user && user._id}
+              setSelectedExperience={() => setSelectedExperience(experience)}
+              deleteExperience={() =>
+                deleteExperience(experience._id, user._id, setExperiences)
+              }
+              setIsExperience={() => setIsExperience(true)}
+            />
+          ))}
 
-      <div className="d-flex justify-content-between">
-        <h4 className="mt-4">
-          <i className="fas fa-briefcase"></i> Experience
-        </h4>
-        {user && userId === user._id && (
-          <h6
-            className="mt-4"
-            onClick={() => {
-              setIsExperience(true);
-              handleShow();
-            }}
-          >
-            Add experience
-          </h6>
-        )}
-      </div>
-      {experiences.map((experience, index) => (
-        <SingleExperienceOrEducation
-          key={`${experience._id}${index}`}
-          experience={experience}
-          handleShow={handleShow}
-          userId={user && user._id}
-          setSelectedExperience={() => setSelectedExperience(experience)}
-          deleteExperience={() =>
-            deleteExperience(experience._id, user._id, setExperiences)
-          }
-          setIsExperience={() => setIsExperience(true)}
-        />
-      ))}
-
-      <div className="d-flex justify-content-between">
-        <h4 className="mt-4">
-          <i className="fas fa-graduation-cap"></i> Education
-        </h4>
-        {user && userId === user._id && (
-          <h6
-            className="mt-4"
-            onClick={() => {
-              setIsExperience(false);
-              handleShow();
-            }}
-          >
-            Add education
-          </h6>
-        )}
-      </div>
-      {educations.map((education, index) => (
-        <SingleExperienceOrEducation
-          key={`${education._id}${index}`}
-          education={education}
-          handleShow={handleShow}
-          userId={user && user._id}
-          setSelectedEducation={() => setSelectedEducation(education)}
-          deleteEducation={() =>
-            deleteEducation(education._id, user._id, setEducations)
-          }
-          setIsExperience={() => setIsExperience(false)}
-        />
-      ))}
+          <div className="d-flex justify-content-between">
+            <h4 className="mt-4">
+              <i className="fas fa-graduation-cap"></i> Education
+            </h4>
+            {user && userId === user._id && (
+              <h6
+                className="mt-4"
+                onClick={() => {
+                  setIsExperience(false);
+                  handleShow();
+                }}
+              >
+                Add education
+              </h6>
+            )}
+          </div>
+          {educations.map((education, index) => (
+            <SingleExperienceOrEducation
+              key={`${education._id}${index}`}
+              education={education}
+              handleShow={handleShow}
+              userId={user && user._id}
+              setSelectedEducation={() => setSelectedEducation(education)}
+              deleteEducation={() =>
+                deleteEducation(education._id, user._id, setEducations)
+              }
+              setIsExperience={() => setIsExperience(false)}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 };
