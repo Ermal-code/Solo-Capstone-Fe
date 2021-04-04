@@ -57,7 +57,7 @@ textarea {
   background: rgb(48, 125, 151);
   color: white;
   text-align: center;
-  padding: 8px 10px;
+  padding: 8px 0;
   border-radius: 15px;
 }
 
@@ -170,10 +170,9 @@ textarea {
 
 .profileSectionSelector {
   margin-bottom: 0;
-  background-color: #eaf5e9;
+  background-color: white;
   padding: 5px 15px;
   color: gray;
-  border-top: 2px solid #b9e9b2;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -182,14 +181,11 @@ textarea {
 }
 
 .profileSectionBorder {
-  background-color: #d6fcd2;
-  border-right: 2px solid #b9e9b2;
-  border-left: 2px solid #b9e9b2;
+  background-color: #dff6f7;
   color: #303030;
 }
 .profileSection {
-  background-color: #d6fcd2;
-  border: 2px solid #b9e9b2;
+  background-color: #dff6f7;
   border-radius: 15px;
   border-top-left-radius: 0;
 }

@@ -37,12 +37,12 @@ const PatientAppointments = () => {
   return (
     <div className="h-100">
       <Row className="my-5">
-        <Col md={3}>
+        <Col xs={3}>
           <Form.Label style={{ color: "white" }}>
             Filter appointments
           </Form.Label>
         </Col>
-        <Col md={4}>
+        <Col xs={4}>
           <Form.Control
             as="select"
             value={dropDownValue}

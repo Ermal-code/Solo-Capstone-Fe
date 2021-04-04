@@ -50,7 +50,7 @@ const ProfileInfoCard = ({ profile }) => {
         <Col xs={12}>
           <div
             className="mt-3 d-flex justify-content-end"
-            style={{ color: "#fcba03" }}
+            style={{ color: "#739AA0" }}
           >
             {[1, 2, 3, 4, 5].map((star) => (
               <i

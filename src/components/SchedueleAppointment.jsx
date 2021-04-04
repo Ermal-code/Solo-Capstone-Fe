@@ -36,8 +36,11 @@ const SchedueleAppointment = ({ profile, doctorAppointments }) => {
   }, [value, hour, profile]);
 
   return (
-    <>
-      <div className="mt-5">
+    <div
+      className="mt-5"
+      style={{ background: "#DFF6F7", borderRadius: "15px" }}
+    >
+      <div>
         <div className="mb-3 d-flex justify-content-center">
           <Calendar value={value} onChange={setValue} minDate={new Date()} />
         </div>
@@ -55,7 +58,7 @@ const SchedueleAppointment = ({ profile, doctorAppointments }) => {
         </div>
       </div>
       <Button onClick={() => submitAppointment()}>Submit</Button>
-    </>
+    </div>
   );
 };
 
