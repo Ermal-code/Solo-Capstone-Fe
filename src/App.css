@@ -193,7 +193,7 @@ textarea {
 .reviewText {
   border-radius: 10px;
   border-top-left-radius: 0;
-  background-color: #f8fff7;
+  background-color: white;
   margin-left: 50px;
   padding: 7px 15px;
   display: flex;

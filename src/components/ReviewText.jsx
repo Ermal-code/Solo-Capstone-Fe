@@ -47,7 +47,7 @@ const ReviewText = ({ review, user, getReviews }) => {
           {review.reviewUser.name} {review.reviewUser.surname}
         </h5>
       </div>
-      <div className="reviewText shadow">
+      <div className={`reviewText`}>
         {showEditReview ? (
           <>
             <div className="w-100">
