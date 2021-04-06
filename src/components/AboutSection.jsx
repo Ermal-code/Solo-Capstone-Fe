@@ -10,18 +10,14 @@ const AboutSection = ({ profile }) => {
       <div>
         {profile.description ? (
           <>
-            <h5 className="mt-3">
-              <i className="fas fa-align-left"></i> Bio
-            </h5>
+            <h5 className="mt-3">Bio</h5>
             <p>{profile.description}</p>
           </>
         ) : (
           user &&
           user._id === profile._id && (
             <>
-              <h5 className="mt-3">
-                <i className="fas fa-align-left"></i> Bio
-              </h5>
+              <h5 className="mt-3">Bio</h5>
               <p style={{ fontStyle: "italic" }}>
                 This is where you can show a bio for yourself so others can
                 see...
@@ -33,10 +29,7 @@ const AboutSection = ({ profile }) => {
 
       {profile.languages && profile.languages.length > 0 ? (
         <>
-          <h5 className="mt-4">
-            <i className="fas fa-language" style={{ fontSize: "28px" }}></i>{" "}
-            Spoken languages
-          </h5>
+          <h5 className="mt-4">Spoken languages</h5>
           <div className="d-flex">
             {profile.languages.map((language, index) => (
               <p key={`${language}and${index}`} className="mr-1">
@@ -51,13 +44,7 @@ const AboutSection = ({ profile }) => {
         user &&
         user._id === profile._id && (
           <>
-            <h5 className="mt-4">
-              <i
-                className="fas fa-language mb-0"
-                style={{ fontSize: "28px" }}
-              ></i>
-              Spoken languages
-            </h5>
+            <h5 className="mt-4">Spoken languages</h5>
             <p style={{ fontStyle: "italic" }}>
               This is where you can show a spoken languages so others can see...
             </p>
@@ -67,15 +54,11 @@ const AboutSection = ({ profile }) => {
 
       {profile.clinicOrHospital && (
         <>
-          <h5 className="mt-4">
-            <i className="fas fa-clinic-medical"></i> Hospital/Clinic
-          </h5>
+          <h5 className="mt-4">Hospital/Clinic</h5>
           <p>{profile.clinicOrHospital}</p>
         </>
       )}
-      <h5 className="mt-4">
-        <i className="far fa-clock"></i> Working days and hours
-      </h5>
+      <h5 className="mt-4">Working days and hours</h5>
       {groupBy(profile.workingHours, "day").map((day, index) => (
         <div
           key={`${day[0].day}${day[0].startHour}${index}`}
@@ -98,9 +81,7 @@ const AboutSection = ({ profile }) => {
 
       {profile.website ? (
         <>
-          <h5 className="mt-4">
-            <i className="fas fa-globe"></i> Website
-          </h5>
+          <h5 className="mt-4">Website</h5>
           <a href={profile.website} target="_blank">
             {profile.website}
           </a>
@@ -109,9 +90,7 @@ const AboutSection = ({ profile }) => {
         user &&
         user._id === profile._id && (
           <>
-            <h5 className="mt-4">
-              <i className="fas fa-globe"></i> Website
-            </h5>
+            <h5 className="mt-4">Website</h5>
             <p style={{ fontStyle: "italic" }}>
               This is where you can show your website so others can see...
             </p>

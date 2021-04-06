@@ -2,7 +2,7 @@ import React from "react";
 
 const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
   return (
-    <div className="d-flex justify-content-start mt-3">
+    <div className="d-flex justify-content-start mt-5">
       <h5
         onClick={() => setSectionSelector(1)}
         className={` profileSectionSelector ${
@@ -18,7 +18,7 @@ const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
             sectionSelector === 2 ? " profileSectionBorder " : ""
           }`}
         >
-          <i className="fas fa-hat-wizard"></i> Experiences
+          <i class="fas fa-briefcase"></i> Experiences
         </h5>
       ) : (
         <h5

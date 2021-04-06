@@ -47,9 +47,7 @@ const ExperienceSection = ({ userId }) => {
       ) : (
         <>
           <div className="d-flex justify-content-between">
-            <h4 className="mt-4">
-              <i className="fas fa-briefcase"></i> Experience
-            </h4>
+            <h4 className="mt-4">Experience</h4>
             {user && userId === user._id && (
               <h6
                 className="mt-4"
@@ -77,9 +75,7 @@ const ExperienceSection = ({ userId }) => {
           ))}
 
           <div className="d-flex justify-content-between">
-            <h4 className="mt-4">
-              <i className="fas fa-graduation-cap"></i> Education
-            </h4>
+            <h4 className="mt-4">Education</h4>
             {user && userId === user._id && (
               <h6
                 className="mt-4"
