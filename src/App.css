@@ -351,11 +351,13 @@ textarea {
   cursor: pointer;
 }
 
-.fas.fa-trash-alt {
+.fas.fa-trash-alt,
+.fas.fa-plus {
   padding: 5px 5px;
 }
 
-.fas.fa-trash-alt:hover {
+.fas.fa-trash-alt:hover,
+.fas.fa-plus:hover {
   cursor: pointer;
   border-radius: 50%;
   background-color: rgba(143, 143, 143, 0.37);

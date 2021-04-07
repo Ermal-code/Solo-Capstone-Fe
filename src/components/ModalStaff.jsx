@@ -6,10 +6,38 @@ import {
   FormControl,
   FormText,
 } from "react-bootstrap";
+import { getDoctorsAndClinics } from "../api/usersApi";
+import ModalStaffSingleDoctor from "./ModalStaffSingleDoctor";
 import SingleMember from "./SingleMember";
 
 const ModalStaff = ({ show, handleClose, staff, setStaff, addMember }) => {
   const [searchText, setSearchText] = useState("");
+  const [doctors, setDoctors] = useState([]);
+  const [showNoSearchResult, setShowNoSearchResult] = useState(false);
+
+  const getDoctors = async () => {
+    try {
+      const query = `?name=${searchText}`;
+      const response = await getDoctorsAndClinics(query);
+
+      if (response.statusText === "OK") {
+        const doctorResult = response.data.filter(
+          (user) => user.role === "doctor"
+        );
+        if (doctorResult.length === 0) {
+          setShowNoSearchResult(true);
+        } else {
+          setShowNoSearchResult(false);
+        }
+
+        setDoctors(doctorResult);
+        setSearchText("");
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
   return (
     <div>
       <Modal show={show} onHide={handleClose}>
@@ -30,13 +58,30 @@ const ModalStaff = ({ show, handleClose, staff, setStaff, addMember }) => {
                   onChange={(e) => setSearchText(e.currentTarget.value)}
                 />
                 <InputGroup.Append>
-                  <Button variant="outline-secondary">Search</Button>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => getDoctors()}
+                    disabled={searchText === ""}
+                  >
+                    Search
+                  </Button>
                 </InputGroup.Append>
               </InputGroup>
               <FormText className="text-danger mb-4">
                 Doctor should be a user of this app.
               </FormText>
               <hr />
+              <div>
+                {doctors.map((doctor, index) => (
+                  <div key={`${doctor._id}${doctor.name}${index}`}>
+                    <ModalStaffSingleDoctor
+                      doctor={doctor}
+                      setStaff={setStaff}
+                    />
+                  </div>
+                ))}
+                {showNoSearchResult && <h3>No search result were found</h3>}
+              </div>
             </div>
           ) : (
             <div>

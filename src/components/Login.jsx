@@ -17,7 +17,7 @@ const Login = () => {
 
       if (response.ok) {
         localStorage.setItem("LoggedIn", true);
-        history.goBack();
+        history.push("/home");
       } else {
         const data = await response.json();
         setError(data);
