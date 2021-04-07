@@ -7,6 +7,7 @@ import ReviewSection from "./ReviewSection";
 import SchedueleAppointment from "./SchedueleAppointment";
 import SectionSelector from "./SectionSelector";
 import ExperienceSection from "./ExperienceSection";
+import StaffSection from "./StaffSection";
 
 const ProfileDoctorOrClinic = ({ profile }) => {
   const [sectionSelector, setSectionSelector] = useState(1);
@@ -29,7 +30,7 @@ const ProfileDoctorOrClinic = ({ profile }) => {
   }, []);
 
   return (
-    <div>
+    <div className="mb-5">
       <Row>
         <Col lg={7}>
           <ProfileInfoCard profile={profile} />
@@ -40,9 +41,12 @@ const ProfileDoctorOrClinic = ({ profile }) => {
           />
           <div className="profileSection shadow">
             {sectionSelector === 1 && <AboutSection profile={profile} />}
-            {sectionSelector === 2 && (
-              <ExperienceSection userId={profile._id} />
-            )}
+            {sectionSelector === 2 &&
+              (profile.role === "doctor" ? (
+                <ExperienceSection userId={profile._id} />
+              ) : (
+                <StaffSection userId={profile._id} />
+              ))}
 
             {sectionSelector === 3 && (
               <ReviewSection

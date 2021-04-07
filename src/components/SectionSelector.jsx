@@ -3,7 +3,7 @@ import React from "react";
 const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
   return (
     <>
-      <div className="d-none d-md-flex justify-content-start mt-5">
+      <div className="d-none d-sm-flex justify-content-start mt-5">
         <h5
           onClick={() => setSectionSelector(1)}
           className={` profileSectionSelector ${
@@ -40,7 +40,7 @@ const SectionSelector = ({ profile, sectionSelector, setSectionSelector }) => {
           <i className="fas fa-comments"></i> Reviews
         </h5>
       </div>
-      <div className="d-md-none d-flex justify-content-start mt-5">
+      <div className="d-sm-none d-flex justify-content-start mt-5">
         <h5
           style={{ fontSize: "30px" }}
           onClick={() => setSectionSelector(1)}

@@ -17,25 +17,23 @@ const Profile = () => {
 
   const getProfile = async () => {
     try {
+      setLoader(true);
       const response = await getUserById(params.id);
       if (response.statusText === "OK") {
         const user = response.data;
-        setTimeout(() => {
-          setProfile(user);
 
-          setLoader(false);
-        }, 3000);
+        setProfile(user);
+
+        setLoader(false);
       }
     } catch (error) {
       setError(error.response.data);
 
       setLoader(false);
 
-      if (error.response.data.httpStatusCode === 403) {
-        setTimeout(() => {
-          history.goBack();
-        }, 3000);
-      }
+      setTimeout(() => {
+        history.goBack();
+      }, 3000);
     }
   };
 
@@ -53,7 +51,10 @@ const Profile = () => {
         <>
           {error && (
             <div className="mt-5 d-flex justify-content-center">
-              <Alert variant="danger">{error.message}</Alert>
+              <Alert variant="danger">
+                {error.message}
+                <br /> You will be redirected to previous page in 3 seconds
+              </Alert>
             </div>
           )}
           {profile && (

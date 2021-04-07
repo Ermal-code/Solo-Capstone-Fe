@@ -350,3 +350,18 @@ textarea {
 .fas.fa-times:hover {
   cursor: pointer;
 }
+
+.fas.fa-trash-alt {
+  padding: 5px 5px;
+}
+
+.fas.fa-trash-alt:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: rgba(143, 143, 143, 0.37);
+}
+
+.singleMember:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

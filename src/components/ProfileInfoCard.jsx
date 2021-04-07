@@ -39,10 +39,10 @@ const ProfileInfoCard = ({ profile }) => {
         </Col>
         <Col md={8} className="profileInfoCard">
           <h3>
-            Dr. {profile.name} {profile.surname}
+            {profile.role === "doctor" && "Dr. "}
+            {profile.name} {profile.surname}
           </h3>
           <h5>
-            Specialist in:
             {profile.specialization.map((specialization, index) => (
               <strong key={`${specialization._id}index${index}`}>
                 {index === profile.specialization.length - 1
