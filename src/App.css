@@ -367,3 +367,39 @@ textarea {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.patientDocument img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.patientDocument:hover {
+  cursor: pointer;
+}
+
+.patientDocument {
+  position: relative;
+}
+
+.patientDocument div:first-of-type {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.469);
+  justify-content: center;
+  align-items: center;
+  color: rgb(240, 234, 234);
+  display: none;
+}
+
+.patientDocument:hover div:first-of-type {
+  display: flex;
+}
+
+.patientDocument div:first-of-type:hover i {
+  transform: scale(3.3);
+  transition: 0.6s ease;
+}

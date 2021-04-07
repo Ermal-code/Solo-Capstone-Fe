@@ -35,7 +35,7 @@ const PatientAppointments = () => {
   };
 
   return (
-    <div className="h-100">
+    <div>
       <Row className="my-5">
         <Col xs={3}>
           <Form.Label style={{ color: "white" }}>

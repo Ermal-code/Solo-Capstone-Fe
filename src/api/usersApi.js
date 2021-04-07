@@ -78,7 +78,7 @@ export const addPicture = async (body) => {
   return response;
 };
 
-export const getDoctorsAndClinics = async (query = "") => {
+export const getDoctorsAndClinics = async (query) => {
   const response = await axios.get(
     `${process.env.REACT_APP_BE_URL}/api/users/doctorsAndClinics${query}`
   );

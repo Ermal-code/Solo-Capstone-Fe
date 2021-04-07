@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import PatientAppointments from "./PatientAppointments";
+import PatientDocuments from "./PatientDocuments";
 import PatientSidebar from "./PatientSidebar";
 
 const ProfilePatient = ({ profile }) => {
@@ -19,6 +20,9 @@ const ProfilePatient = ({ profile }) => {
           style={{ borderBottomRightRadius: "15px", background: "#93bcc5" }}
         >
           {selectedSection === 2 && <PatientAppointments />}
+          {selectedSection === 3 && (
+            <PatientDocuments patientId={profile._id} />
+          )}
         </Col>
       </Row>
     </div>
