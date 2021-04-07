@@ -63,7 +63,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
                 {profile.rating.find((rate) => rate.user === user._id) ||
                 rating ? (
                   <div className="addRating">
-                    You rated this {profile.role} with:{" "}
+                    <p>You rated this {profile.role} with: </p>{" "}
                     {[1, 2, 3, 4, 5].map((star) => (
                       <i
                         key={`keyOfStarand${star}`}
@@ -80,7 +80,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
                   </div>
                 ) : (
                   <div className="addRating">
-                    You have yet to rate this {profile.role}
+                    <p> You have yet to rate this {profile.role}</p>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <i
                         key={`keyOfStarOfOf${star}`}

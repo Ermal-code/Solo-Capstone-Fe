@@ -44,6 +44,13 @@ const Header = () => {
                 src={`${process.env.PUBLIC_URL}/EasyDoctorNavBar.png`}
                 alt="logo"
                 height="40px"
+                className="d-none d-sm-block"
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/EasyDoctorLogo-01.png`}
+                alt="logo"
+                height="40px"
+                className="d-block d-sm-none"
               />
             </Navbar.Brand>
           </Link>
@@ -64,12 +71,12 @@ const Header = () => {
                   onMouseLeave={() => setShowDropDown(false)}
                 >
                   <div className="d-flex justify-content-between align-items-center ">
-                    <img src={user.image} className="img-fluid" />
+                    <img src={user.image} />
                     <div className="ml-2">
                       <p>
                         {user.name} {user.surname}
                       </p>
-                      <p>Manage your account</p>
+                      <p className="d-none d-md-block">Manage your account</p>
                     </div>
                   </div>
                   {showDropDown && (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Form, Button, Col } from "react-bootstrap";
+import { Row, Form, Button, Col, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../api/usersApi";
 
@@ -7,9 +7,11 @@ const Login = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const submitLogin = async (e) => {
     e.preventDefault();
+    setError(null);
     try {
       const response = await loginUser({ email, password });
 
@@ -18,7 +20,7 @@ const Login = () => {
         history.push("/home");
       } else {
         const data = await response.json();
-        alert(data.message);
+        setError(data);
       }
     } catch (error) {
       console.log("error: ", error);
@@ -51,6 +53,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.currentTarget.value)}
             />
           </Form.Group>
+          {error && <Alert variant="danger">{error.message}</Alert>}
 
           <Button variant="primary" type="submit">
             Login

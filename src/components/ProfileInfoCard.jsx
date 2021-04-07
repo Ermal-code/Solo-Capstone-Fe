@@ -17,7 +17,12 @@ const ProfileInfoCard = ({ profile }) => {
       <IdPin />
       <ModalUploadPicture show={show} handleClose={handleClose} />
       <Row className="p-5 ">
-        <Col xs={12} className="idBackground"></Col>
+        <Col xs={12}>
+          <img
+            src={`${process.env.PUBLIC_URL}/profili_i_dokit2-02.jpg`}
+            className="idBackground"
+          />
+        </Col>
         <Col md={4}>
           <div className="imageContainer">
             <img

@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { getUserById } from "../api/usersApi";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import ProfileDoctorOrClinic from "../components/ProfileDoctorOrClinic";
 import ProfilePatient from "../components/ProfilePatient";
 import { useSelector } from "react-redux";
+import { Alert } from "react-bootstrap";
 
 const Profile = () => {
+  const history = useHistory();
   const params = useParams();
   const [loader, setLoader] = useState(true);
   const [profile, setProfile] = useState(null);
+  const [error, setError] = useState(null);
   const user = useSelector((state) => state.user);
 
   const getProfile = async () => {
@@ -24,10 +27,15 @@ const Profile = () => {
         }, 3000);
       }
     } catch (error) {
-      console.log(error.response.data);
-      setTimeout(() => {
-        setLoader(false);
-      }, 3000);
+      setError(error.response.data);
+
+      setLoader(false);
+
+      if (error.response.data.httpStatusCode === 403) {
+        setTimeout(() => {
+          history.goBack();
+        }, 3000);
+      }
     }
   };
 
@@ -37,18 +45,28 @@ const Profile = () => {
 
   return (
     <div>
-      {loader && (
+      {loader ? (
         <div className="waitingScreen">
           <Loader height="150px" />
         </div>
-      )}
-      {profile && (
-        <div>
-          {(profile.role === "doctor" || profile.role === "clinic") && (
-            <ProfileDoctorOrClinic profile={profile} />
+      ) : (
+        <>
+          {error && (
+            <div className="mt-5 d-flex justify-content-center">
+              <Alert variant="danger">{error.message}</Alert>
+            </div>
           )}
-          {profile.role === "patient" && <ProfilePatient profile={profile} />}
-        </div>
+          {profile && (
+            <div>
+              {(profile.role === "doctor" || profile.role === "clinic") && (
+                <ProfileDoctorOrClinic profile={profile} />
+              )}
+              {profile.role === "patient" && (
+                <ProfilePatient profile={profile} />
+              )}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
