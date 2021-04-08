@@ -13,29 +13,27 @@ const ReasonsToJoin = () => {
         <Col md="3" xs="6">
           <div className="reasonsToJoin">
             <MemoDoctorsSvg />
-            <h6 className="mt-3 text-center">
-              Access to best proffesionals around
-            </h6>
+            <h6 className="text-center">Access to best proffesionals around</h6>
           </div>
         </Col>
         <Col md="3" xs="6">
           <div className="reasonsToJoin">
             <MemoBookAppointmentsSvg />
-            <h6 className="mt-3 text-center">Book appointments 24/7</h6>
-          </div>
-        </Col>
-        <Col md="3" xs="6">
-          <div className="reasonsToJoin">
-            <MemoDocumentsSvg />
-            <h6 className="mt-3 text-center">
-              Your medical documents in one place
+            <h6 className="text-center">
+              Book appointments from anywhere 24/7
             </h6>
           </div>
         </Col>
         <Col md="3" xs="6">
           <div className="reasonsToJoin">
+            <MemoDocumentsSvg />
+            <h6 className="text-center">Your medical documents in one place</h6>
+          </div>
+        </Col>
+        <Col md="3" xs="6">
+          <div className="reasonsToJoin">
             <MemoNotificationSvg />
-            <h6 className="mt-3 text-center">
+            <h6 className="text-center">
               Get notification about your appointment
             </h6>
           </div>

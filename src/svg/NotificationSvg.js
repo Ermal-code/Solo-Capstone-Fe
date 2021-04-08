@@ -5,7 +5,7 @@ function NotificationSvg(props) {
     <svg
       id="prefix__Layer_1"
       data-name="Layer 1"
-      viewBox="0 0 291.62 200.01"
+      viewBox="-70 0 291.62 200.01"
       {...props}
     >
       <defs>
