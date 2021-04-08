@@ -20,7 +20,7 @@ const ReasonsToJoin = () => {
           <div className="reasonsToJoin">
             <MemoBookAppointmentsSvg />
             <h6 className="text-center">
-              Book appointments from anywhere 24/7
+              Book appointments online from anywhere 24/7
             </h6>
           </div>
         </Col>
