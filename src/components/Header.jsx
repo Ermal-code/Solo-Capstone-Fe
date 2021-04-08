@@ -4,6 +4,8 @@ import { Link, withRouter, useHistory, useLocation } from "react-router-dom";
 import { isLoggedIn } from "../helpers/helperFuctions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById, logOutUser } from "../api/usersApi";
+import MemoLogoEasyDoctor from "../svg/LogoEasyDoctor";
+import MemoLogoED from "../svg/LogoED";
 
 const Header = () => {
   const location = useLocation();
@@ -39,33 +41,25 @@ const Header = () => {
           }`}
         >
           <Link to="/">
-            <Navbar.Brand className="mt-1">
-              <img
-                src={`${process.env.PUBLIC_URL}/EasyDoctorNavBar.png`}
-                alt="logo"
-                height="40px"
-                className="d-none d-sm-block"
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/EasyDoctorLogo-01.png`}
-                alt="logo"
-                height="40px"
-                className="d-block d-sm-none"
-              />
+            <Navbar.Brand>
+              <div className="d-none d-sm-block">
+                <MemoLogoEasyDoctor />
+              </div>
+              <div className="d-block d-sm-none">
+                <MemoLogoED height="40px" />
+              </div>
             </Navbar.Brand>
           </Link>
           <Nav>
             {isLoggedIn() === "false" ? (
-              <Link to="/" className="nav-link">
-                <i className="fas fa-user"></i> Log In
+              <Link to="/login" className="nav-link">
+                <i className="fas fa-user"></i> Log In/Register
               </Link>
             ) : (
               user && (
                 <div
                   className={
-                    showDropDown
-                      ? `accountInfoLight shadow pt-2`
-                      : `accountInfo pt-2`
+                    showDropDown ? `accountInfoLight pt-2` : `accountInfo pt-2`
                   }
                   onClick={() => setShowDropDown(!showDropDown)}
                   onMouseLeave={() => setShowDropDown(false)}

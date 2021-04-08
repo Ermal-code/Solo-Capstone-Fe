@@ -26,11 +26,7 @@ const RegisterDoctorOrClinic = () => {
 
   return (
     <Row>
-      <Col
-        sm={{ span: 10, offset: 1 }}
-        md={{ span: 8, offset: 2 }}
-        lg={{ span: 6, offset: 3 }}
-      >
+      <Col sm={{ span: 10, offset: 1 }} md={{ span: 8, offset: 2 }}>
         <Formik
           initialValues={{
             name: "",
@@ -253,13 +249,10 @@ const RegisterDoctorOrClinic = () => {
                                     </div>
                                   </Col>
                                   <Col xs={3} style={{ textAlign: "right" }}>
-                                    <Button
-                                      variant="outline-danger"
-                                      className="mt-4"
+                                    <i
+                                      className="fas fa-trash-alt mt-4"
                                       onClick={() => arrayHelpers.remove(index)}
-                                    >
-                                      X
-                                    </Button>
+                                    ></i>
                                   </Col>
                                 </Row>
                               );
@@ -311,12 +304,10 @@ const RegisterDoctorOrClinic = () => {
                                     )
                                   )}
                                 </Field>
-                                <Button
-                                  variant="outline-danger"
+                                <i
+                                  className="fas fa-trash-alt"
                                   onClick={() => arrayHelpers.remove(index)}
-                                >
-                                  X
-                                </Button>
+                                ></i>
                               </div>
                             ))}
                             <Button
@@ -346,9 +337,13 @@ const RegisterDoctorOrClinic = () => {
                     </Form.Row>
                   )}
                   <div>
-                    <Button type="submit" disabled={isSubmitting}>
+                    <button
+                      className="orangeButton"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
                       Register
-                    </Button>
+                    </button>
                   </div>
                 </>
               )}

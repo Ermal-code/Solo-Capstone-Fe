@@ -155,7 +155,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
       {loader ? (
         <Loader />
       ) : (
-        <div className="mt-2 mb-5">
+        <div className="pt-3 pb-5">
           {reviews.map((review, index) => (
             <ReviewText
               review={review}

@@ -1,13 +1,12 @@
 import axios from "../helpers/authRefresh";
 
 export const loginUser = async (body) => {
-  const response = await fetch(
+  const response = await axios.post(
     `${process.env.REACT_APP_BE_URL}/api/users/login`,
+    body,
     {
-      method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(body),
+      withCredentials: true,
     }
   );
   return response;

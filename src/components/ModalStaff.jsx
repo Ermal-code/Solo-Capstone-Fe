@@ -43,7 +43,7 @@ const ModalStaff = ({ show, handleClose, staff, setStaff, addMember }) => {
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {addMember ? "Add Member" : "Delete Members"}
+            {addMember ? "Add Member" : "Remove staff members"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

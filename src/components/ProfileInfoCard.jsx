@@ -37,7 +37,7 @@ const ProfileInfoCard = ({ profile }) => {
             )}
           </div>
         </Col>
-        <Col md={8} className="profileInfoCard">
+        <Col md={8} className="profileInfoCard mt-2">
           <h3>
             {profile.role === "doctor" && "Dr. "}
             {profile.name} {profile.surname}
@@ -51,12 +51,7 @@ const ProfileInfoCard = ({ profile }) => {
               </strong>
             ))}
           </h5>
-        </Col>
-        <Col xs={12}>
-          <div
-            className="mt-3 d-flex justify-content-end"
-            style={{ color: "#739AA0" }}
-          >
+          <div className="mt-3" style={{ color: "#739AA0" }}>
             {[1, 2, 3, 4, 5].map((star) => (
               <i
                 key={`keyOfStar${star}`}

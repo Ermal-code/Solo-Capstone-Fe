@@ -1,14 +1,10 @@
 import React from "react";
+import MemoLogoED from "../svg/LogoED";
 
 const Loader = ({ height }) => {
   return (
     <div className="d-flex justify-content-center align-items-center w-100 h-100 mb-5">
-      <img
-        src={`${process.env.PUBLIC_URL}/EasyDoctorLogo-01.png`}
-        alt="logo"
-        height={height ? height : "45px"}
-        className="loader"
-      />
+      <MemoLogoED className="loader" height={height ? height : "45px"} />
     </div>
   );
 };

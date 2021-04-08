@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row, Form, Button, Col, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { loginUser, registerUser } from "../api/usersApi";
-import MemoLoginIlustrationSvg from "./LoginIlustrationSvg";
+import MemoLoginIlustrationSvg from "../svg/LoginIlustrationSvg";
 import { Formik, Field } from "formik";
 
 const Login = () => {
@@ -10,24 +10,6 @@ const Login = () => {
 
   const [error, setError] = useState(null);
   const [selectedSection, setSelectedSection] = useState("Login");
-
-  // const submitLogin = async (e) => {
-  //   e.preventDefault();
-  //   setError(null);
-  //   try {
-  //     const response = await loginUser({ email, password });
-
-  //     if (response.ok) {
-  //       localStorage.setItem("LoggedIn", true);
-  //       history.push("/home");
-  //     } else {
-  //       const data = await response.json();
-  //       setError(data);
-  //     }
-  //   } catch (error) {
-  //     console.log("error: ", error);
-  //   }
-  // };
 
   return (
     <Row className="mb-5">
@@ -67,21 +49,33 @@ const Login = () => {
             phone: "",
             gender: "",
           }}
-          onSubmit={async (data, { setSubmitting, resetForm }) => {
+          onSubmit={async (data, { setSubmitting }) => {
             try {
               setSubmitting(true);
               if (data.gender === "") {
                 delete data.gender;
               }
-              const response = await registerUser(data);
+              let response;
+              if (selectedSection === "Login") {
+                response = await loginUser({
+                  email: data.email,
+                  password: data.password,
+                });
+              } else {
+                response = await registerUser(data);
+              }
+
               if (response.status === 201) {
-                const data = response.data;
-                console.log(data);
                 setSubmitting(false);
-                resetForm();
+
+                localStorage.setItem("LoggedIn", true);
+
+                history.push("/home");
               }
             } catch (error) {
               console.log(error.response.data);
+              setError(error.response.data);
+              setSubmitting(false);
             }
           }}
         >
@@ -132,11 +126,15 @@ const Login = () => {
                   />
                 </Form.Group>
                 {error && selectedSection === "Login" && (
-                  <Alert>{error.message}</Alert>
+                  <Alert variant="danger" className="w-100 text-center">
+                    {error.message}
+                  </Alert>
                 )}
               </Form.Row>
               {selectedSection === "Login" && (
-                <p className="mt-3 text-center">Forgot password?</p>
+                <p className="mt-3 text-center" style={{ color: "#1a73e8" }}>
+                  Forgot password?
+                </p>
               )}
               {selectedSection === "Register" && (
                 <>

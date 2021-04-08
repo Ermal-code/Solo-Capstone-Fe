@@ -244,13 +244,10 @@ const EditProfile = () => {
                                   </div>
                                 </Col>
                                 <Col xs={3} style={{ textAlign: "right" }}>
-                                  <Button
-                                    variant="outline-danger"
-                                    className="mt-4"
+                                  <i
+                                    className="fas fa-trash-alt mt-4"
                                     onClick={() => arrayHelpers.remove(index)}
-                                  >
-                                    X
-                                  </Button>
+                                  ></i>
                                 </Col>
                               </Row>
                             );
@@ -306,12 +303,11 @@ const EditProfile = () => {
                                   )
                                 )}
                               </Field>
-                              <Button
-                                variant="outline-danger"
+
+                              <i
+                                className="fas fa-trash-alt"
                                 onClick={() => arrayHelpers.remove(index)}
-                              >
-                                X
-                              </Button>
+                              ></i>
                             </div>
                           ))}
                           <Button
@@ -374,12 +370,10 @@ const EditProfile = () => {
                                   </option>
                                 ))}
                               </Field>
-                              <Button
-                                variant="outline-danger"
+                              <i
+                                className="fas fa-trash-alt"
                                 onClick={() => arrayHelpers.remove(index)}
-                              >
-                                X
-                              </Button>
+                              ></i>
                             </div>
                           ))}
                           <Button
