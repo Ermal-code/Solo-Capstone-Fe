@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { FormControl, InputGroup, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 const HomeSearch = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [searchText, setSearchText] = useState("");
   return (
     <div>
@@ -29,9 +31,10 @@ const HomeSearch = () => {
             <InputGroup.Append>
               <Button
                 variant="light"
-                onClick={() =>
-                  dispatch({ type: "SET_SEARCH_TEXT", payload: searchText })
-                }
+                onClick={() => {
+                  dispatch({ type: "SET_SEARCH_TEXT", payload: searchText });
+                  history.push("results");
+                }}
               >
                 <i className="fas fa-search"></i>
               </Button>

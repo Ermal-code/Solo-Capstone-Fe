@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import EditProfile from "./components/EditProfile";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
+import Results from "./pages/Results";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             component={RegisterDoctorOrClinic}
           />
           <Route path="/profile/:id" exact component={Profile} />
+          <Route path="/results" exact component={Results} />
           <Route path="/editProfile/:id" exact component={EditProfile} />
         </Container>
       </Router>
