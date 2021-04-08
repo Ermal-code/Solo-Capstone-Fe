@@ -34,7 +34,7 @@ const ReasonsToJoin = () => {
           <div className="reasonsToJoin">
             <MemoNotificationSvg />
             <h6 className="text-center">
-              Get notification about your appointment
+              Get notifications about your appointment
             </h6>
           </div>
         </Col>
