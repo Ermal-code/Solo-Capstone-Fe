@@ -49,7 +49,7 @@ const Results = () => {
       </InputGroup>
       <Row>
         <Col xs={12}>
-          <h4 className="border-bottom border-secondary pb-3">
+          <h4 className="border-bottom border-secondary pb-3 mt-5 mt-md-1">
             {doctorsAndHopsitals.length === 0
               ? "No search results were found"
               : `Found ${doctorsAndHopsitals.length} search
