@@ -10,10 +10,10 @@ function LogoEasyDoctor(props) {
       {...props}
     >
       <defs>
-        <style>{".prefix__cls-1{fill:#26a3cf}"}</style>
+        <style>{".prefix__cls_Logo-1{fill:#26a3cf}"}</style>
       </defs>
       <path
-        className="prefix__cls-1"
+        className="prefix__cls_Logo-1"
         d="M61.39 18.16a21.94 21.94 0 00-8.17-9.45q-5.44-3.5-13.57-3.5H22.3V57.6h18.35a30.19 30.19 0 003.22-.26 23.11 23.11 0 008.8-3 21.74 21.74 0 008.5-9.15 30.36 30.36 0 003-13.87 31.17 31.17 0 00-2.78-13.16zm-4.54 24.2a18.07 18.07 0 01-6.55 7.78A18.78 18.78 0 0139.65 53H27.34V9.78h12.31a19.18 19.18 0 0110.58 2.77 17.69 17.69 0 016.59 7.64 26.11 26.11 0 012.27 11.14 26.32 26.32 0 01-2.24 11.03z"
       />
       <path
@@ -31,7 +31,7 @@ function LogoEasyDoctor(props) {
         <tspan x={91.03} y={0} letterSpacing={0} fill="#26a3cf">
           {"D"}
         </tspan>
-        <tspan className="prefix__cls-1" x={120.74} y={0}>
+        <tspan className="prefix__cls_Logo-1" x={120.74} y={0}>
           {"o"}
         </tspan>
         <tspan x={145.08} y={0} letterSpacing=".01em" fill="#26a3cf">
@@ -40,7 +40,7 @@ function LogoEasyDoctor(props) {
         <tspan x={165.52} y={0} letterSpacing="-.01em" fill="#26a3cf">
           {"t"}
         </tspan>
-        <tspan className="prefix__cls-1" x={179.93} y={0}>
+        <tspan className="prefix__cls_Logo-1" x={179.93} y={0}>
           {"or"}
         </tspan>
       </text>
