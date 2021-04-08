@@ -12,6 +12,46 @@ textarea {
   background-color: #101227;
 }
 
+.loginNavbar {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 7%;
+  border-bottom: 1px solid #d8d8d8;
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .loginNavbar {
+    width: 100%;
+    justify-content: center;
+    padding-left: 0;
+  }
+}
+
+.loginNavbar h6 {
+  margin-bottom: 0;
+  font-weight: normal;
+  padding-bottom: 11px;
+}
+
+.loginNavbar h6:hover {
+  cursor: pointer;
+}
+
+h6.selectedLoginNavbar {
+  color: #ff804a;
+  border-bottom: 2px solid #ff804a;
+}
+
+.orangeButton {
+  background-color: #ff804a;
+  color: white;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
 .loader {
   animation-name: enlarge;
   animation-duration: 1700ms;
@@ -402,4 +442,8 @@ textarea {
 .patientDocument div:first-of-type:hover i {
   transform: scale(3.3);
   transition: 0.6s ease;
+}
+
+.documentModal {
+  max-width: 90vw !important;
 }

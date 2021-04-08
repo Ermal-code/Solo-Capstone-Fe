@@ -1,43 +1,55 @@
-import React, { Component } from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Row, Button } from "react-bootstrap";
 import { getPatientDocuments } from "../api/documentsApi";
+import ShowDocumentModal from "./ShowDocumentModal";
 import SingleDocument from "./SingleDocument";
 
-export class PatientDocuments extends Component {
-  state = {
-    documents: [],
-  };
+const PatientDocuments = ({ patientId }) => {
+  const [documents, setDocuments] = useState([]);
+  const [showDocumentModal, setShowDocumentModal] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState(null);
 
-  getDocuments = async () => {
+  const getDocuments = async () => {
     try {
-      const response = await getPatientDocuments(this.props.patientId);
+      const response = await getPatientDocuments(patientId);
 
       if (response.statusText === "OK") {
-        const documents = response.data;
-        this.setState({ documents });
+        setDocuments(response.data);
       }
     } catch (error) {
       console.log(error.response.data);
     }
   };
 
-  componentDidMount = () => {
-    this.getDocuments();
-  };
+  useEffect(() => {
+    getDocuments();
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <Row className="mt-5">
-          {this.state.documents.map((document, index) => (
-            <Col md="4" key={`${document._id}${index}${document.patient}ss`}>
-              <SingleDocument document={document} />
-            </Col>
-          ))}
-        </Row>
+  return (
+    <div>
+      <ShowDocumentModal
+        show={showDocumentModal}
+        setShow={setShowDocumentModal}
+        selectedDocument={selectedDocument}
+      />
+      <div className="mt-5">
+        <Button variant="outline-light">
+          <i className="fas fa-plus"></i>Add a new document
+        </Button>
       </div>
-    );
-  }
-}
+      <Row className="mt-5">
+        {documents.map((document, index) => (
+          <Col md="4" key={`${document._id}${index}${document.patient}ss`}>
+            <SingleDocument
+              document={document}
+              setShow={setShowDocumentModal}
+              setSelectedDocument={() => setSelectedDocument(document)}
+            />
+          </Col>
+        ))}
+      </Row>
+    </div>
+  );
+};
 
 export default PatientDocuments;
