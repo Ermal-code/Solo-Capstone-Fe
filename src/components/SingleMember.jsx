@@ -24,9 +24,7 @@ const SingleMember = ({ member, deleteModal, setStaff }) => {
           <h6 className="mb-1">
             Dr. {member.doctor.name} {member.doctor.surname}
           </h6>
-          <h6 style={{ color: "gray" }}>
-            {member.doctor.specialization[0].field}
-          </h6>
+          <h6 style={{ color: "gray" }}>{member.doctor.specialization[0]}</h6>
         </div>
       </div>
       {deleteModal && (

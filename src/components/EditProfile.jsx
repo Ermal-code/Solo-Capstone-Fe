@@ -30,7 +30,7 @@ const EditProfile = () => {
 
   return (
     user && (
-      <Row>
+      <Row className="my-5">
         <Col sm={{ span: 10, offset: 1 }} md={{ span: 8, offset: 2 }}>
           <Formik
             initialValues={{
@@ -46,7 +46,7 @@ const EditProfile = () => {
               clinicOrHospital: user.clinicOrHospital,
               description: user.description,
               website: user.website,
-              languages: user.languages,
+              languages: user.languages ? user.languages : [""],
             }}
             onSubmit={async (data) => {
               try {
@@ -171,8 +171,8 @@ const EditProfile = () => {
                             name="gender"
                             type="radio"
                             as={Form.Check}
-                            value="non-binary"
-                            label="Non-binary"
+                            value="Other"
+                            label="Other"
                           />
                         </div>
                       </Form.Group>
@@ -280,23 +280,21 @@ const EditProfile = () => {
                           {values.specialization.map((element, index) => (
                             <div
                               className="d-flex justify-content-between align-items-center mb-3"
-                              key={`${element._id}${index}`}
+                              key={`${element}${index}`}
                             >
                               <Field
                                 name={`specialization.${index}`}
                                 as="select"
                                 className="form-control w-50 "
                               >
-                                <option value={element._id ? element._id : ""}>
-                                  {element.field
-                                    ? element.field
-                                    : "Choose Option"}
+                                <option value={element ? element : ""}>
+                                  {element ? element : "Choose Option"}
                                 </option>
                                 {specializationList.map(
                                   (specialization, index) => (
                                     <option
                                       key={`${specialization._id}and${index}`}
-                                      value={specialization._id}
+                                      value={specialization.field}
                                     >
                                       {specialization.field}
                                     </option>

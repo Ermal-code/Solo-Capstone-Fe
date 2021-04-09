@@ -21,7 +21,7 @@ const ModalStaffSingleDoctor = ({ doctor, setStaff }) => {
           <h6 className="mb-1">
             Dr. {doctor.name} {doctor.surname}
           </h6>
-          <h6 style={{ color: "gray" }}>{doctor.specialization[0].field}</h6>
+          <h6 style={{ color: "gray" }}>{doctor.specialization}</h6>
         </div>
       </div>
 

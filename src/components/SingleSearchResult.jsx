@@ -19,7 +19,7 @@ const SingleSearchResult = ({ docOrhosp }) => {
           <h5>
             {docOrhosp.name} {docOrhosp.surname && docOrhosp.surname}
           </h5>
-          <h6>{docOrhosp.specialization[0].field}</h6>
+          <h6>{docOrhosp.specialization[0]}</h6>
           <h6>{docOrhosp.languages[0]}</h6>
         </div>
         <div>

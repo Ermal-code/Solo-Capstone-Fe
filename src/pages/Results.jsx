@@ -3,11 +3,13 @@ import { InputGroup, FormControl, Button, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getDoctorsAndClinics } from "../api/usersApi";
 import SingleSearchResult from "../components/SingleSearchResult";
+import Loader from "../components/Loader";
 
 const Results = () => {
   const searchText = useSelector((state) => state.searchText);
   const [doctorsAndHopsitals, setDoctorsAndHospitals] = useState([]);
   const [searchQuery, setSearchQuery] = useState(searchText);
+  const [loader, setLoader] = useState(true);
 
   const getDoctorsHospitals = async (keyword) => {
     try {
@@ -17,10 +19,11 @@ const Results = () => {
 
       if (response.statusText === "OK") {
         setDoctorsAndHospitals(response.data);
-        console.log(response.data);
+        setLoader(false);
       }
     } catch (error) {
       console.log(error.response.data);
+      setLoader(false);
     }
   };
 
@@ -28,7 +31,11 @@ const Results = () => {
     getDoctorsHospitals(searchQuery);
   }, []);
 
-  return (
+  return loader ? (
+    <div className="waitingScreen">
+      <Loader height="150px" />
+    </div>
+  ) : (
     <div className="mt-5">
       <InputGroup className="mb-md-5">
         <FormControl

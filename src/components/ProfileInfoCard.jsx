@@ -23,7 +23,7 @@ const ProfileInfoCard = ({ profile }) => {
             className="idBackground"
           />
         </Col>
-        <Col md={4}>
+        <Col md={5}>
           <div className="imageContainer">
             <img
               src={profile.image}
@@ -37,7 +37,7 @@ const ProfileInfoCard = ({ profile }) => {
             )}
           </div>
         </Col>
-        <Col md={8} className="profileInfoCard mt-2">
+        <Col md={7} className="profileInfoCard mt-2">
           <h3>
             {profile.role === "doctor" && "Dr. "}
             {profile.name} {profile.surname}
@@ -46,8 +46,8 @@ const ProfileInfoCard = ({ profile }) => {
             {profile.specialization.map((specialization, index) => (
               <strong key={`${specialization._id}index${index}`}>
                 {index === profile.specialization.length - 1
-                  ? ` ${specialization.field}`
-                  : ` ${specialization.field},`}
+                  ? ` ${specialization}`
+                  : ` ${specialization},`}
               </strong>
             ))}
           </h5>

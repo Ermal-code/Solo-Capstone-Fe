@@ -32,7 +32,7 @@ const ProfileDoctorOrClinic = ({ profile }) => {
   return (
     <div className="mb-5">
       <Row>
-        <Col lg={7}>
+        <Col md="10" lg={7}>
           <ProfileInfoCard profile={profile} />
           <SectionSelector
             profile={profile}
@@ -56,7 +56,7 @@ const ProfileDoctorOrClinic = ({ profile }) => {
             )}
           </div>
         </Col>
-        <Col lg={5}>
+        <Col md={{ span: 8, offset: 1 }} lg={{ span: 5, offset: 0 }}>
           <SchedueleAppointment
             profile={profile}
             doctorAppointments={doctorAppointments}

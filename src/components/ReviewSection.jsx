@@ -154,7 +154,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
       )}
       {loader ? (
         <Loader />
-      ) : (
+      ) : reviews.length > 0 ? (
         <div className="pt-3 pb-5">
           {reviews.map((review, index) => (
             <ReviewText
@@ -165,6 +165,8 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
             />
           ))}
         </div>
+      ) : (
+        <h4 className="py-5 px-3">This {profile.role} has no reviews</h4>
       )}
     </div>
   );

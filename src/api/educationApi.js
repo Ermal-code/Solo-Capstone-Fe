@@ -29,7 +29,7 @@ export const addEducation = async (body) => {
 
 export const editEducation = async (body, educationId) => {
   const response = await axios.put(
-    `${process.env.REACT_APP_BE_URL}/api/Educations/${educationId}`,
+    `${process.env.REACT_APP_BE_URL}/api/educations/${educationId}`,
     body,
     { withCredentials: true }
   );
@@ -39,7 +39,7 @@ export const editEducation = async (body, educationId) => {
 export const deleteEducation = async (educationId, userId, setEducations) => {
   try {
     const response = await authAxios.delete(
-      `${process.env.REACT_APP_BE_URL}/api/experiences/${educationId}`,
+      `${process.env.REACT_APP_BE_URL}/api/educations/${educationId}`,
       { withCredentials: true }
     );
     if (response.status === 203) {

@@ -25,7 +25,7 @@ const RegisterDoctorOrClinic = () => {
   }, []);
 
   return (
-    <Row>
+    <Row className="my-5">
       <Col sm={{ span: 10, offset: 1 }} md={{ span: 8, offset: 2 }}>
         <Formik
           initialValues={{
@@ -176,8 +176,8 @@ const RegisterDoctorOrClinic = () => {
                               name="gender"
                               type="radio"
                               as={Form.Check}
-                              value="non-binary"
-                              label="Non-binary"
+                              value="Other"
+                              label="Other"
                             />
                           </div>
                         </Form.Group>
@@ -205,7 +205,7 @@ const RegisterDoctorOrClinic = () => {
                                   key={`${hour}${index}`}
                                   className="align-items-center mb-3"
                                 >
-                                  <Col xs={3}>
+                                  <Col xs={4}>
                                     <Form.Label>Day</Form.Label>
                                     <Field
                                       name={`workingHours.${index}.day`}
@@ -248,7 +248,7 @@ const RegisterDoctorOrClinic = () => {
                                       ></Field>
                                     </div>
                                   </Col>
-                                  <Col xs={3} style={{ textAlign: "right" }}>
+                                  <Col xs={2} style={{ textAlign: "right" }}>
                                     <i
                                       className="fas fa-trash-alt mt-4"
                                       onClick={() => arrayHelpers.remove(index)}
@@ -285,7 +285,7 @@ const RegisterDoctorOrClinic = () => {
                             {values.specialization.map((element, index) => (
                               <div
                                 className="d-flex justify-content-between align-items-center mb-3"
-                                key={`${element}${index}`}
+                                key={`${element}specialization${index}`}
                               >
                                 <Field
                                   name={`specialization.${index}`}
@@ -296,8 +296,8 @@ const RegisterDoctorOrClinic = () => {
                                   {specializationList.map(
                                     (specialization, index) => (
                                       <option
-                                        key={`${specialization._id}and${index}`}
-                                        value={specialization._id}
+                                        key={`${specialization._id}andofc${index}`}
+                                        value={specialization.field}
                                       >
                                         {specialization.field}
                                       </option>

@@ -10,13 +10,13 @@ const ReasonsToJoin = () => {
     <div className="my-5">
       <h5 className="text-center">Why choose Easy Doctor ?</h5>
       <Row className="mt-4">
-        <Col md="3" xs="6">
+        <Col md="3" xs="6" className="mb-4">
           <div className="reasonsToJoin">
             <MemoDoctorsSvg />
             <h6 className="text-center">Access to best proffesionals around</h6>
           </div>
         </Col>
-        <Col md="3" xs="6">
+        <Col md="3" xs="6" className="mb-4">
           <div className="reasonsToJoin">
             <MemoBookAppointmentsSvg />
             <h6 className="text-center">
@@ -24,13 +24,13 @@ const ReasonsToJoin = () => {
             </h6>
           </div>
         </Col>
-        <Col md="3" xs="6">
+        <Col md="3" xs="6" className="mb-4">
           <div className="reasonsToJoin">
             <MemoDocumentsSvg />
             <h6 className="text-center">Your medical documents in one place</h6>
           </div>
         </Col>
-        <Col md="3" xs="6">
+        <Col md="3" xs="6" className="mb-4">
           <div className="reasonsToJoin">
             <MemoNotificationSvg />
             <h6 className="text-center">

@@ -1,15 +1,34 @@
 import React, { useState } from "react";
-import { Row, Form, Button, Col, Alert } from "react-bootstrap";
+import { Row, Form, Col, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { loginUser, registerUser } from "../api/usersApi";
+import { getUserById, loginUser, registerUser } from "../api/usersApi";
 import MemoLoginIlustrationSvg from "../svg/LoginIlustrationSvg";
 import { Formik, Field } from "formik";
+import { useDispatch } from "react-redux";
+import { isLoggedIn } from "../helpers/helperFuctions";
 
 const Login = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [error, setError] = useState(null);
   const [selectedSection, setSelectedSection] = useState("Login");
+
+  const setStoreUser = () => {
+    dispatch(async (dispatch) => {
+      try {
+        const response = await getUserById("me");
+        if (response.statusText === "OK") {
+          dispatch({
+            type: "SET_USER",
+            payload: response.data,
+          });
+        }
+      } catch (error) {
+        console.log(error.response);
+      }
+    });
+  };
 
   return (
     <Row className="mb-5">
@@ -48,6 +67,7 @@ const Login = () => {
             password: "",
             phone: "",
             gender: "",
+            birthdate: "",
           }}
           onSubmit={async (data, { setSubmitting }) => {
             try {
@@ -70,7 +90,10 @@ const Login = () => {
 
                 localStorage.setItem("LoggedIn", true);
 
-                history.push("/home");
+                if (isLoggedIn() === "true") {
+                  setStoreUser();
+                  history.push("/");
+                }
               }
             } catch (error) {
               console.log(error.response.data);
@@ -170,8 +193,8 @@ const Login = () => {
                           name="gender"
                           type="radio"
                           as={Form.Check}
-                          value="non-binary"
-                          label="Non-binary"
+                          value="Other"
+                          label="Other"
                         />
                       </div>
                     </Form.Group>
@@ -179,7 +202,7 @@ const Login = () => {
                   <Form.Row>
                     <Form.Group as={Col} sm="7">
                       <Form.Label className="mr-3">Birthdate</Form.Label>
-                      <Field name="birthdate" type="date" />
+                      <Field name="birthdate" type="date" as={Form.Check} />
                     </Form.Group>
                   </Form.Row>{" "}
                 </>
