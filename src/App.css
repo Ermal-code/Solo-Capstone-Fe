@@ -78,15 +78,11 @@ h6.selectedLoginNavbar {
 }
 
 .waitingScreen {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.17);
+  background-color: hsla(0, 0%, 0%, 0.017);
 }
 
 .shadow {
@@ -138,7 +134,6 @@ h6.selectedLoginNavbar {
 }
 
 .imageContainer:hover .addProfileImage {
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,6 +142,7 @@ h6.selectedLoginNavbar {
 .addProfileImage:hover i {
   transform: scale(3);
   transition: 0.6s ease;
+  cursor: pointer;
 }
 
 .profileCardContainer {

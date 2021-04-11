@@ -9,11 +9,17 @@ const SingleSearchResult = ({ docOrhosp }) => {
       className="singleSearchResult mt-4"
       onClick={() => history.push(`/profile/${docOrhosp._id}`)}
     >
-      <img
-        src={docOrhosp.image}
-        className="profileAvatar"
-        style={{ height: "80px", width: "80px" }}
-      />
+      <div>
+        <img
+          src={docOrhosp.image}
+          style={{
+            height: "80px",
+            width: "80px",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
+        />
+      </div>
       <div className="ml-4 d-flex justify-content-between align-items-center w-100">
         <div>
           <h5>
@@ -22,7 +28,7 @@ const SingleSearchResult = ({ docOrhosp }) => {
           <h6>{docOrhosp.specialization[0]}</h6>
           <h6>{docOrhosp.languages[0]}</h6>
         </div>
-        <div>
+        <div className="d-none d-sm-block">
           {[1, 2, 3, 4, 5].map((star, index) => (
             <i
               key={`keyOfStar${star}${index}${docOrhosp._id}`}

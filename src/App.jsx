@@ -9,6 +9,7 @@ import EditProfile from "./components/EditProfile";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Results from "./pages/Results";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/results" exact component={Results} />
           <Route path="/editProfile/:id" exact component={EditProfile} />
         </Container>
+        <Footer />
       </Router>
     </div>
   );

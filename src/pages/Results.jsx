@@ -65,7 +65,7 @@ const Results = () => {
         </Col>
 
         {doctorsAndHopsitals.map((docOrhosp, index) => (
-          <Col md="6" key={`${docOrhosp._id}index${index + 2132}`}>
+          <Col lg="6" key={`${docOrhosp._id}index${index + 2132}`}>
             <SingleSearchResult docOrhosp={docOrhosp} />
           </Col>
         ))}
