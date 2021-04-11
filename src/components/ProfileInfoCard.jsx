@@ -51,7 +51,7 @@ const ProfileInfoCard = ({ profile }) => {
               </strong>
             ))}
           </h5>
-          <div className="mt-3" style={{ color: "#739AA0" }}>
+          <div className="mt-3" style={{ color: "#24acb8" }}>
             {[1, 2, 3, 4, 5].map((star) => (
               <i
                 key={`keyOfStar${star}`}

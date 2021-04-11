@@ -31,45 +31,49 @@ const Results = () => {
     getDoctorsHospitals(searchQuery);
   }, []);
 
-  return loader ? (
-    <div className="waitingScreen">
-      <Loader height="150px" />
-    </div>
-  ) : (
-    <div className="mt-5">
-      <InputGroup className="mb-md-5">
-        <FormControl
-          placeholder="Search doctor by name or specialization"
-          aria-label="Search doctor by name or specialization"
-          aria-describedby="basic-addon2"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.currentTarget.value)}
-        />
-        <InputGroup.Append>
-          <Button
-            variant="light"
-            onClick={() => getDoctorsHospitals(searchQuery)}
-          >
-            <i className="fas fa-search"></i>
-          </Button>
-        </InputGroup.Append>
-      </InputGroup>
-      <Row>
-        <Col xs={12}>
-          <h4 className="border-bottom border-secondary pb-3 mt-5 mt-md-1">
-            {doctorsAndHopsitals.length === 0
-              ? "No search results were found"
-              : `Found ${doctorsAndHopsitals.length} search
+  return (
+    <div style={{ height: "90vh" }}>
+      {loader ? (
+        <div className="waitingScreen">
+          <Loader height="150px" />
+        </div>
+      ) : (
+        <div className="mt-5">
+          <InputGroup className="mb-md-5">
+            <FormControl
+              placeholder="Search doctor by name or specialization"
+              aria-label="Search doctor by name or specialization"
+              aria-describedby="basic-addon2"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.currentTarget.value)}
+            />
+            <InputGroup.Append>
+              <Button
+                variant="light"
+                onClick={() => getDoctorsHospitals(searchQuery)}
+              >
+                <i className="fas fa-search"></i>
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+          <Row>
+            <Col xs={12}>
+              <h4 className="border-bottom border-secondary pb-3 mt-5 mt-md-1">
+                {doctorsAndHopsitals.length === 0
+                  ? "No search results were found"
+                  : `Found ${doctorsAndHopsitals.length} search
             ${doctorsAndHopsitals.length === 1 ? " result" : " results"}`}
-          </h4>
-        </Col>
+              </h4>
+            </Col>
 
-        {doctorsAndHopsitals.map((docOrhosp, index) => (
-          <Col lg="6" key={`${docOrhosp._id}index${index + 2132}`}>
-            <SingleSearchResult docOrhosp={docOrhosp} />
-          </Col>
-        ))}
-      </Row>
+            {doctorsAndHopsitals.map((docOrhosp, index) => (
+              <Col lg="6" key={`${docOrhosp._id}index${index + 2132}`}>
+                <SingleSearchResult docOrhosp={docOrhosp} />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      )}
     </div>
   );
 };

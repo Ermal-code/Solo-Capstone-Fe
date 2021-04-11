@@ -60,6 +60,22 @@ export const hoursOfDay = (value, doctor, doctorAppointments) => {
       hoursArray = [...hoursArray, ...arr];
     }
 
+    if (value.getDay() === new Date().getDay()) {
+      const valueHour = moment(value).format("HH:mm");
+
+      let bigerHours = [];
+
+      for (let i = 0; i < hoursArray.length; i++) {
+        let arrHour = hoursArray[i].split(":")[0];
+
+        if (parseInt(arrHour) > parseInt(valueHour.split(":")[0])) {
+          bigerHours.push(hoursArray[i]);
+        }
+      }
+
+      hoursArray = bigerHours;
+    }
+
     return hoursArray;
   } else {
     return [];

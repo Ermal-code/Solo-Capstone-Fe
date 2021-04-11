@@ -19,6 +19,7 @@ const SchedueleAppointment = ({ profile, doctorAppointments }) => {
         startDate: fullDate,
         doctor: profile._id,
         patient: user._id,
+        clinic: "6070bf650b1ce657b8807ec8",
         type: "online",
         reason: "Follow up",
       });

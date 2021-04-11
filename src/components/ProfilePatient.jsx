@@ -7,7 +7,7 @@ import PatientSidebar from "./PatientSidebar";
 const ProfilePatient = ({ profile }) => {
   const [selectedSection, setSelectedSection] = useState(1);
   return (
-    <div>
+    <div className="mb-5">
       <Row>
         <PatientSidebar
           profile={profile}

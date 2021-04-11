@@ -70,7 +70,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
                         className={`${
                           star <= getRating() ? "fas" : "far"
                         } fa-star fa-2x`}
-                        style={{ color: "#739AA0" }}
+                        style={{ color: "#24acb8" }}
                         onClick={() => {
                           setRating(star);
                           setShowConfirm(true);
@@ -85,7 +85,7 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
                       <i
                         key={`keyOfStarOfOf${star}`}
                         className={`far fa-star fa-2x`}
-                        style={{ color: "#739AA0" }}
+                        style={{ color: "#24acb8" }}
                         onClick={() => {
                           setRating(star);
                           setShowConfirm(true);

@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 body {
   color: #303030;
   background-color: #f3f2ef;
   overflow-x: hidden;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 textarea {
@@ -52,6 +55,10 @@ h6.selectedLoginNavbar {
   padding: 10px 0;
 }
 
+.orangeButton:hover {
+  background-color: #ff5b22;
+}
+
 .loader {
   animation-name: enlarge;
   animation-duration: 1700ms;
@@ -90,7 +97,7 @@ h6.selectedLoginNavbar {
 }
 
 .hoursOfDay {
-  background: rgb(48, 125, 151);
+  background: #67d6d3;
   color: white;
   text-align: center;
   padding: 8px 0;
@@ -99,7 +106,7 @@ h6.selectedLoginNavbar {
 
 .hoursOfDay:hover {
   cursor: pointer;
-  background: rgb(92, 167, 92);
+  background: #ff804a;
 }
 
 .getBiger:hover {
@@ -109,7 +116,7 @@ h6.selectedLoginNavbar {
 
 .profileAvatar {
   border-radius: 50%;
-  border: 5px solid #101227;
+  border: 2px solid white;
   height: 150px;
   width: 150px;
   object-fit: cover;
@@ -460,6 +467,7 @@ h6.selectedLoginNavbar {
   font-size: 3.5rem;
   margin-left: 5%;
   font-weight: 400;
+  color: #101227;
 }
 
 .homePageSearch .input-group {
@@ -486,6 +494,4 @@ h6.selectedLoginNavbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
-  border-radius: 50%;
 }

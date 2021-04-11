@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormControl, InputGroup, Button } from "react-bootstrap";
+import { FormControl, InputGroup, Button, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -8,8 +8,8 @@ const HomeSearch = () => {
   const history = useHistory();
   const [searchText, setSearchText] = useState("");
   return (
-    <div>
-      <div className="w-100" style={{ position: "relative" }}>
+    <Row>
+      <Col sm="12" style={{ position: "relative" }} className="px-0">
         <img
           src="https://sybridmd.com/wp-content/uploads/2019/12/Joros_PatientExp-824x320.jpg"
           alt="doctor and patient"
@@ -41,8 +41,8 @@ const HomeSearch = () => {
             </InputGroup.Append>
           </InputGroup>
         </div>
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 };
 

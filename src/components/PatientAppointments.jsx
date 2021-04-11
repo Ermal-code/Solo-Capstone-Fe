@@ -35,7 +35,7 @@ const PatientAppointments = () => {
   };
 
   return (
-    <div>
+    <div className="mb-5">
       <Row className="my-5">
         <Col xs={3}>
           <Form.Label style={{ color: "white" }}>
@@ -92,7 +92,7 @@ const PatientAppointments = () => {
                     {moment(appointment.endDate).format("MMMM Do YYYY, HH:mm")}
                   </td>
 
-                  <td>{appointment.clinic ? appointment.clinic : "-"}</td>
+                  <td>{appointment.clinic ? appointment.clinic.name : "-"}</td>
                 </tr>
               ))}
             </tbody>

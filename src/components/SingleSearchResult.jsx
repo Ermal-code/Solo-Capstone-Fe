@@ -37,7 +37,7 @@ const SingleSearchResult = ({ docOrhosp }) => {
                   ? "fas"
                   : "far"
               } fa-star`}
-              style={{ fontSize: "24px", color: "#739AA0" }}
+              style={{ fontSize: "24px", color: "#24acb8" }}
             ></i>
           ))}
         </div>

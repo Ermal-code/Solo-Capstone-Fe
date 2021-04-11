@@ -7,39 +7,37 @@ import MemoNotificationSvg from "../svg/NotificationSvg";
 
 const ReasonsToJoin = () => {
   return (
-    <div className="my-5">
-      <h5 className="text-center">Why choose Easy Doctor ?</h5>
-      <Row className="mt-4">
-        <Col md="3" xs="6" className="mb-4">
-          <div className="reasonsToJoin">
-            <MemoDoctorsSvg />
-            <h6 className="text-center">Access to best proffesionals around</h6>
-          </div>
-        </Col>
-        <Col md="3" xs="6" className="mb-4">
-          <div className="reasonsToJoin">
-            <MemoBookAppointmentsSvg />
-            <h6 className="text-center">
-              Book appointments online from anywhere 24/7
-            </h6>
-          </div>
-        </Col>
-        <Col md="3" xs="6" className="mb-4">
-          <div className="reasonsToJoin">
-            <MemoDocumentsSvg />
-            <h6 className="text-center">Your medical documents in one place</h6>
-          </div>
-        </Col>
-        <Col md="3" xs="6" className="mb-4">
-          <div className="reasonsToJoin">
-            <MemoNotificationSvg />
-            <h6 className="text-center">
-              Get notifications about your appointment
-            </h6>
-          </div>
-        </Col>
-      </Row>
-    </div>
+    <Row className="p-3" style={{ background: "white" }}>
+      <h5 className="text-center py-5 w-100">Why choose Easy Doctor ?</h5>
+      <Col md="3" xs="6" className="mb-4">
+        <div className="reasonsToJoin">
+          <MemoDoctorsSvg />
+          <h6 className="text-center">Access to best proffesionals around</h6>
+        </div>
+      </Col>
+      <Col md="3" xs="6" className="mb-4">
+        <div className="reasonsToJoin">
+          <MemoBookAppointmentsSvg />
+          <h6 className="text-center">
+            Book appointments online from anywhere 24/7
+          </h6>
+        </div>
+      </Col>
+      <Col md="3" xs="6" className="mb-4">
+        <div className="reasonsToJoin">
+          <MemoDocumentsSvg />
+          <h6 className="text-center">Your medical documents in one place</h6>
+        </div>
+      </Col>
+      <Col md="3" xs="6" className="mb-4">
+        <div className="reasonsToJoin">
+          <MemoNotificationSvg />
+          <h6 className="text-center">
+            Get notifications about your appointment
+          </h6>
+        </div>
+      </Col>
+    </Row>
   );
 };
 
