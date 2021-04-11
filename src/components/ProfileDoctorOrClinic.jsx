@@ -30,40 +30,38 @@ const ProfileDoctorOrClinic = ({ profile }) => {
   }, []);
 
   return (
-    <div className="mb-5">
-      <Row>
-        <Col md="10" lg={7}>
-          <ProfileInfoCard profile={profile} />
-          <SectionSelector
-            profile={profile}
-            sectionSelector={sectionSelector}
-            setSectionSelector={setSectionSelector}
-          />
-          <div className="profileSection shadow">
-            {sectionSelector === 1 && <AboutSection profile={profile} />}
-            {sectionSelector === 2 &&
-              (profile.role === "doctor" ? (
-                <ExperienceSection userId={profile._id} />
-              ) : (
-                <StaffSection userId={profile._id} />
-              ))}
+    <Row className="mb-5">
+      <Col md="10" lg={7}>
+        <ProfileInfoCard profile={profile} />
+        <SectionSelector
+          profile={profile}
+          sectionSelector={sectionSelector}
+          setSectionSelector={setSectionSelector}
+        />
+        <div className="profileSection shadow">
+          {sectionSelector === 1 && <AboutSection profile={profile} />}
+          {sectionSelector === 2 &&
+            (profile.role === "doctor" ? (
+              <ExperienceSection userId={profile._id} />
+            ) : (
+              <StaffSection userId={profile._id} />
+            ))}
 
-            {sectionSelector === 3 && (
-              <ReviewSection
-                profile={profile}
-                doctorAppointments={doctorAppointments}
-              />
-            )}
-          </div>
-        </Col>
-        <Col md={{ span: 8, offset: 1 }} lg={{ span: 5, offset: 0 }}>
-          <SchedueleAppointment
-            profile={profile}
-            doctorAppointments={doctorAppointments}
-          />
-        </Col>
-      </Row>
-    </div>
+          {sectionSelector === 3 && (
+            <ReviewSection
+              profile={profile}
+              doctorAppointments={doctorAppointments}
+            />
+          )}
+        </div>
+      </Col>
+      <Col md={{ span: 8, offset: 1 }} lg={{ span: 5, offset: 0 }}>
+        <SchedueleAppointment
+          profile={profile}
+          doctorAppointments={doctorAppointments}
+        />
+      </Col>
+    </Row>
   );
 };
 

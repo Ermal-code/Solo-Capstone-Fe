@@ -96,7 +96,8 @@ h6.selectedLoginNavbar {
   box-shadow: 0 0.5rem 1rem #1012276b !important;
 }
 
-.hoursOfDay {
+.hoursOfDay,
+.hoursOfDaySelected {
   background: #67d6d3;
   color: white;
   text-align: center;
@@ -107,6 +108,10 @@ h6.selectedLoginNavbar {
 .hoursOfDay:hover {
   cursor: pointer;
   background: #ff804a;
+}
+
+.hoursOfDaySelected {
+  background-color: #ff804a;
 }
 
 .getBiger:hover {
