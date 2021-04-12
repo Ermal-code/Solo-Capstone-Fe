@@ -59,6 +59,7 @@ const ProfileDoctorOrClinic = ({ profile }) => {
         <SchedueleAppointment
           profile={profile}
           doctorAppointments={doctorAppointments}
+          getDoctorAppointments={getDoctorAppointments}
         />
       </Col>
     </Row>

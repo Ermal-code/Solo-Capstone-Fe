@@ -7,7 +7,7 @@ import { Col, Form, Row } from "react-bootstrap";
 const PatientAppointments = () => {
   const [patientAppointments, setPatientAppointments] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [dropDownValue, setDropDownValue] = useState("All");
+  const [dropDownValue, setDropDownValue] = useState("Upcoming");
 
   useEffect(() => {
     getPatientAppointments(setLoader, setPatientAppointments);
@@ -50,7 +50,7 @@ const PatientAppointments = () => {
               setDropDownValue(e.currentTarget.value);
             }}
           >
-            {["All", "Upcoming", "Past"].map((element, index) => (
+            {["Upcoming", "Past", "All"].map((element, index) => (
               <option key={`${element}and${index}`}>{element}</option>
             ))}
           </Form.Control>

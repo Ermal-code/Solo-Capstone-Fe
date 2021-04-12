@@ -22,7 +22,7 @@ export const addExperience = async (body) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BE_URL}/api/experiences`,
     body,
-    { withCredentials: true }
+    { headers: { "Content-Type": "application/json" }, withCredentials: true }
   );
   return response;
 };
@@ -31,7 +31,7 @@ export const editExperience = async (body, experienceId) => {
   const response = await axios.put(
     `${process.env.REACT_APP_BE_URL}/api/experiences/${experienceId}`,
     body,
-    { withCredentials: true }
+    { headers: { "Content-Type": "application/json" }, withCredentials: true }
   );
   return response;
 };

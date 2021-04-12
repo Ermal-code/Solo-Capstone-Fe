@@ -8,6 +8,7 @@ const PatientDocuments = ({ patientId }) => {
   const [documents, setDocuments] = useState([]);
   const [showDocumentModal, setShowDocumentModal] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState(null);
+  const [addOrEditDocument, setAddOrEditDocument] = useState(false);
 
   const getDocuments = async () => {
     try {
@@ -31,9 +32,16 @@ const PatientDocuments = ({ patientId }) => {
         show={showDocumentModal}
         setShow={setShowDocumentModal}
         selectedDocument={selectedDocument}
+        addOrEditDocument={addOrEditDocument}
       />
       <div className="mt-5">
-        <Button variant="outline-light">
+        <Button
+          variant="outline-light"
+          onClick={() => {
+            setAddOrEditDocument(true);
+            setShowDocumentModal(true);
+          }}
+        >
           <i className="fas fa-plus"></i>Add a new document
         </Button>
       </div>

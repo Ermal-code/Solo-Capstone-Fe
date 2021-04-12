@@ -66,9 +66,10 @@ export const hoursOfDay = (value, doctor, doctorAppointments) => {
       let bigerHours = [];
 
       for (let i = 0; i < hoursArray.length; i++) {
-        let arrHour = hoursArray[i].split(":")[0];
-
-        if (parseInt(arrHour) > parseInt(valueHour.split(":")[0])) {
+        if (
+          parseInt(hoursArray[i].split(":")[0]) + 1.5 >
+          parseInt(valueHour.split(":")[0])
+        ) {
           bigerHours.push(hoursArray[i]);
         }
       }

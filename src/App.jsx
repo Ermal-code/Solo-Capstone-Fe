@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Login from "./components/Login";
 import RegisterDoctorOrClinic from "./components/RegisterDoctorOrClinic";
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
@@ -10,6 +9,7 @@ import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Results from "./pages/Results";
 import Footer from "./components/Footer";
+import Login from "./pages/Login";
 
 function App() {
   return (

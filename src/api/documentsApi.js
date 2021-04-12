@@ -8,3 +8,15 @@ export const getPatientDocuments = async (patientId) => {
 
   return response;
 };
+
+export const addNewDocument = async (body) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BE_URL}/api/documents/`,
+    body,
+    {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    }
+  );
+  return response;
+};

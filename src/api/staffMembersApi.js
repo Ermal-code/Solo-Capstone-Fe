@@ -36,7 +36,7 @@ export const addHospitalStaff = async (doctorId, hopstialId, setStaff) => {
     const response = await authAxios.post(
       `${process.env.REACT_APP_BE_URL}/api/staff`,
       { doctor: doctorId },
-      { withCredentials: true }
+      { headers: { "Content-Type": "application/json" }, withCredentials: true }
     );
     if (response.status === 201) {
       getHospitalStaff(hopstialId, setStaff);
