@@ -47,16 +47,25 @@ export const hoursOfDay = (value, doctor, doctorAppointments) => {
       const selectedDayAppointments = doctorAppointments
         .filter(
           (appointment) =>
-            moment(appointment.startDate).format("LL") ===
-            moment(value).format("LL")
+            moment(appointment.startDate).format("MMMM Do YYYY") ===
+            moment(value).format("MMMM Do YYYY")
         )
-        .map((appointment) => moment(appointment.startDate).format("HH:mm"));
+        .map((appointment) => {
+          let date = new Date(appointment.startDate);
+
+          return `${
+            date.getUTCHours() < 10
+              ? `0${date.getUTCHours()}`
+              : date.getUTCHours()
+          }:${date.getUTCMinutes()}${date.getUTCMinutes() === 0 ? "0" : ""}`;
+        });
 
       if (selectedDayAppointments.length > 0) {
         arr = arr.filter(
           (appointment) => !selectedDayAppointments.includes(appointment)
         );
       }
+
       hoursArray = [...hoursArray, ...arr];
     }
 
@@ -67,8 +76,8 @@ export const hoursOfDay = (value, doctor, doctorAppointments) => {
 
       for (let i = 0; i < hoursArray.length; i++) {
         if (
-          parseInt(hoursArray[i].split(":")[0]) + 1.5 >
-          parseInt(valueHour.split(":")[0])
+          parseInt(hoursArray[i].split(":")[0]) >
+          parseInt(valueHour.split(":")[0]) + 1.5
         ) {
           bigerHours.push(hoursArray[i]);
         }

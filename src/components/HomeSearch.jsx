@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormControl, InputGroup, Button, Row, Col } from "react-bootstrap";
+import { FormControl, InputGroup, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -27,17 +27,19 @@ const HomeSearch = () => {
               aria-describedby="basic-addon2"
               value={searchText}
               onChange={(e) => setSearchText(e.currentTarget.value)}
+              className="py-4"
             />
             <InputGroup.Append>
-              <Button
-                variant="light"
+              <button
+                className="orangeButton"
+                style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
                 onClick={() => {
                   dispatch({ type: "SET_SEARCH_TEXT", payload: searchText });
                   history.push("results");
                 }}
               >
-                <i className="fas fa-search"></i>
-              </Button>
+                <i className="fas fa-search px-3"></i>
+              </button>
             </InputGroup.Append>
           </InputGroup>
         </div>

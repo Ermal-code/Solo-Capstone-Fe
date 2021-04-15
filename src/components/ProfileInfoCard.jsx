@@ -23,7 +23,7 @@ const ProfileInfoCard = ({ profile }) => {
             className="idBackground"
           />
         </Col>
-        <Col md={5}>
+        <Col md={5} className="d-flex justify-content-center">
           <div className="imageContainer">
             <img
               src={profile.image}

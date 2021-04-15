@@ -135,17 +135,21 @@ class ModalUploadPicture extends Component {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="outline-secondary" onClick={this.props.handleClose}>
+          <button
+            className="blueButtonV2"
+            style={{ width: "130px" }}
+            onClick={this.props.handleClose}
+          >
             Cancel
-          </Button>
-          <Button
-            variant="primary"
+          </button>
+          <button
+            className="blueButton"
             onClick={this.uploadPicture}
             disabled={this.state.loading}
             style={{ width: "130px" }}
           >
-            Save Changes
-          </Button>
+            Save
+          </button>
         </Modal.Footer>
       </Modal>
     );

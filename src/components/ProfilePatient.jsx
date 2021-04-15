@@ -7,7 +7,7 @@ import PatientSidebar from "./PatientSidebar";
 const ProfilePatient = ({ profile }) => {
   const [selectedSection, setSelectedSection] = useState(1);
   return (
-    <div className="mb-5">
+    <div className="mb-5" style={{ minHeight: "80vh" }}>
       <Row>
         <PatientSidebar
           profile={profile}
@@ -21,7 +21,7 @@ const ProfilePatient = ({ profile }) => {
         >
           {selectedSection === 2 && <PatientAppointments />}
           {selectedSection === 3 && (
-            <PatientDocuments patientId={profile._id} />
+            <PatientDocuments profileId={profile._id} />
           )}
         </Col>
       </Row>

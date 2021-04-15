@@ -167,16 +167,25 @@ const ModalExperience = ({
                   <Field name="endDate" type="date" />
                 </Form.Group>
               </Form.Row>
-              <Modal.Footer className="mt-3">
-                <Button variant="outline-primary" onClick={handleClose}>
+
+              <div className="d-flex justify-content-end mt-5">
+                <button
+                  className="blueButtonV2"
+                  onClick={handleClose}
+                  style={{ width: "35%" }}
+                >
                   Cancel
-                </Button>
-                <Button variant="primary" type="submit">
+                </button>
+                <button
+                  className="blueButton  ml-3"
+                  type="submit"
+                  style={{ width: "35%" }}
+                >
                   {selectedExperience || selectedEducation
                     ? "Save changes"
-                    : `Add ${isExperience ? "experience" : "education"}`}
-                </Button>
-              </Modal.Footer>
+                    : `Add`}
+                </button>
+              </div>
             </Form>
           )}
         </Formik>

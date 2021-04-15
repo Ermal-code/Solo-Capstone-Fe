@@ -396,8 +396,10 @@ const EditProfile = () => {
                     />
                   </Form.Group>
                 </Form.Row>
-                <div>
-                  <Button type="submit">Save</Button>
+                <div className="mt-5">
+                  <button className="blueButton w-100" type="submit">
+                    Save
+                  </button>
                 </div>
               </Form>
             )}

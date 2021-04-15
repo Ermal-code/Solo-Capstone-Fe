@@ -4,7 +4,7 @@ import { getPatientDocuments } from "../api/documentsApi";
 import ShowDocumentModal from "./ShowDocumentModal";
 import SingleDocument from "./SingleDocument";
 
-const PatientDocuments = ({ patientId }) => {
+const PatientDocuments = ({ profileId }) => {
   const [documents, setDocuments] = useState([]);
   const [showDocumentModal, setShowDocumentModal] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState(null);
@@ -12,7 +12,7 @@ const PatientDocuments = ({ patientId }) => {
 
   const getDocuments = async () => {
     try {
-      const response = await getPatientDocuments(patientId);
+      const response = await getPatientDocuments(profileId);
 
       if (response.statusText === "OK") {
         setDocuments(response.data);
@@ -29,6 +29,7 @@ const PatientDocuments = ({ patientId }) => {
   return (
     <div>
       <ShowDocumentModal
+        getDocuments={getDocuments}
         show={showDocumentModal}
         setShow={setShowDocumentModal}
         selectedDocument={selectedDocument}
@@ -38,6 +39,7 @@ const PatientDocuments = ({ patientId }) => {
         <Button
           variant="outline-light"
           onClick={() => {
+            setSelectedDocument(null);
             setAddOrEditDocument(true);
             setShowDocumentModal(true);
           }}
@@ -47,11 +49,19 @@ const PatientDocuments = ({ patientId }) => {
       </div>
       <Row className="mt-5">
         {documents.map((document, index) => (
-          <Col md="4" key={`${document._id}${index}${document.patient}ss`}>
+          <Col
+            xs="6"
+            sm="4"
+            md="3"
+            lg="2"
+            key={`${document._id}${index}${document.patient}ss`}
+          >
             <SingleDocument
+              profileId={profileId}
               document={document}
               setShow={setShowDocumentModal}
               setSelectedDocument={() => setSelectedDocument(document)}
+              setAddOrEditDocument={setAddOrEditDocument}
             />
           </Col>
         ))}

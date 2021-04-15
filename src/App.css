@@ -46,13 +46,47 @@ h6.selectedLoginNavbar {
   border-bottom: 2px solid #ff804a;
 }
 
-.orangeButton {
+.orangeButton,
+.blueButton,
+.blueButtonV2 {
   background-color: #ff804a;
   color: white;
   width: 100%;
   border: none;
   border-radius: 5px;
   padding: 10px 0;
+}
+
+.blueButton {
+  background-color: #5190d1;
+}
+.blueButton:hover {
+  background-color: #306187;
+}
+
+.blueButton:disabled {
+  background-color: #87b4e2;
+}
+
+.blueButtonV2 {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #5190d1;
+  color: #5190d1;
+}
+
+.blueButtonV2:hover {
+  background-color: #5190d1;
+  color: white;
+}
+
+.blueButtonV2:disabled {
+  border: 1px solid #82b7ec;
+  color: #82b7ec;
+}
+.blueButtonV2:disabled:hover {
+  border: 1px solid #82b7ec;
+  color: #82b7ec;
+  background: rgba(255, 255, 255, 0);
 }
 
 .orangeButton:hover {
@@ -169,8 +203,10 @@ h6.selectedLoginNavbar {
 
 .addProfileImage {
   position: absolute;
-  height: 150px;
-  width: 150px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   color: white;
   background-color: rgba(0, 0, 0, 0.415);
   border-radius: 50%;
@@ -178,23 +214,28 @@ h6.selectedLoginNavbar {
 }
 
 .imageContainer {
+  height: 150px;
+  width: 150px;
   position: relative;
-  display: flex;
-  justify-content: center;
   border-radius: 50%;
   margin-top: -70px;
 }
 
-.imageContainer:hover .addProfileImage {
+.imageContainer:hover .addProfileImage,
+.patientSidebar div:first-of-type div:first-of-type:hover .addProfileImage,
+.patientSidebarSm div:first-of-type div:first-of-type:hover .addProfileImage {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .addProfileImage:hover i {
-  transform: scale(3);
+  transform: scale(2);
   transition: 0.6s ease;
   cursor: pointer;
+}
+.addProfileImage .fas.fa-plus:hover {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .profileCardContainer {
@@ -355,16 +396,14 @@ h6.selectedLoginNavbar {
   line-height: 30px;
 }
 .patientSidebar {
-  background-color: #26a4cf;
+  background-color: white;
   border-bottom-left-radius: 15px;
-  color: white;
   min-height: 80vh;
 }
 
 .sideBarSelector ul {
   padding: 0 10px;
   list-style: none;
-  color: rgb(226, 220, 220);
 }
 
 .sideBarSelector li {
@@ -373,14 +412,30 @@ h6.selectedLoginNavbar {
 
 .sideBarSelector li:hover {
   cursor: pointer;
-  color: white;
-  transform: scale(1.03);
-  transition: 0.4s ease;
+  color: #ff804a;
 }
 
 .sideBarSelectedItem {
-  color: white;
-  border-right: 3px solid white;
+  color: #ff804a;
+  border-right: 3px solid #ff804a;
+}
+
+.patientSidebarSm {
+  background-color: white;
+}
+
+.patientSidebarSm div:last-of-type div {
+  padding-bottom: 10px;
+}
+
+.patientSidebarSm div:nth-child(2) div:hover {
+  cursor: pointer;
+  color: #ff804a;
+}
+
+.sideBarSelectedItemSm {
+  color: #ff804a;
+  border-bottom: 3px solid #ff804a;
 }
 
 .appointmentTable thead {
@@ -462,7 +517,7 @@ h6.selectedLoginNavbar {
 }
 
 .patientDocument img {
-  height: 200px;
+  height: 120px;
   width: 100%;
   object-fit: cover;
 }
@@ -493,7 +548,7 @@ h6.selectedLoginNavbar {
 }
 
 .patientDocument div:first-of-type:hover i {
-  transform: scale(3.3);
+  transform: scale(1.9);
   transition: 0.6s ease;
 }
 

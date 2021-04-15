@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { InputGroup, FormControl, Button, Row, Col } from "react-bootstrap";
+import { InputGroup, FormControl, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getDoctorsAndClinics } from "../api/usersApi";
 import SingleSearchResult from "../components/SingleSearchResult";
@@ -20,6 +20,7 @@ const Results = () => {
       if (response.statusText === "OK") {
         setDoctorsAndHospitals(response.data);
         setLoader(false);
+        setSearchQuery("");
       }
     } catch (error) {
       console.log(error.response.data);
@@ -39,21 +40,23 @@ const Results = () => {
         </div>
       ) : (
         <div className="mt-5">
-          <InputGroup className="mb-md-5">
+          <InputGroup className="mb-md-5 w-50">
             <FormControl
               placeholder="Search doctor by name or specialization"
               aria-label="Search doctor by name or specialization"
               aria-describedby="basic-addon2"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.currentTarget.value)}
+              className="py-4"
             />
             <InputGroup.Append>
-              <Button
-                variant="light"
+              <button
+                className="orangeButton"
+                style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
                 onClick={() => getDoctorsHospitals(searchQuery)}
               >
-                <i className="fas fa-search"></i>
-              </Button>
+                <i className="fas fa-search px-3 "></i>
+              </button>
             </InputGroup.Append>
           </InputGroup>
           <Row>
