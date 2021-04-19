@@ -4,8 +4,8 @@ import { Link, withRouter, useHistory, useLocation } from "react-router-dom";
 import { isLoggedIn } from "../helpers/helperFuctions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById, logOutUser } from "../api/usersApi";
-import MemoLogoEasyDoctor from "../svg/LogoEasyDoctor";
 import MemoLogoED from "../svg/LogoED";
+import MemoLogoEasyDoctor from "../svg/LogoEasyDoctor";
 
 const Header = () => {
   const location = useLocation();

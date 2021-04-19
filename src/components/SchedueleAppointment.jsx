@@ -74,7 +74,7 @@ const SchedueleAppointment = ({
           <h6>You need to be logged in to make an appointment</h6>
           <button
             onClick={() => history.push("/Login")}
-            className="orangeButton mb-5 mt-3"
+            className="orangeButton mb-5 mt-3 w-100"
           >
             Log In
           </button>
@@ -200,10 +200,7 @@ const SchedueleAppointment = ({
                   </Col>
                 ))}
                 {hours.length > 4 && (
-                  <Col
-                    xs="12"
-                    className="text-center border-top border-secondary"
-                  >
+                  <Col xs="12" className="text-center border-top border-muted">
                     <i
                       className={`fas fa-chevron-${
                         !showMore ? "down" : "up"
@@ -220,7 +217,7 @@ const SchedueleAppointment = ({
                     className="orangeButton w-50 mb-5"
                     disabled={isSubmiting || hour === null}
                   >
-                    Submit
+                    Book Appointment
                   </button>
                 </div>
               )}

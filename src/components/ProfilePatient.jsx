@@ -17,7 +17,7 @@ const ProfilePatient = ({ profile }) => {
         <Col
           md={9}
           className="ml-0 shadow"
-          style={{ borderBottomRightRadius: "15px", background: "#93bcc5" }}
+          style={{ borderBottomRightRadius: "15px", background: "white" }}
         >
           {selectedSection === 2 && <PatientAppointments />}
           {selectedSection === 3 && (

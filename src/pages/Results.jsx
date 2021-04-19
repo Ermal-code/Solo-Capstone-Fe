@@ -13,7 +13,7 @@ const Results = () => {
 
   const getDoctorsHospitals = async (keyword) => {
     try {
-      const query = `?name=${keyword}`;
+      const query = `?name=${keyword}&specialization=${keyword}`;
 
       const response = await getDoctorsAndClinics(query);
 

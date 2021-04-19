@@ -37,12 +37,10 @@ const PatientAppointments = () => {
   return (
     <div className="mb-5">
       <Row className="my-5">
-        <Col xs={3}>
-          <Form.Label style={{ color: "white" }}>
-            Filter appointments
-          </Form.Label>
+        <Col xs={6} md="4" lg="3">
+          <Form.Label>Filter appointments</Form.Label>
         </Col>
-        <Col xs={4}>
+        <Col xs={6} md="5" lg="4">
           <Form.Control
             as="select"
             value={dropDownValue}
@@ -101,7 +99,7 @@ const PatientAppointments = () => {
       ) : (
         <div
           className="d-flex justify-content-center align-items-start h-100 "
-          style={{ color: "white" }}
+          style={{ color: "#ff804a" }}
         >
           <h3>
             <i className="far fa-calendar-times"></i> You have no appointments

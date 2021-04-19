@@ -17,7 +17,7 @@ const HomeSearch = () => {
           style={{ objectFit: "cover" }}
         />
         <div className="homePageSearch">
-          <p>
+          <p className="d-none d-md-block">
             Easiest way to <br /> meet your doctor
           </p>
           <InputGroup className="mb-md-5">

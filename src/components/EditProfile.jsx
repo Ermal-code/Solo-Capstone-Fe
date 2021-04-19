@@ -252,8 +252,8 @@ const EditProfile = () => {
                               </Row>
                             );
                           })}
-                          <Button
-                            variant="outline-dark"
+                          <button
+                            className="blueButtonV2"
                             onClick={() =>
                               arrayHelpers.push({
                                 day: "Monday",
@@ -263,7 +263,7 @@ const EditProfile = () => {
                             }
                           >
                             Add working days
-                          </Button>
+                          </button>
                         </>
                       )}
                     </FieldArray>
@@ -308,12 +308,12 @@ const EditProfile = () => {
                               ></i>
                             </div>
                           ))}
-                          <Button
-                            variant="outline-dark"
+                          <button
+                            className="blueButtonV2"
                             onClick={() => arrayHelpers.push("")}
                           >
                             Add specialization
-                          </Button>
+                          </button>
                         </>
                       )}
                     </FieldArray>
@@ -374,12 +374,12 @@ const EditProfile = () => {
                               ></i>
                             </div>
                           ))}
-                          <Button
-                            variant="outline-dark"
+                          <button
+                            className="blueButtonV2"
                             onClick={() => arrayHelpers.push("")}
                           >
                             Add language
-                          </Button>
+                          </button>
                         </>
                       )}
                     </FieldArray>

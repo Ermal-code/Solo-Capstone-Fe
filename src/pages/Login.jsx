@@ -6,6 +6,7 @@ import MemoLoginIlustrationSvg from "../svg/LoginIlustrationSvg";
 import { Formik, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { isLoggedIn } from "../helpers/helperFuctions";
+import MemoGoogleSvg from "../svg/googleSvg";
 
 const Login = () => {
   const history = useHistory();
@@ -52,6 +53,7 @@ const Login = () => {
           </h6>
         </div>
       </Col>
+
       <Col
         xs={{ span: 10, offset: 1 }}
         md={{ span: 5, offset: 0 }}
@@ -104,6 +106,27 @@ const Login = () => {
         >
           {({ values, isSubmitting, handleSubmit }) => (
             <Form onSubmit={handleSubmit} className="mt-5 px-3">
+              <a href={`${process.env.REACT_APP_BE_URL}/api/users/googleLogin`}>
+                <button
+                  className="googleButton w-100"
+                  type="button"
+                  onClick={() => localStorage.setItem("LoggedIn", true)}
+                >
+                  <MemoGoogleSvg className="mr-3" /> Continue with Google
+                </button>
+              </a>
+              <div className="divider my-4 ">
+                <strong
+                  style={{
+                    background: "#ddf4f5",
+                    padding: "0 20px",
+                    color: "#aaa6a6",
+                    fontSize: "14px",
+                  }}
+                >
+                  OR
+                </strong>
+              </div>
               {selectedSection === "Register" && (
                 <Form.Row>
                   <Form.Group as={Col} xs={12}>
@@ -208,7 +231,7 @@ const Login = () => {
                 </>
               )}
               <button
-                className={`orangeButton mb-5 mt-3`}
+                className={`orangeButton mb-5 mt-3 w-100`}
                 disabled={isSubmitting}
                 type="submit"
               >

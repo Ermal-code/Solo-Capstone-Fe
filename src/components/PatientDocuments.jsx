@@ -36,8 +36,8 @@ const PatientDocuments = ({ profileId }) => {
         addOrEditDocument={addOrEditDocument}
       />
       <div className="mt-5">
-        <Button
-          variant="outline-light"
+        <button
+          className="blueButtonV2"
           onClick={() => {
             setSelectedDocument(null);
             setAddOrEditDocument(true);
@@ -45,7 +45,7 @@ const PatientDocuments = ({ profileId }) => {
           }}
         >
           <i className="fas fa-plus"></i>Add a new document
-        </Button>
+        </button>
       </div>
       <Row className="mt-5">
         {documents.map((document, index) => (

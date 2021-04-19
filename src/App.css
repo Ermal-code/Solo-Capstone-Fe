@@ -46,15 +46,37 @@ h6.selectedLoginNavbar {
   border-bottom: 2px solid #ff804a;
 }
 
+.divider {
+  border-top: 1px solid #dfdfdf;
+  display: block;
+  line-height: 1px;
+  margin: 15px 0;
+  position: relative;
+  text-align: center;
+}
+
 .orangeButton,
 .blueButton,
-.blueButtonV2 {
+.blueButtonV2,
+.googleButton {
   background-color: #ff804a;
   color: white;
-  width: 100%;
+  /* width: 100%; */
   border: none;
   border-radius: 5px;
   padding: 10px 0;
+  text-align: center;
+  vertical-align: center;
+}
+
+.googleButton {
+  color: #303030;
+  background-color: white;
+}
+
+.googleButton:hover {
+  color: white;
+  background-color: #757171;
 }
 
 .blueButton {
@@ -62,6 +84,8 @@ h6.selectedLoginNavbar {
 }
 .blueButton:hover {
   background-color: #306187;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .blueButton:disabled {
@@ -72,11 +96,14 @@ h6.selectedLoginNavbar {
   background-color: rgba(0, 0, 0, 0);
   border: 1px solid #5190d1;
   color: #5190d1;
+  padding: 0.375rem 0.75rem;
 }
 
 .blueButtonV2:hover {
   background-color: #5190d1;
   color: white;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .blueButtonV2:disabled {
@@ -91,6 +118,8 @@ h6.selectedLoginNavbar {
 
 .orangeButton:hover {
   background-color: #ff5b22;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .orangeButton:disabled {
@@ -124,10 +153,10 @@ h6.selectedLoginNavbar {
 
 .Toaster {
   border-radius: 5px;
-  background-color: rgb(84, 186, 112);
+  background-color: #67d6d3;
   position: fixed;
-  top: 60px;
-  right: 30px;
+  top: 30px;
+  right: 20px;
   z-index: 999999;
   color: white;
   padding: 8px 15px;
@@ -439,33 +468,37 @@ h6.selectedLoginNavbar {
 }
 
 .appointmentTable thead {
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  border: 1px solid #999999;
+  border: 1px solid #999999;
+
+  color: #5190d1;
+  background-color: #ddf4f5;
 }
 .appointmentTable thead th {
-  border-left: 1px solid white;
+  padding: 10px 8px;
+  border-left: 1px solid #999999;
   background-color: rgba(255, 255, 255, 0.415);
 }
 
 .appointmentTable thead th:last-of-type {
-  border-right: 1px solid white;
+  border-right: 1px solid #999999;
 }
 
 .appointmentTable tbody tr {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #999999;
 }
 
 .appointmentTable tbody tr td {
-  border-left: 1px solid white;
-  color: white;
+  border-left: 1px solid #999999;
+  color: #999999;
 }
 
 .appointmentTable tbody tr td:last-of-type {
-  border-right: 1px solid white;
+  border-right: 1px solid #999999;
 }
 
 .appointmentTable tbody tr:hover {
-  border: 2px solid white;
+  border: 2px solid #999999;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.415);
   transform: scaleX(1.01);
