@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Form, Col, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { getUserById, loginUser, registerUser } from "../api/usersApi";
@@ -8,9 +8,10 @@ import { useDispatch } from "react-redux";
 import { isLoggedIn } from "../helpers/helperFuctions";
 import MemoGoogleSvg from "../svg/googleSvg";
 
-const Login = () => {
-  const history = useHistory();
+const Login = ({ history, location }) => {
+  // const history = useHistory();
   const dispatch = useDispatch();
+  const url = location.search.split("?")[1];
 
   const [error, setError] = useState(null);
   const [selectedSection, setSelectedSection] = useState("Login");
@@ -94,7 +95,7 @@ const Login = () => {
 
                 if (isLoggedIn() === "true") {
                   setStoreUser();
-                  history.push("/");
+                  history.push(url);
                 }
               }
             } catch (error) {

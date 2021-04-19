@@ -7,9 +7,7 @@ import { getUserById, logOutUser } from "../api/usersApi";
 import MemoLogoED from "../svg/LogoED";
 import MemoLogoEasyDoctor from "../svg/LogoEasyDoctor";
 
-const Header = () => {
-  const location = useLocation();
-  const history = useHistory();
+const Header = ({ history, location }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -52,7 +50,7 @@ const Header = () => {
           </Link>
           <Nav>
             {isLoggedIn() === "false" ? (
-              <Link to="/login" className="nav-link">
+              <Link to={`/login?${location.pathname}`} className="nav-link">
                 <i className="fas fa-user"></i> Log In/Register
               </Link>
             ) : (

@@ -73,7 +73,7 @@ const SchedueleAppointment = ({
         <div className="p-4 text-center" style={{ color: "#ff804a" }}>
           <h6>You need to be logged in to make an appointment</h6>
           <button
-            onClick={() => history.push("/Login")}
+            onClick={() => history.push(`/login?${history.location.pathname}`)}
             className="orangeButton mb-5 mt-3 w-100"
           >
             Log In
