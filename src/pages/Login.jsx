@@ -32,6 +32,39 @@ const Login = ({ history, location }) => {
     });
   };
 
+  const loginOrRegister = async (data, setSubmitting) => {
+    try {
+      setSubmitting(true);
+      if (data.gender === "") {
+        delete data.gender;
+      }
+      let response;
+      if (selectedSection === "Login") {
+        response = await loginUser({
+          email: data.email,
+          password: data.password,
+        });
+      } else {
+        response = await registerUser(data);
+      }
+
+      if (response.status === 201) {
+        setSubmitting(false);
+
+        localStorage.setItem("LoggedIn", true);
+
+        if (isLoggedIn()) {
+          setStoreUser();
+          history.push(url);
+        }
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      setError(error.response.data);
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Row className="mb-5">
       <Col xs="12" className="mt-5">
@@ -72,37 +105,8 @@ const Login = ({ history, location }) => {
             gender: "",
             birthdate: "",
           }}
-          onSubmit={async (data, { setSubmitting }) => {
-            try {
-              setSubmitting(true);
-              if (data.gender === "") {
-                delete data.gender;
-              }
-              let response;
-              if (selectedSection === "Login") {
-                response = await loginUser({
-                  email: data.email,
-                  password: data.password,
-                });
-              } else {
-                response = await registerUser(data);
-              }
-
-              if (response.status === 201) {
-                setSubmitting(false);
-
-                localStorage.setItem("LoggedIn", true);
-
-                if (isLoggedIn()) {
-                  setStoreUser();
-                  history.push(url);
-                }
-              }
-            } catch (error) {
-              console.log(error.response.data);
-              setError(error.response.data);
-              setSubmitting(false);
-            }
+          onSubmit={(data, { setSubmitting }) => {
+            loginOrRegister(data, setSubmitting);
           }}
         >
           {({ values, isSubmitting, handleSubmit }) => (
