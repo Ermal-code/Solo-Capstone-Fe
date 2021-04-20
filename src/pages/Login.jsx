@@ -9,9 +9,8 @@ import { isLoggedIn } from "../helpers/helperFuctions";
 import MemoGoogleSvg from "../svg/googleSvg";
 
 const Login = ({ history, location }) => {
-  // const history = useHistory();
   const dispatch = useDispatch();
-  const url = location.search.split("?")[1];
+  const url = location.search.substring(1);
 
   const [error, setError] = useState(null);
   const [selectedSection, setSelectedSection] = useState("Login");
