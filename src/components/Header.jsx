@@ -35,7 +35,7 @@ const Header = ({ history, location }) => {
       <Container>
         <div
           className={`d-flex justify-content-between w-100 ${
-            !isLoggedIn() && "align-items-center"
+            !user && "align-items-center"
           }`}
         >
           <Link to="/">
@@ -49,7 +49,7 @@ const Header = ({ history, location }) => {
             </Navbar.Brand>
           </Link>
           <Nav>
-            {!isLoggedIn() ? (
+            {!user ? (
               <Link to={`/login?${location.pathname}`} className="nav-link">
                 <i className="fas fa-user"></i> Log In/Register
               </Link>

@@ -5,7 +5,6 @@ import { Row, Col, Form } from "react-bootstrap";
 import { addNewAppointment } from "../api/appointmentApi";
 import { hoursOfDay, convertToFullDate } from "../helpers/dateHandlers";
 import { useSelector } from "react-redux";
-import { isLoggedIn } from "../helpers/helperFuctions";
 import { useHistory } from "react-router";
 import { getHospitalStaff } from "../api/staffMembersApi";
 import Toaster from "./Toaster";
@@ -69,7 +68,7 @@ const SchedueleAppointment = ({
 
   return (
     <div style={{ background: "#ddf4f5" }} className="my-5">
-      {!isLoggedIn() ? (
+      {!user ? (
         <div className="p-4 text-center" style={{ color: "#ff804a" }}>
           <h6>You need to be logged in to make an appointment</h6>
           <button
