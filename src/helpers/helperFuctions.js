@@ -22,5 +22,5 @@ export const roundedAvg = (array) => {
 export const isLoggedIn = () => {
   const isLoggedIn = localStorage.getItem("LoggedIn");
 
-  return isLoggedIn;
+  return isLoggedIn === "true" ? true : false;
 };

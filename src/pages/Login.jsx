@@ -93,7 +93,7 @@ const Login = ({ history, location }) => {
 
                 localStorage.setItem("LoggedIn", true);
 
-                if (isLoggedIn() === "true") {
+                if (isLoggedIn()) {
                   setStoreUser();
                   history.push(url);
                 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link, withRouter, useHistory, useLocation } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { isLoggedIn } from "../helpers/helperFuctions";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById, logOutUser } from "../api/usersApi";
@@ -13,7 +13,7 @@ const Header = ({ history, location }) => {
   const [showDropDown, setShowDropDown] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn() === "true") {
+    if (isLoggedIn()) {
       dispatch(async (dispatch) => {
         try {
           const response = await getUserById("me");
@@ -35,7 +35,7 @@ const Header = ({ history, location }) => {
       <Container>
         <div
           className={`d-flex justify-content-between w-100 ${
-            isLoggedIn() === "false" && "align-items-center"
+            !isLoggedIn() && "align-items-center"
           }`}
         >
           <Link to="/">
@@ -49,7 +49,7 @@ const Header = ({ history, location }) => {
             </Navbar.Brand>
           </Link>
           <Nav>
-            {isLoggedIn() === "false" ? (
+            {!isLoggedIn() ? (
               <Link to={`/login?${location.pathname}`} className="nav-link">
                 <i className="fas fa-user"></i> Log In/Register
               </Link>
