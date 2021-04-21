@@ -83,3 +83,12 @@ export const getDoctorsAndClinics = async (query) => {
   );
   return response;
 };
+
+export const addAllowedUser = async (id) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BE_URL}/api/users/${id}/addAllowedUser`,
+    {},
+    { withCredentials: true }
+  );
+  return response;
+};

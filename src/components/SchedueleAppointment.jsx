@@ -80,7 +80,11 @@ const SchedueleAppointment = ({
 
   return (
     <div style={{ background: "#ddf4f5" }} className="my-5">
-      <ModalAllowUser show={show} handleClose={() => setShow(false)} />
+      <ModalAllowUser
+        show={show}
+        handleClose={() => setShow(false)}
+        profileId={profile._id}
+      />
       {!user ? (
         <div className="p-4 text-center" style={{ color: "#ff804a" }}>
           <h6>You need to be logged in to make an appointment</h6>

@@ -1,7 +1,20 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import { addAllowedUser } from "../api/usersApi";
 
-const ModalAllowUser = ({ show, handleClose }) => {
+const ModalAllowUser = ({ show, handleClose, profileId }) => {
+  const addDoctorToAllowedUserList = async () => {
+    try {
+      const response = await addAllowedUser(profileId);
+
+      if (response.status === 201) {
+        handleClose();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton></Modal.Header>
@@ -12,7 +25,7 @@ const ModalAllowUser = ({ show, handleClose }) => {
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
         <div className="d-flex justify-content-between w-50">
-          <Button variant="success" onClick={handleClose}>
+          <Button variant="success" onClick={addDoctorToAllowedUserList}>
             Yes
           </Button>
           <Button variant="danger" onClick={handleClose}>
