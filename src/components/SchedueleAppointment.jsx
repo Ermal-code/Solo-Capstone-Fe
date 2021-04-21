@@ -20,7 +20,6 @@ const SchedueleAppointment = ({
   const [hours, setHours] = useState([]);
   const [hour, setHour] = useState(null);
   const [fullDate, setFullDate] = useState("");
-  const [showMore, setShowMore] = useState(false);
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [doctor, setDoctor] = useState("");
   const [staff, setStaff] = useState([]);
@@ -179,15 +178,7 @@ const SchedueleAppointment = ({
                   </Col>
                 )}
                 {hours.map((h, index) => (
-                  <Col
-                    xs={4}
-                    sm={3}
-                    key={index}
-                    className="mb-4 getBiger"
-                    style={{
-                      display: !showMore && index > 3 ? "none" : "block",
-                    }}
-                  >
+                  <Col xs={4} sm={3} key={index} className="mb-4 getBiger">
                     <p
                       className={`${
                         h === hour ? "hoursOfDaySelected" : "hoursOfDay"
@@ -198,16 +189,6 @@ const SchedueleAppointment = ({
                     </p>
                   </Col>
                 ))}
-                {hours.length > 4 && (
-                  <Col xs="12" className="text-center border-top border-muted">
-                    <i
-                      className={`fas fa-chevron-${
-                        !showMore ? "down" : "up"
-                      } fa-2x `}
-                      onClick={() => setShowMore(!showMore)}
-                    ></i>
-                  </Col>
-                )}
               </Row>
               {hours.length > 0 && (
                 <div className="text-center mt-4">
