@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { getHospitalStaff } from "../api/staffMembersApi";
 import Toaster from "./Toaster";
+import ModalAllowUser from "./ModalAllowUser";
 
 const SchedueleAppointment = ({
   profile,
@@ -26,6 +27,17 @@ const SchedueleAppointment = ({
   const [reason, setReason] = useState("");
   const [type, setType] = useState("");
   const [toaster, setToaster] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const findAllowedUser = () => {
+    const allowedUser = user.allowedUsers.find(
+      (allowed) => allowed === profile._id
+    );
+
+    if (!allowedUser) {
+      setShow(true);
+    }
+  };
 
   const submitAppointment = async () => {
     setIsSubmiting(true);
@@ -47,10 +59,11 @@ const SchedueleAppointment = ({
         setTimeout(() => {
           setToaster(false);
         }, 4000);
+        findAllowedUser();
       }
     } catch (error) {
       setIsSubmiting(false);
-      console.log(error.response.data);
+      // console.log(error.response.data);
     }
   };
 
@@ -67,6 +80,7 @@ const SchedueleAppointment = ({
 
   return (
     <div style={{ background: "#ddf4f5" }} className="my-5">
+      <ModalAllowUser show={show} handleClose={() => setShow(false)} />
       {!user ? (
         <div className="p-4 text-center" style={{ color: "#ff804a" }}>
           <h6>You need to be logged in to make an appointment</h6>
