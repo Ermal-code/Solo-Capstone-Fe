@@ -16,7 +16,7 @@ function App() {
     <div>
       <Router>
         <Header />
-        <Container style={{ minHeight: "80vh" }}>
+        <Container style={{ minHeight: "85vh" }}>
           <Route path="/login" exact component={Login} />
           <Route path="/" exact component={Home} />
           <Route
