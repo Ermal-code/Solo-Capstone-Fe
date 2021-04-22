@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Row, Form, Col, Alert } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import { getUserById, loginUser, registerUser } from "../api/usersApi";
 import MemoLoginIlustrationSvg from "../svg/LoginIlustrationSvg";
 import { Formik, Field } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "../helpers/helperFuctions";
 import MemoGoogleSvg from "../svg/googleSvg";
 
 const Login = ({ history, location }) => {
   const dispatch = useDispatch();
   const url = location.search.substring(1);
+  const user = useSelector((state) => state.user);
 
   const [error, setError] = useState(null);
   const [selectedSection, setSelectedSection] = useState("Login");
@@ -63,6 +63,12 @@ const Login = ({ history, location }) => {
       setSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      history.push("/");
+    }
+  }, [user]);
 
   return (
     <Row className="mb-5">
