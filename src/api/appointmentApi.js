@@ -18,23 +18,23 @@ export const getDoctorOrClinicAppointments = async (id) => {
 };
 
 export const getPatientAppointments = async (
-  setLoader,
-  setPatientAppointments
+  setPatientAppointments,
+  setLinks,
+  offset
 ) => {
   try {
-    setLoader && setLoader(true);
     const response = await axiosAuth.get(
-      `${process.env.REACT_APP_BE_URL}/api/appointments/patientAppointments`,
+      `${process.env.REACT_APP_BE_URL}/api/appointments/patientAppointments?limit=10&offset=${offset}`,
       { withCredentials: true }
     );
 
     if (response.statusText === "OK") {
-      setPatientAppointments(response.data);
-      setLoader && setLoader(false);
+      setPatientAppointments(response.data.appointments);
+      setLinks(response.data.links);
     }
   } catch (error) {
     console.log(error.response.data);
-    setLoader && setLoader(false);
+
     return error.response.data;
   }
 };

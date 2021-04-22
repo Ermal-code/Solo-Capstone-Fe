@@ -184,7 +184,7 @@ h6.selectedLoginNavbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: hsla(0, 0%, 0%, 0.017);
+  background-color: rgba(0, 0, 0, 0.017);
 }
 
 .shadow {
@@ -460,34 +460,35 @@ h6.selectedLoginNavbar {
 }
 
 .appointmentTable thead {
-  border: 1px solid #999999;
-  border: 1px solid #999999;
+  /* border: 1px solid #999999;
+  border: 1px solid #999999; */
 
   color: #5190d1;
-  background-color: #ddf4f5;
+  /* background-color: #ddf4f5; */
 }
 .appointmentTable thead th {
   padding: 10px 8px;
-  border-left: 1px solid #999999;
-  background-color: rgba(255, 255, 255, 0.415);
+  /* border-left: 1px solid #999999; */
+  /* background-color: rgba(255, 255, 255, 0.415); */
 }
 
-.appointmentTable thead th:last-of-type {
+/* .appointmentTable thead th:last-of-type {
   border-right: 1px solid #999999;
-}
+} */
 
 .appointmentTable tbody tr {
   border-bottom: 1px solid #999999;
 }
 
 .appointmentTable tbody tr td {
-  border-left: 1px solid #999999;
+  /* border-left: 1px solid #999999; */
+  padding: 15px 0;
   color: #999999;
 }
 
-.appointmentTable tbody tr td:last-of-type {
+/* .appointmentTable tbody tr td:last-of-type {
   border-right: 1px solid #999999;
-}
+} */
 
 .appointmentTable tbody tr:hover {
   border: 2px solid #999999;

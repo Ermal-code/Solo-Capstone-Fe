@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { getPatientAppointments } from "../api/appointmentApi";
-import Loader from "./Loader";
 import moment from "moment";
 import { Col, Form, Row } from "react-bootstrap";
 
 const PatientAppointments = () => {
   const [patientAppointments, setPatientAppointments] = useState([]);
-  const [loader, setLoader] = useState(true);
+  const [offset, setOffset] = useState(0);
+
   const [dropDownValue, setDropDownValue] = useState("Upcoming");
+  const [links, setLinks] = useState(null);
 
   useEffect(() => {
-    getPatientAppointments(setLoader, setPatientAppointments);
-  }, []);
+    getPatientAppointments(setPatientAppointments, setLinks, offset);
+  }, [offset]);
 
   const filterAppointments = () => {
     switch (dropDownValue) {
       case "Upcoming":
-        return [
+        let upcomingArray = [
           ...patientAppointments.filter(
             (appointment) =>
               moment(appointment.startDate).format() >= moment().format()
           ),
         ];
+
+        // if (upcomingArray.length === 0 && links.hasOwnProperty("last")) {
+        //   setOffset((previousOffset) => previousOffset + 10);
+        // }
+
+        return upcomingArray;
       case "Past":
         return [
           ...patientAppointments.filter(
@@ -54,9 +61,7 @@ const PatientAppointments = () => {
           </Form.Control>
         </Col>
       </Row>
-      {loader ? (
-        <Loader />
-      ) : filterAppointments().length > 0 ? (
+      {filterAppointments().length > 0 ? (
         <div>
           <table className="w-100 appointmentTable">
             <thead className="text-center">
@@ -95,6 +100,28 @@ const PatientAppointments = () => {
               ))}
             </tbody>
           </table>
+          <div className="d-flex justify-content-between mt-3">
+            <button
+              className="blueButtonV2"
+              onClick={() => setOffset((prevOffset) => prevOffset - 10)}
+              style={{
+                visibility: links.hasOwnProperty("first")
+                  ? "visible"
+                  : "hidden",
+              }}
+            >
+              Previous
+            </button>
+            <button
+              className="blueButtonV2"
+              onClick={() => setOffset((prevOffset) => prevOffset + 10)}
+              style={{
+                visibility: links.hasOwnProperty("last") ? "visible" : "hidden",
+              }}
+            >
+              Next
+            </button>
+          </div>
         </div>
       ) : (
         <div
