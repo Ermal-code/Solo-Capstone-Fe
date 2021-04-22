@@ -23,14 +23,6 @@ textarea {
   width: 70%;
 }
 
-@media (max-width: 768px) {
-  .loginNavbar {
-    width: 100%;
-    justify-content: center;
-    padding-left: 0;
-  }
-}
-
 .loginNavbar h6 {
   margin-bottom: 0;
   font-weight: normal;
@@ -613,6 +605,10 @@ h6.selectedLoginNavbar {
   margin-left: 15%;
 }
 
+.searchResultInput {
+  width: 50%;
+}
+
 .singleSearchResult {
   display: flex;
   justify-content: flex-start;
@@ -632,4 +628,31 @@ h6.selectedLoginNavbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .homePageSearch .input-group {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 10px;
+  }
+  .searchResultInput {
+    width: 100%;
+  }
+  .loginNavbar {
+    width: 100%;
+    justify-content: center;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .homePageSearch .input-group {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+  .homePageSearch .input-group input {
+    font-size: 14px;
+  }
 }

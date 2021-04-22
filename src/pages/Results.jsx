@@ -40,7 +40,7 @@ const Results = () => {
         </div>
       ) : (
         <div className="mt-5">
-          <InputGroup className="mb-md-5 w-50">
+          <InputGroup className="mb-md-5 searchResultInput">
             <FormControl
               placeholder="Search doctor by name or specialization"
               aria-label="Search doctor by name or specialization"
