@@ -458,37 +458,26 @@ h6.selectedLoginNavbar {
   color: #ff804a;
   border-bottom: 3px solid #ff804a;
 }
+.patientContent {
+  border-bottom-right-radius: 15px;
+  background: white;
+}
 
 .appointmentTable thead {
-  /* border: 1px solid #999999;
-  border: 1px solid #999999; */
-
   color: #5190d1;
-  /* background-color: #ddf4f5; */
 }
 .appointmentTable thead th {
   padding: 10px 8px;
-  /* border-left: 1px solid #999999; */
-  /* background-color: rgba(255, 255, 255, 0.415); */
 }
-
-/* .appointmentTable thead th:last-of-type {
-  border-right: 1px solid #999999;
-} */
 
 .appointmentTable tbody tr {
   border-bottom: 1px solid #999999;
 }
 
 .appointmentTable tbody tr td {
-  /* border-left: 1px solid #999999; */
   padding: 15px 0;
   color: #999999;
 }
-
-/* .appointmentTable tbody tr td:last-of-type {
-  border-right: 1px solid #999999;
-} */
 
 .appointmentTable tbody tr:hover {
   border: 2px solid #999999;
@@ -644,6 +633,9 @@ h6.selectedLoginNavbar {
     width: 100%;
     justify-content: center;
     padding-left: 0;
+  }
+  .patientContent {
+    border-bottom-left-radius: 15px;
   }
 }
 

@@ -11,35 +11,13 @@ const PatientAppointments = () => {
   const [links, setLinks] = useState(null);
 
   useEffect(() => {
-    getPatientAppointments(setPatientAppointments, setLinks, offset);
-  }, [offset]);
-
-  const filterAppointments = () => {
-    switch (dropDownValue) {
-      case "Upcoming":
-        let upcomingArray = [
-          ...patientAppointments.filter(
-            (appointment) =>
-              moment(appointment.startDate).format() >= moment().format()
-          ),
-        ];
-
-        // if (upcomingArray.length === 0 && links.hasOwnProperty("last")) {
-        //   setOffset((previousOffset) => previousOffset + 10);
-        // }
-
-        return upcomingArray;
-      case "Past":
-        return [
-          ...patientAppointments.filter(
-            (appointment) =>
-              moment(appointment.startDate).format() <= moment().format()
-          ),
-        ];
-      default:
-        return patientAppointments;
-    }
-  };
+    getPatientAppointments(
+      setPatientAppointments,
+      setLinks,
+      offset,
+      dropDownValue
+    );
+  }, [offset, dropDownValue]);
 
   return (
     <div className="mb-5">
@@ -52,6 +30,7 @@ const PatientAppointments = () => {
             as="select"
             value={dropDownValue}
             onChange={(e) => {
+              setOffset(0);
               setDropDownValue(e.currentTarget.value);
             }}
           >
@@ -61,7 +40,7 @@ const PatientAppointments = () => {
           </Form.Control>
         </Col>
       </Row>
-      {filterAppointments().length > 0 ? (
+      {patientAppointments.length > 0 ? (
         <div>
           <table className="w-100 appointmentTable">
             <thead className="text-center">
@@ -76,7 +55,7 @@ const PatientAppointments = () => {
             </thead>
 
             <tbody>
-              {filterAppointments().map((appointment, index) => (
+              {patientAppointments.map((appointment, index) => (
                 <tr
                   key={`${appointment._id}and${index}`}
                   className="text-center"
@@ -100,28 +79,32 @@ const PatientAppointments = () => {
               ))}
             </tbody>
           </table>
-          <div className="d-flex justify-content-between mt-3">
-            <button
-              className="blueButtonV2"
-              onClick={() => setOffset((prevOffset) => prevOffset - 10)}
-              style={{
-                visibility: links.hasOwnProperty("first")
-                  ? "visible"
-                  : "hidden",
-              }}
-            >
-              Previous
-            </button>
-            <button
-              className="blueButtonV2"
-              onClick={() => setOffset((prevOffset) => prevOffset + 10)}
-              style={{
-                visibility: links.hasOwnProperty("last") ? "visible" : "hidden",
-              }}
-            >
-              Next
-            </button>
-          </div>
+          {links && (
+            <div className="d-flex justify-content-between mt-3">
+              <button
+                className="blueButtonV2"
+                onClick={() => setOffset((prevOffset) => prevOffset - 10)}
+                style={{
+                  visibility: links.hasOwnProperty("first")
+                    ? "visible"
+                    : "hidden",
+                }}
+              >
+                Previous
+              </button>
+              <button
+                className="blueButtonV2"
+                onClick={() => setOffset((prevOffset) => prevOffset + 10)}
+                style={{
+                  visibility: links.hasOwnProperty("last")
+                    ? "visible"
+                    : "hidden",
+                }}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div

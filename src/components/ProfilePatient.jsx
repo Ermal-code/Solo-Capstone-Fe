@@ -14,11 +14,7 @@ const ProfilePatient = ({ profile }) => {
           setSelectedSection={setSelectedSection}
           selectedSection={selectedSection}
         />
-        <Col
-          md={9}
-          className="ml-0 shadow"
-          style={{ borderBottomRightRadius: "15px", background: "white" }}
-        >
+        <Col md={9} className="ml-0 shadow patientContent">
           {selectedSection === 2 && <PatientAppointments />}
           {selectedSection === 3 && (
             <PatientDocuments profileId={profile._id} />
