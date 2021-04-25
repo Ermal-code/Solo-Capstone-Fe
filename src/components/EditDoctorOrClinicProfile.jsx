@@ -37,9 +37,6 @@ const EditDoctorOrClinicProfile = ({ user }) => {
       const response = await editProfile(data);
 
       if (response.status === 200) {
-        const data = response.data;
-        console.log(data);
-
         history.push("/profile/me");
       }
     } catch (error) {
@@ -331,6 +328,7 @@ const EditDoctorOrClinicProfile = ({ user }) => {
                               })}
                               <button
                                 className="blueButtonV2"
+                                type="button"
                                 onClick={() =>
                                   arrayHelpers.push({
                                     day: "Monday",
@@ -386,6 +384,7 @@ const EditDoctorOrClinicProfile = ({ user }) => {
                                 </div>
                               ))}
                               <button
+                                type="button"
                                 className="blueButtonV2"
                                 onClick={() => arrayHelpers.push("")}
                               >
@@ -470,6 +469,7 @@ const EditDoctorOrClinicProfile = ({ user }) => {
                               )}
                               <button
                                 className="blueButtonV2"
+                                type="button"
                                 onClick={() => arrayHelpers.push("")}
                               >
                                 Add language

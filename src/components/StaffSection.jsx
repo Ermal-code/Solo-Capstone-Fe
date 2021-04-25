@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getHospitalStaff } from "../api/staffMembersApi";
 import Loader from "./Loader";
@@ -23,7 +23,11 @@ const StaffSection = ({ userId }) => {
 
   return (
     <>
-      {loader && <Loader />}
+      {loader && (
+        <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+          <Spinner variant="primary" animation="border" />
+        </div>
+      )}
       <ModalStaff
         handleClose={handleClose}
         show={show}
