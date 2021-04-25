@@ -101,9 +101,9 @@ const ModalStaff = ({ show, handleClose, staff, setStaff, addMember }) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-primary" onClick={handleClose}>
+          <button className="blueButtonV2" onClick={handleClose}>
             Close
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </div>
