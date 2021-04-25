@@ -4,7 +4,7 @@ import "./App.css";
 import RegisterDoctorOrClinic from "./components/RegisterDoctorOrClinic";
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
-import EditProfile from "./components/EditProfile";
+import EditProfile from "./pages/EditProfile";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import Results from "./pages/Results";

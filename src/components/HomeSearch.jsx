@@ -7,6 +7,14 @@ const HomeSearch = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [searchText, setSearchText] = useState("");
+
+  const handleEnterKey = (e) => {
+    if (e.keyCode === 13 || e.key === "Enter") {
+      dispatch({ type: "SET_SEARCH_TEXT", payload: searchText });
+      history.push("results");
+    }
+  };
+
   return (
     <Row>
       <Col sm="12" style={{ position: "relative" }} className="px-0">
@@ -26,6 +34,7 @@ const HomeSearch = () => {
               aria-label="Search doctor by name or specialization"
               aria-describedby="basic-addon2"
               value={searchText}
+              onKeyDown={handleEnterKey}
               onChange={(e) => setSearchText(e.currentTarget.value)}
               className="py-4"
             />

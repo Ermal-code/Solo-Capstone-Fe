@@ -32,6 +32,12 @@ const Results = () => {
     getDoctorsHospitals(searchQuery);
   }, []);
 
+  const handleEnterKey = (e) => {
+    if (e.keyCode === 13 || e.key === "Enter") {
+      getDoctorsHospitals(searchQuery);
+    }
+  };
+
   return (
     <div style={{ height: "90vh" }}>
       {loader ? (
@@ -46,6 +52,7 @@ const Results = () => {
               aria-label="Search doctor by name or specialization"
               aria-describedby="basic-addon2"
               value={searchQuery}
+              onKeyDown={handleEnterKey}
               onChange={(e) => setSearchQuery(e.currentTarget.value)}
               className="py-4"
             />

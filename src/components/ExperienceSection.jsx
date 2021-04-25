@@ -4,7 +4,7 @@ import ModalExperience from "./ModalExperience";
 import SingleExperienceOrEducation from "./SingleExperienceOrEducation";
 import { useSelector } from "react-redux";
 import { getEducations, deleteEducation } from "../api/educationApi";
-import Loader from "./Loader";
+import { Spinner } from "react-bootstrap";
 
 const ExperienceSection = ({ userId }) => {
   const user = useSelector((state) => state.user);
@@ -43,7 +43,9 @@ const ExperienceSection = ({ userId }) => {
       />
 
       {loader ? (
-        <Loader />
+        <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+          <Spinner variant="primary" animation="border" />
+        </div>
       ) : (
         <>
           <div className="d-flex justify-content-between">

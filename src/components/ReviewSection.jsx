@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { addReview, getReviews } from "../api/reviewsApi";
-import { FormControl, Button } from "react-bootstrap";
+import { FormControl, Button, Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ReviewText from "./ReviewText";
 import { addRate } from "../api/usersApi";
-import Loader from "./Loader";
 
 const ReviewSection = ({ profile, doctorAppointments }) => {
   const [reviews, setReviews] = useState([]);
@@ -153,7 +152,9 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
         </div>
       )}
       {loader ? (
-        <Loader />
+        <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+          <Spinner variant="primary" animation="border" />
+        </div>
       ) : reviews.length > 0 ? (
         <div className="pt-3 pb-5">
           {reviews.map((review, index) => (

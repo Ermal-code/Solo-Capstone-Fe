@@ -93,8 +93,9 @@ const Header = ({ history, location }) => {
                           onClick={() => {
                             localStorage.setItem("LoggedIn", false);
                             if (
-                              location.pathname === "/profile/me" &&
-                              user.role === "patient"
+                              (location.pathname === "/profile/me" &&
+                                user.role === "patient") ||
+                              location.pathname === `/editProfile/${user._id}`
                             ) {
                               history.push("/");
                             } else if (

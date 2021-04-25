@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Field, FieldArray } from "formik";
-import { Form, Col, Row, Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Form, Col, Row } from "react-bootstrap";
 import { getSpecializations } from "../api/specializationApi";
 import { editProfile } from "../api/usersApi";
 import { useHistory } from "react-router-dom";
 import { languageList } from "../helpers/laguageList";
 
-const EditProfile = () => {
+const EditDoctorOrClinicProfile = ({ user }) => {
   const history = useHistory();
   const [specializationList, setSpecializationList] = useState([]);
   const [registerErrors, setRegisterErrors] = useState([]);
-  const user = useSelector((state) => state.user);
 
   const fetchSpecializations = async () => {
     try {
@@ -410,4 +408,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditDoctorOrClinicProfile;
