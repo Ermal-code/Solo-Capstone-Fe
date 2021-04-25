@@ -619,6 +619,14 @@ h6.selectedLoginNavbar {
   justify-content: center;
   align-items: center;
 }
+.editProfileForm h4 {
+  color: #5190d1;
+}
+
+.editProfileForm h4:hover {
+  cursor: pointer;
+  color: #306187;
+}
 
 @media (max-width: 992px) {
   .searchResultInput {

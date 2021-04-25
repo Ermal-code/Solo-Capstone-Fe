@@ -58,6 +58,14 @@ const AboutSection = ({ profile }) => {
           <p>{profile.clinicOrHospital}</p>
         </>
       )}
+      {profile.street && (
+        <>
+          <h5 className="mt-4">Work address</h5>
+          <p>
+            {profile.street}, {profile.city}, {profile.state}
+          </p>
+        </>
+      )}
       <h5 className="mt-4">Working days and hours</h5>
       {groupBy(profile.workingHours, "day").map((day, index) => (
         <div

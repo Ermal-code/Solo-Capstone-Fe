@@ -51,15 +51,17 @@ const ExperienceSection = ({ userId }) => {
           <div className="d-flex justify-content-between">
             <h4 className="mt-4">Experience</h4>
             {user && userId === user._id && (
-              <h6
-                className="mt-4"
-                onClick={() => {
-                  setIsExperience(true);
-                  handleShow();
-                }}
-              >
-                Add experience
-              </h6>
+              <div>
+                <button
+                  className="blueButtonV2 mt-4"
+                  onClick={() => {
+                    setIsExperience(true);
+                    handleShow();
+                  }}
+                >
+                  Add experience
+                </button>
+              </div>
             )}
           </div>
           {experiences.map((experience, index) => (
@@ -79,15 +81,17 @@ const ExperienceSection = ({ userId }) => {
           <div className="d-flex justify-content-between">
             <h4 className="mt-4">Education</h4>
             {user && userId === user._id && (
-              <h6
-                className="mt-4"
-                onClick={() => {
-                  setIsExperience(false);
-                  handleShow();
-                }}
-              >
-                Add education
-              </h6>
+              <div>
+                <button
+                  className="blueButtonV2 mt-4"
+                  onClick={() => {
+                    setIsExperience(false);
+                    handleShow();
+                  }}
+                >
+                  Add experience
+                </button>
+              </div>
             )}
           </div>
           {educations.map((education, index) => (

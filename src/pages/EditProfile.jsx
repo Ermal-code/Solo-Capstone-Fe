@@ -5,13 +5,18 @@ import EditDoctorOrClinicProfile from "../components/EditDoctorOrClinicProfile";
 const EditProfile = () => {
   const user = useSelector((state) => state.user);
   return (
-    <div>
-      {user.role === "patient" ? (
-        <div></div>
-      ) : (
-        <EditDoctorOrClinicProfile user={user} />
-      )}
-    </div>
+    user && (
+      <div
+        style={{ borderRadius: "15px", background: "white" }}
+        className="my-5 py-3 px-2  px-md-0"
+      >
+        {user.role === "patient" ? (
+          <div></div>
+        ) : (
+          <EditDoctorOrClinicProfile user={user} />
+        )}
+      </div>
+    )
   );
 };
 
