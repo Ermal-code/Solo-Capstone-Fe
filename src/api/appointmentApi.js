@@ -21,9 +21,11 @@ export const getPatientAppointments = async (
   setPatientAppointments,
   setLinks,
   offset,
-  filterQuery
+  filterQuery,
+  setLoader
 ) => {
   try {
+    setLoader(true);
     const response = await axiosAuth.get(
       `${process.env.REACT_APP_BE_URL}/api/appointments/patientAppointments/${filterQuery}?limit=10&offset=${offset}`,
       { withCredentials: true }
@@ -32,11 +34,13 @@ export const getPatientAppointments = async (
     if (response.statusText === "OK") {
       setPatientAppointments(response.data.appointments);
       setLinks(response.data.links);
+      setLoader(false);
     }
   } catch (error) {
     console.log(error.response.data);
     setPatientAppointments([]);
     setLinks(null);
+    setLoader(false);
 
     return error.response.data;
   }

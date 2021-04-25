@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getPatientAppointments } from "../api/appointmentApi";
 import moment from "moment";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Form, Row, Spinner } from "react-bootstrap";
 
 const PatientAppointments = () => {
   const [patientAppointments, setPatientAppointments] = useState([]);
   const [offset, setOffset] = useState(0);
-
+  const [loader, setLoader] = useState(true);
   const [dropDownValue, setDropDownValue] = useState("Upcoming");
   const [links, setLinks] = useState(null);
 
@@ -15,7 +15,8 @@ const PatientAppointments = () => {
       setPatientAppointments,
       setLinks,
       offset,
-      dropDownValue
+      dropDownValue,
+      setLoader
     );
   }, [offset, dropDownValue]);
 
@@ -40,7 +41,11 @@ const PatientAppointments = () => {
           </Form.Control>
         </Col>
       </Row>
-      {patientAppointments.length > 0 ? (
+      {loader ? (
+        <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+          <Spinner variant="primary" animation="border" />
+        </div>
+      ) : patientAppointments.length > 0 ? (
         <div>
           <table className="w-100 appointmentTable">
             <thead className="text-center">
@@ -50,7 +55,7 @@ const PatientAppointments = () => {
                 <th>Reason</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Hospital/Clinic</th>
+                <th className="d-none d-sm-block">Hospital/Clinic</th>
               </tr>
             </thead>
 
@@ -74,7 +79,9 @@ const PatientAppointments = () => {
                     {moment(appointment.endDate).format("MMMM Do YYYY, HH:mm")}
                   </td>
 
-                  <td>{appointment.clinic ? appointment.clinic.name : "-"}</td>
+                  <td className="d-none d-sm-block">
+                    {appointment.clinic ? appointment.clinic.name : "-"}
+                  </td>
                 </tr>
               ))}
             </tbody>
