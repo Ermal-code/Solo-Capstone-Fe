@@ -58,7 +58,6 @@ const Login = ({ history, location }) => {
         }
       }
     } catch (error) {
-      console.log(error.response.data);
       setError(error.response.data);
       setSubmitting(false);
     }
@@ -78,7 +77,10 @@ const Login = ({ history, location }) => {
             className={` ${
               selectedSection === "Login" ? "selectedLoginNavbar" : ""
             }`}
-            onClick={(e) => setSelectedSection(e.currentTarget.innerText)}
+            onClick={(e) => {
+              setSelectedSection(e.currentTarget.innerText);
+              setError(null);
+            }}
           >
             Login
           </h6>
@@ -86,7 +88,10 @@ const Login = ({ history, location }) => {
             className={`ml-5 ${
               selectedSection === "Register" ? "selectedLoginNavbar" : ""
             }`}
-            onClick={(e) => setSelectedSection(e.currentTarget.innerText)}
+            onClick={(e) => {
+              setSelectedSection(e.currentTarget.innerText);
+              setError(null);
+            }}
           >
             Register
           </h6>
@@ -108,7 +113,6 @@ const Login = ({ history, location }) => {
             password: "",
             phone: "",
             gender: "",
-            birthdate: "",
           }}
           onSubmit={(data, { setSubmitting }) => {
             loginOrRegister(data, setSubmitting);
@@ -232,12 +236,11 @@ const Login = ({ history, location }) => {
                       </div>
                     </Form.Group>
                   </Form.Row>
-                  <Form.Row>
-                    <Form.Group as={Col} sm="7">
-                      <Form.Label className="mr-3">Birthdate</Form.Label>
-                      <Field name="birthdate" type="date" as={Form.Check} />
-                    </Form.Group>
-                  </Form.Row>{" "}
+                  {selectedSection === "Register" && error && (
+                    <Alert variant="danger" className="w-100 text-center">
+                      {error.message}
+                    </Alert>
+                  )}
                 </>
               )}
               <button

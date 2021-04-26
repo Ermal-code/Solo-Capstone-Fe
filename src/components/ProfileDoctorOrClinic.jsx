@@ -15,7 +15,9 @@ const ProfileDoctorOrClinic = ({ profile }) => {
 
   const getDoctorAppointments = async () => {
     try {
-      const response = await getDoctorOrClinicAppointments(profile._id);
+      const response = await getDoctorOrClinicAppointments(
+        `/doctorOrClinicAppointments/${profile._id}/none`
+      );
       if (response.statusText === "OK") {
         const appointments = response.data;
         setDoctorAppointments(appointments);

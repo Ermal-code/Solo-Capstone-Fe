@@ -30,6 +30,28 @@ const Header = ({ history, location }) => {
     }
   }, []);
 
+  const logOut = () => {
+    localStorage.setItem("LoggedIn", false);
+    if (
+      ((location.pathname === "/profile/me" ||
+        location.pathname === `/profile/${user._id}`) &&
+        user.role === "patient") ||
+      location.pathname === `/editProfile/${user._id}` ||
+      location.pathname === `/appointments/${user._id}`
+    ) {
+      history.push("/");
+    } else if (
+      location.pathname === "/profile/me" &&
+      (user.role === "doctor" || user.role === "clinic")
+    ) {
+      history.push("/profile/" + user._id);
+    }
+    dispatch({
+      type: "UNSET_USER",
+    });
+    logOutUser();
+  };
+
   return (
     <Navbar variant="dark" className="py-0 navBarHeader">
       <Container>
@@ -79,37 +101,21 @@ const Header = ({ history, location }) => {
                         </li>
                         <li
                           onClick={() =>
-                            history.push("/editProfile/" + user._id)
+                            history.push(`/editProfile/${user._id}`)
                           }
                         >
                           <i className="fas fa-user-cog"></i> Account
                         </li>
                         {user.role !== "patient" && (
-                          <li>
+                          <li
+                            onClick={() =>
+                              history.push(`/appointments/${user._id}`)
+                            }
+                          >
                             <i className="fas fa-calendar-alt"></i> Appointments
                           </li>
                         )}
-                        <li
-                          onClick={() => {
-                            localStorage.setItem("LoggedIn", false);
-                            if (
-                              (location.pathname === "/profile/me" &&
-                                user.role === "patient") ||
-                              location.pathname === `/editProfile/${user._id}`
-                            ) {
-                              history.push("/");
-                            } else if (
-                              location.pathname === "/profile/me" &&
-                              (user.role === "doctor" || user.role === "clinic")
-                            ) {
-                              history.push("/profile/" + user._id);
-                            }
-                            dispatch({
-                              type: "UNSET_USER",
-                            });
-                            logOutUser();
-                          }}
-                        >
+                        <li onClick={() => logOut()}>
                           <i className="fas fa-door-open"></i> Log out
                         </li>
                       </ul>

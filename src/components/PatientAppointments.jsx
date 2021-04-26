@@ -5,20 +5,16 @@ import { Col, Form, Row, Spinner } from "react-bootstrap";
 
 const PatientAppointments = () => {
   const [patientAppointments, setPatientAppointments] = useState([]);
-  const [offset, setOffset] = useState(0);
   const [loader, setLoader] = useState(true);
   const [dropDownValue, setDropDownValue] = useState("Upcoming");
   const [links, setLinks] = useState(null);
+  const [url, setUrl] = useState(
+    `/patientAppointments/${dropDownValue}?limit=10&offset=0`
+  );
 
   useEffect(() => {
-    getPatientAppointments(
-      setPatientAppointments,
-      setLinks,
-      offset,
-      dropDownValue,
-      setLoader
-    );
-  }, [offset, dropDownValue]);
+    getPatientAppointments(setPatientAppointments, setLinks, url, setLoader);
+  }, [url]);
 
   return (
     <div className="mb-5">
@@ -31,7 +27,9 @@ const PatientAppointments = () => {
             as="select"
             value={dropDownValue}
             onChange={(e) => {
-              setOffset(0);
+              setUrl(
+                `/patientAppointments/${e.currentTarget.value}?limit=10&offset=0`
+              );
               setDropDownValue(e.currentTarget.value);
             }}
           >
@@ -90,7 +88,7 @@ const PatientAppointments = () => {
             <div className="d-flex justify-content-between mt-3">
               <button
                 className="blueButtonV2"
-                onClick={() => setOffset((prevOffset) => prevOffset - 10)}
+                onClick={() => setUrl(links.prev)}
                 style={{
                   visibility: links.hasOwnProperty("first")
                     ? "visible"
@@ -101,7 +99,7 @@ const PatientAppointments = () => {
               </button>
               <button
                 className="blueButtonV2"
-                onClick={() => setOffset((prevOffset) => prevOffset + 10)}
+                onClick={() => setUrl(links.next)}
                 style={{
                   visibility: links.hasOwnProperty("last")
                     ? "visible"

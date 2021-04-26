@@ -10,9 +10,10 @@ export const addNewAppointment = async (body) => {
   return response;
 };
 
-export const getDoctorOrClinicAppointments = async (id) => {
-  const response = await axios.get(
-    `${process.env.REACT_APP_BE_URL}/api/appointments/doctorOrClinicAppointments/${id}`
+export const getDoctorOrClinicAppointments = async (query) => {
+  const response = await axiosAuth.get(
+    `${process.env.REACT_APP_BE_URL}/api/appointments${query}`,
+    { withCredentials: true }
   );
   return response;
 };
@@ -20,27 +21,26 @@ export const getDoctorOrClinicAppointments = async (id) => {
 export const getPatientAppointments = async (
   setPatientAppointments,
   setLinks,
-  offset,
-  filterQuery,
+  url,
   setLoader
 ) => {
   try {
-    setLoader(true);
+    setLoader && setLoader(true);
     const response = await axiosAuth.get(
-      `${process.env.REACT_APP_BE_URL}/api/appointments/patientAppointments/${filterQuery}?limit=10&offset=${offset}`,
+      `${process.env.REACT_APP_BE_URL}/api/appointments${url}`,
       { withCredentials: true }
     );
 
     if (response.statusText === "OK") {
       setPatientAppointments(response.data.appointments);
       setLinks(response.data.links);
-      setLoader(false);
+      setLoader && setLoader(false);
     }
   } catch (error) {
     console.log(error.response.data);
     setPatientAppointments([]);
     setLinks(null);
-    setLoader(false);
+    setLoader && setLoader(false);
 
     return error.response.data;
   }

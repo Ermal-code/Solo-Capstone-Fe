@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Results from "./pages/Results";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
+import Appointments from "./pages/Appointments";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/profile/:id" exact component={Profile} />
           <Route path="/results" exact component={Results} />
           <Route path="/editProfile/:id" exact component={EditProfile} />
+          <Route path="/appointments/:id" exact component={Appointments} />
         </Container>
         <Footer />
       </Router>
