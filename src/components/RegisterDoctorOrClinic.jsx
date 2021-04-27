@@ -201,7 +201,10 @@ const RegisterDoctorOrClinic = ({
                     <Field
                       name="specialization"
                       as="select"
-                      className="form-control"
+                      className={`form-control${errorHandlerForInput(
+                        "specialization",
+                        error
+                      )}`}
                     >
                       <option value="">Choose specialization</option>
                       {specializationList.map((specialization, index) => (
@@ -213,6 +216,7 @@ const RegisterDoctorOrClinic = ({
                         </option>
                       ))}
                     </Field>
+                    {errorHandlerText("specialization", error)}
                   </Form.Group>
                 </Form.Row>
                 {roleType === "doctor" && (
