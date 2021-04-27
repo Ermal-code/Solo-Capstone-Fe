@@ -6,7 +6,7 @@ import { editProfile } from "../api/usersApi";
 import { useHistory } from "react-router-dom";
 import { languageList } from "../helpers/laguageList";
 
-const EditDoctorOrClinicProfile = ({ user }) => {
+const EditDoctorOrClinicProfile = ({ user, setStoreUser }) => {
   const history = useHistory();
   const [specializationList, setSpecializationList] = useState([]);
   const [registerErrors, setRegisterErrors] = useState([]);
@@ -37,6 +37,7 @@ const EditDoctorOrClinicProfile = ({ user }) => {
       const response = await editProfile(data);
 
       if (response.status === 200) {
+        setStoreUser();
         history.push("/profile/me");
       }
     } catch (error) {

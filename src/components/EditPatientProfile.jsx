@@ -9,7 +9,7 @@ import {
   surgicalInterventionsList,
 } from "../helpers/medicalArrays";
 
-const EditPatientProfile = ({ user }) => {
+const EditPatientProfile = ({ user, setStoreUser }) => {
   const history = useHistory();
   const [sectionSelector, setSectionSelector] = useState("General");
   const [registerErrors, setRegisterErrors] = useState([]);
@@ -21,6 +21,7 @@ const EditPatientProfile = ({ user }) => {
       const response = await editProfile(data);
 
       if (response.status === 200) {
+        setStoreUser();
         history.push("/profile/me");
       }
     } catch (error) {
