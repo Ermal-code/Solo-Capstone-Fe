@@ -205,7 +205,6 @@ const RegisterDoctorOrClinic = ({
                                 name={`specialization.${index}`}
                                 as="select"
                                 className="form-control"
-                                required
                               >
                                 <option value="">Choose specialization</option>
                                 {specializationList.map(
