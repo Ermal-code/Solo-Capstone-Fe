@@ -201,7 +201,7 @@ const RegisterDoctorOrClinic = ({
                     <Field
                       name="specialization"
                       as="select"
-                      className={`form-control${errorHandlerForInput(
+                      className={`form-control ${errorHandlerForInput(
                         "specialization",
                         error
                       )}`}
