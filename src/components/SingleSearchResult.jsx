@@ -6,7 +6,7 @@ const SingleSearchResult = ({ docOrhosp }) => {
   const history = useHistory();
   return (
     <div
-      className="singleSearchResult mt-4"
+      className="singleSearchResult mt-4 shadow"
       onClick={() => history.push(`/profile/${docOrhosp._id}`)}
     >
       <div>

@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Field, FieldArray } from "formik";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col } from "react-bootstrap";
 import { registerUser } from "../api/usersApi";
 import { getSpecializations } from "../api/specializationApi";
+import { isLoggedIn } from "../helpers/helperFuctions";
+import {
+  errorHandlerForInput,
+  errorHandlerText,
+} from "../helpers/helperFuctions";
 
-const RegisterDoctorOrClinic = () => {
-  const [roleType, setRoleType] = useState({ role: "", isTrue: false });
+const RegisterDoctorOrClinic = ({
+  setError,
+  setRegisterDoctor,
+  setStoreUser,
+  history,
+  url,
+  error,
+}) => {
+  const [roleType, setRoleType] = useState("");
   const [specializationList, setSpecializationList] = useState([]);
-  const [registerErrors, setRegisterErrors] = useState([]);
 
   const fetchSpecializations = async () => {
     try {
@@ -20,338 +31,233 @@ const RegisterDoctorOrClinic = () => {
     }
   };
 
+  const sumbitRegister = async (data, setSubmitting, resetForm) => {
+    try {
+      setSubmitting(true);
+      if (roleType === "clinic") {
+        delete data.surname;
+        delete data.gender;
+        delete data.clinicOrHospital;
+      }
+      if (data.gender === null) delete data.gender;
+
+      data.role = roleType;
+
+      const response = await registerUser(data);
+
+      if (response.status === 201) {
+        setSubmitting(false);
+        localStorage.setItem("LoggedIn", true);
+
+        if (isLoggedIn()) {
+          setStoreUser();
+          history.push(url);
+        }
+        resetForm();
+      }
+    } catch (error) {
+      setError(error.response.data);
+      setSubmitting(false);
+    }
+  };
+
   useEffect(() => {
     fetchSpecializations();
   }, []);
 
   return (
-    <Row className="my-5">
-      <Col sm={{ span: 10, offset: 1 }} md={{ span: 8, offset: 2 }}>
-        <Formik
-          initialValues={{
-            name: "",
-            surname: "",
-            email: "",
-            password: "",
-            phone: "",
-            gender: null,
-            birthdate: "",
-            workingHours: [{ day: "Monday", startHour: "", endHour: "" }],
-            specialization: [""],
-            clinicOrHospital: "",
-          }}
-          onSubmit={async (data, { setSubmitting, resetForm }) => {
-            try {
-              setSubmitting(true);
-              if (roleType.role === "clinic") {
-                delete data.surname;
-                delete data.gender;
-                delete data.birthdate;
-                delete data.clinicOrHospital;
-              }
-              if (data.gender === null) delete data.gender;
-
-              data.role = roleType.role;
-
-              const response = await registerUser(data);
-
-              if (response.status === 201) {
-                const data = response.data;
-                console.log(data);
-                setSubmitting(false);
-                resetForm();
-              }
-            } catch (error) {
-              console.log(error.response.data);
-              const errors = error.response.data;
-              setRegisterErrors(errors);
-              console.log(registerErrors);
-            }
-          }}
-        >
-          {({ values, isSubmitting, handleSubmit }) => (
-            <Form onSubmit={handleSubmit}>
-              <Form.Row className="align-items-center mb-4">
-                <Col xs={5} sm={3}>
-                  <Form.Label> Select type of user</Form.Label>
-                </Col>
-                <Col xs={6} sm={4}>
-                  <Form.Control
-                    name="role"
-                    as="select"
-                    onChange={(e) => {
-                      setRoleType({
-                        role: e.currentTarget.value,
-                        isTrue: e.currentTarget.value !== "0" ? true : false,
-                      });
-                    }}
-                  >
-                    <option value="0">Choose type</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="clinic">Clinic/Hospital</option>
-                  </Form.Control>
-                </Col>
-              </Form.Row>
-              {roleType.isTrue && (
-                <>
-                  <Form.Row>
-                    <Form.Group as={Col} xs={10} sm="5">
-                      <Form.Label>
-                        {roleType.role === "doctor" ? "First name" : "Name"}
-                      </Form.Label>
+    <Col
+      xs={{ span: 10, offset: 1 }}
+      md={{ span: 5, offset: 0 }}
+      lg="4"
+      className="mt-5"
+      style={{ background: "#ddf4f5" }}
+    >
+      <div className="registerDoctorOrClinic mt-4 px-3">
+        <p>
+          Are you a patient?{" "}
+          <strong onClick={setRegisterDoctor}>Click here</strong>
+        </p>
+      </div>
+      <Formik
+        initialValues={{
+          name: "",
+          surname: "",
+          email: "",
+          password: "",
+          gender: null,
+          specialization: [""],
+          clinicOrHospital: "",
+        }}
+        onSubmit={(data, { setSubmitting, resetForm }) => {
+          sumbitRegister(data, setSubmitting, resetForm);
+        }}
+      >
+        {({ values, isSubmitting, handleSubmit }) => (
+          <Form onSubmit={handleSubmit} className="mt-2 px-3">
+            <Form.Row className="align-items-center mb-4">
+              <Col xs={12}>
+                <Form.Control
+                  name="role"
+                  as="select"
+                  onChange={(e) => {
+                    setRoleType(e.currentTarget.value);
+                  }}
+                >
+                  <option value="">Choose type of user</option>
+                  <option value="doctor">Doctor</option>
+                  <option value="clinic">Clinic/Hospital</option>
+                </Form.Control>
+              </Col>
+            </Form.Row>
+            {roleType && (
+              <>
+                <Form.Row>
+                  <Form.Group as={Col} xs={12}>
+                    <Field
+                      placeholder={`${
+                        roleType === "doctor" ? "First name" : "Name"
+                      }`}
+                      name="name"
+                      type="text"
+                      as={Form.Control}
+                      className={errorHandlerForInput("name", error)}
+                    />
+                    {errorHandlerText("name", error)}
+                  </Form.Group>
+                  {roleType === "doctor" && (
+                    <Form.Group as={Col} xs={12}>
                       <Field
-                        placeholder={`Type your ${
-                          roleType.role === "doctor" ? "first name" : "name"
-                        }`}
-                        name="name"
+                        placeholder="Last name"
+                        name="surname"
                         type="text"
                         as={Form.Control}
+                        className={errorHandlerForInput("surname", error)}
                       />
+                      {errorHandlerText("surname", error)}
                     </Form.Group>
-                    {roleType.role === "doctor" && (
-                      <Form.Group as={Col} xs={10} sm="5">
-                        <Form.Label>Last name</Form.Label>
-                        <Field
-                          placeholder="Type your last name"
-                          name="surname"
-                          type="text"
-                          as={Form.Control}
-                        />
-                      </Form.Group>
-                    )}
-                  </Form.Row>
-                  <Form.Row>
-                    <Form.Group as={Col} xs={10} sm="5">
-                      <Form.Label>Email</Form.Label>
-                      <Field
-                        placeholder="Type your email"
-                        name="email"
-                        type="email"
-                        as={Form.Control}
-                      />
-                    </Form.Group>
-
-                    <Form.Group as={Col} xs={10} sm="5">
-                      <Form.Label>Password</Form.Label>
-                      <Field
-                        placeholder="Type your password"
-                        name="password"
-                        type="password"
-                        as={Form.Control}
-                      />
-                    </Form.Group>
-                  </Form.Row>
-                  <Form.Row>
-                    <Form.Group as={Col} xs={10} sm="5">
-                      <Form.Label>Phone</Form.Label>
-                      <Field
-                        placeholder="Type your phone number"
-                        name="phone"
-                        type="text"
-                        as={Form.Control}
-                      />
-                    </Form.Group>
-                  </Form.Row>
-                  {roleType.role === "doctor" && (
-                    <>
-                      <Form.Row>
-                        <Form.Group as={Col} xs={8} sm={6}>
-                          <Form.Label>Gender</Form.Label>
-                          <div className="d-flex justify-content-between">
-                            <Field
-                              name="gender"
-                              type="radio"
-                              as={Form.Check}
-                              value="male"
-                              label="Male"
-                            />
-                            <Field
-                              name="gender"
-                              type="radio"
-                              as={Form.Check}
-                              value="female"
-                              label="Female"
-                            />
-                            <Field
-                              name="gender"
-                              type="radio"
-                              as={Form.Check}
-                              value="Other"
-                              label="Other"
-                            />
-                          </div>
-                        </Form.Group>
-                      </Form.Row>
-                      <Form.Row>
-                        <Form.Group as={Col} sm="7">
-                          <Form.Label className="mr-3">Birthdate</Form.Label>
-                          <Field name="birthdate" type="date" />
-                        </Form.Group>
-                      </Form.Row>
-                    </>
                   )}
-                  <Form.Row>
-                    <Form.Group as={Col} sm="10">
-                      <Form.Label className="mr-5">
-                        Select working days and hours
-                      </Form.Label>
+                </Form.Row>
+                <Form.Row>
+                  <Form.Group as={Col} xs={12}>
+                    <Field
+                      placeholder="Email"
+                      name="email"
+                      type="email"
+                      as={Form.Control}
+                      className={errorHandlerForInput("email", error)}
+                    />
+                    {errorHandlerText("email", error)}
+                  </Form.Group>
 
-                      <FieldArray name="workingHours">
-                        {(arrayHelpers) => (
-                          <>
-                            {values.workingHours.map((hour, index) => {
-                              return (
-                                <Row
-                                  key={`${hour}${index}`}
-                                  className="align-items-center mb-3"
-                                >
-                                  <Col xs={4}>
-                                    <Form.Label>Day</Form.Label>
-                                    <Field
-                                      name={`workingHours.${index}.day`}
-                                      as="select"
-                                      className="form-control"
-                                    >
-                                      {[
-                                        "Monday",
-                                        "Tuesday",
-                                        "Wednesday",
-                                        "Thursday",
-                                        "Friday",
-                                        "Saturday",
-                                        "Sunday",
-                                      ].map((day, index) => (
-                                        <option
-                                          key={`${day}and${index}`}
-                                          value={day}
-                                        >
-                                          {day}
-                                        </option>
-                                      ))}
-                                    </Field>
-                                  </Col>
-                                  <Col xs={3}>
-                                    <Form.Label>Opening</Form.Label>
-                                    <div>
-                                      <Field
-                                        type="time"
-                                        name={`workingHours.${index}.startHour`}
-                                      ></Field>
-                                    </div>
-                                  </Col>
-                                  <Col xs={3}>
-                                    <Form.Label>Closing</Form.Label>
-                                    <div>
-                                      <Field
-                                        type="time"
-                                        name={`workingHours.${index}.endHour`}
-                                      ></Field>
-                                    </div>
-                                  </Col>
-                                  <Col xs={2} style={{ textAlign: "right" }}>
-                                    <i
-                                      className="fas fa-trash-alt mt-4"
-                                      onClick={() => arrayHelpers.remove(index)}
-                                    ></i>
-                                  </Col>
-                                </Row>
-                              );
-                            })}
-                            <Button
-                              variant="outline-dark"
-                              onClick={() =>
-                                arrayHelpers.push({
-                                  day: "Monday",
-                                  startHour: "",
-                                  endHour: "",
-                                })
-                              }
-                            >
-                              Add working days
-                            </Button>
-                          </>
-                        )}
-                      </FieldArray>
-                    </Form.Group>
-                  </Form.Row>
-                  <Form.Row>
-                    <Form.Group as={Col} sm="10">
-                      <Form.Label className="mr-5">
-                        Select specializations
-                      </Form.Label>
-                      <FieldArray name="specialization">
-                        {(arrayHelpers) => (
-                          <>
-                            {values.specialization.map((element, index) => (
-                              <div
-                                className="d-flex justify-content-between align-items-center mb-3"
-                                key={`${element}specialization${index}`}
-                              >
-                                <Field
-                                  name={`specialization.${index}`}
-                                  as="select"
-                                  className="form-control w-50 "
-                                >
-                                  <option value="">Choose options</option>
-                                  {specializationList.map(
-                                    (specialization, index) => (
-                                      <option
-                                        key={`${specialization._id}andofc${index}`}
-                                        value={specialization.field}
-                                      >
-                                        {specialization.field}
-                                      </option>
-                                    )
-                                  )}
-                                </Field>
-                                <i
-                                  className="fas fa-trash-alt"
-                                  onClick={() => arrayHelpers.remove(index)}
-                                ></i>
-                              </div>
-                            ))}
-                            <Button
-                              variant="outline-dark"
-                              onClick={() => arrayHelpers.push("")}
-                            >
-                              Add specialization
-                            </Button>
-                          </>
-                        )}
-                      </FieldArray>
-                    </Form.Group>
-                  </Form.Row>
-                  {roleType.role === "doctor" && (
+                  <Form.Group as={Col} xs={12}>
+                    <Field
+                      placeholder="Password"
+                      name="password"
+                      type="password"
+                      as={Form.Control}
+                      className={errorHandlerForInput("password", error)}
+                    />
+                    {errorHandlerText("password", error)}
+                  </Form.Group>
+                </Form.Row>
+
+                {roleType === "doctor" && (
+                  <>
                     <Form.Row>
-                      <Form.Group as={Col} md={6}>
-                        <Form.Label className="mr-5">
-                          Hospital or Clinic that you work for
-                        </Form.Label>
-                        <Field
-                          placeholder="Type your hospital or clinic"
-                          name="clinicOrHospital"
-                          type="text"
-                          as={Form.Control}
-                        />
+                      <Form.Group as={Col} xs={12}>
+                        <div className="d-flex justify-content-between">
+                          <Field
+                            name="gender"
+                            type="radio"
+                            as={Form.Check}
+                            value="male"
+                            label="Male"
+                          />
+                          <Field
+                            name="gender"
+                            type="radio"
+                            as={Form.Check}
+                            value="female"
+                            label="Female"
+                          />
+                          <Field
+                            name="gender"
+                            type="radio"
+                            as={Form.Check}
+                            value="Other"
+                            label="Other"
+                          />
+                        </div>
                       </Form.Group>
                     </Form.Row>
-                  )}
-                  <div>
-                    <button
-                      className="orangeButton"
-                      type="submit"
-                      disabled={isSubmitting}
-                    >
-                      Register
-                    </button>
-                  </div>
-                </>
-              )}
-            </Form>
-          )}
-        </Formik>
-      </Col>
-    </Row>
+                  </>
+                )}
+
+                <Form.Row>
+                  <Form.Group as={Col} sm="12">
+                    <FieldArray name="specialization">
+                      {(arrayHelpers) => (
+                        <>
+                          {values.specialization.map((element, index) => (
+                            <div key={`${element}specialization${index}`}>
+                              <Field
+                                name={`specialization.${index}`}
+                                as="select"
+                                className="form-control"
+                                required
+                              >
+                                <option value="">Choose specialization</option>
+                                {specializationList.map(
+                                  (specialization, index) => (
+                                    <option
+                                      key={`${specialization._id}andofc${index}`}
+                                      value={specialization.field}
+                                    >
+                                      {specialization.field}
+                                    </option>
+                                  )
+                                )}
+                              </Field>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </FieldArray>
+                  </Form.Group>
+                </Form.Row>
+                {roleType === "doctor" && (
+                  <Form.Row>
+                    <Form.Group as={Col} md={12}>
+                      <Field
+                        placeholder="Hospital or clinic"
+                        name="clinicOrHospital"
+                        type="text"
+                        as={Form.Control}
+                        className={errorHandlerForInput(
+                          "clinicOrHospital",
+                          error
+                        )}
+                      />
+                      {errorHandlerText("clinicOrHospital", error)}
+                    </Form.Group>
+                  </Form.Row>
+                )}
+                <div>
+                  <button
+                    className="orangeButton mb-5 mt-3 w-100"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    Register
+                  </button>
+                </div>
+              </>
+            )}
+          </Form>
+        )}
+      </Formik>
+    </Col>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Row, Form, Col, Alert } from "react-bootstrap";
-import { getUserById, loginUser, registerUser } from "../api/usersApi";
+import { Row, Col } from "react-bootstrap";
+import { getUserById } from "../api/usersApi";
 import MemoLoginIlustrationSvg from "../svg/LoginIlustrationSvg";
-import { Formik, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { isLoggedIn } from "../helpers/helperFuctions";
-import MemoGoogleSvg from "../svg/googleSvg";
+import LoginOrRegisterPatient from "../components/LoginOrRegisterPatient";
+import RegisterDoctorOrClinic from "../components/RegisterDoctorOrClinic";
 
 const Login = ({ history, location }) => {
   const dispatch = useDispatch();
@@ -14,6 +13,7 @@ const Login = ({ history, location }) => {
 
   const [error, setError] = useState(null);
   const [selectedSection, setSelectedSection] = useState("Login");
+  const [registerDoctor, setRegisterDoctor] = useState(false);
 
   const setStoreUser = () => {
     dispatch(async (dispatch) => {
@@ -29,38 +29,6 @@ const Login = ({ history, location }) => {
         console.log(error.response);
       }
     });
-  };
-
-  const loginOrRegister = async (data, setSubmitting) => {
-    try {
-      setSubmitting(true);
-      if (data.gender === "") {
-        delete data.gender;
-      }
-      let response;
-      if (selectedSection === "Login") {
-        response = await loginUser({
-          email: data.email,
-          password: data.password,
-        });
-      } else {
-        response = await registerUser(data);
-      }
-
-      if (response.status === 201) {
-        setSubmitting(false);
-
-        localStorage.setItem("LoggedIn", true);
-
-        if (isLoggedIn()) {
-          setStoreUser();
-          history.push(url);
-        }
-      }
-    } catch (error) {
-      setError(error.response.data);
-      setSubmitting(false);
-    }
   };
 
   useEffect(() => {
@@ -79,6 +47,7 @@ const Login = ({ history, location }) => {
             }`}
             onClick={(e) => {
               setSelectedSection(e.currentTarget.innerText);
+              setRegisterDoctor(false);
               setError(null);
             }}
           >
@@ -97,163 +66,33 @@ const Login = ({ history, location }) => {
           </h6>
         </div>
       </Col>
-
-      <Col
-        xs={{ span: 10, offset: 1 }}
-        md={{ span: 5, offset: 0 }}
-        lg="4"
-        className="mt-5"
-        style={{ background: "#ddf4f5" }}
-      >
-        <Formik
-          initialValues={{
-            name: "",
-            surname: "",
-            email: "",
-            password: "",
-            phone: "",
-            gender: "",
+      {!registerDoctor ? (
+        <LoginOrRegisterPatient
+          selectedSection={selectedSection}
+          error={error}
+          setRegisterDoctor={() => {
+            setRegisterDoctor(true);
+            setError(null);
           }}
-          onSubmit={(data, { setSubmitting }) => {
-            loginOrRegister(data, setSubmitting);
+          setStoreUser={setStoreUser}
+          history={history}
+          url={url}
+          setError={setError}
+        />
+      ) : (
+        <RegisterDoctorOrClinic
+          setError={setError}
+          setRegisterDoctor={() => {
+            setRegisterDoctor(false);
+            setError(null);
           }}
-        >
-          {({ values, isSubmitting, handleSubmit }) => (
-            <Form onSubmit={handleSubmit} className="mt-5 px-3">
-              <a href={`${process.env.REACT_APP_BE_URL}/api/users/googleLogin`}>
-                <button
-                  className="googleButton w-100"
-                  type="button"
-                  onClick={() => localStorage.setItem("LoggedIn", true)}
-                >
-                  <MemoGoogleSvg className="mr-3" /> Continue with Google
-                </button>
-              </a>
-              <div className="divider my-4 ">
-                <strong
-                  style={{
-                    background: "#ddf4f5",
-                    padding: "0 20px",
-                    color: "#aaa6a6",
-                    fontSize: "14px",
-                  }}
-                >
-                  OR
-                </strong>
-              </div>
-              {selectedSection === "Register" && (
-                <Form.Row>
-                  <Form.Group as={Col} xs={12}>
-                    <Field
-                      placeholder="First name"
-                      name="name"
-                      type="text"
-                      as={Form.Control}
-                    />
-                  </Form.Group>
+          setStoreUser={setStoreUser}
+          history={history}
+          url={url}
+          error={error}
+        />
+      )}
 
-                  <Form.Group as={Col} xs={12}>
-                    <Field
-                      placeholder="Last name"
-                      name="surname"
-                      type="text"
-                      as={Form.Control}
-                    />
-                  </Form.Group>
-                </Form.Row>
-              )}
-              <Form.Row>
-                <Form.Group as={Col} xs={12}>
-                  <Field
-                    placeholder="Email"
-                    name="email"
-                    type="email"
-                    as={Form.Control}
-                  />
-                  {selectedSection === "Login" && (
-                    <Form.Text className="text-muted">
-                      We'll never share your email with anyone else.
-                    </Form.Text>
-                  )}
-                </Form.Group>
-
-                <Form.Group as={Col} xs={12}>
-                  <Field
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                    as={Form.Control}
-                  />
-                </Form.Group>
-                {error && selectedSection === "Login" && (
-                  <Alert variant="danger" className="w-100 text-center">
-                    {error.message}
-                  </Alert>
-                )}
-              </Form.Row>
-              {selectedSection === "Login" && (
-                <p className="mt-3 text-center" style={{ color: "#1a73e8" }}>
-                  Forgot password?
-                </p>
-              )}
-              {selectedSection === "Register" && (
-                <>
-                  <Form.Row>
-                    <Form.Group as={Col} xs={12}>
-                      <Field
-                        placeholder="Phone number"
-                        name="phone"
-                        type="text"
-                        as={Form.Control}
-                      />
-                    </Form.Group>
-                  </Form.Row>
-                  <Form.Row>
-                    <Form.Group as={Col} xs={12}>
-                      <Form.Label>Gender</Form.Label>
-                      <div className="d-flex justify-content-between">
-                        <Field
-                          name="gender"
-                          type="radio"
-                          as={Form.Check}
-                          value="male"
-                          label="Male"
-                        />
-                        <Field
-                          name="gender"
-                          type="radio"
-                          as={Form.Check}
-                          value="female"
-                          label="Female"
-                        />
-                        <Field
-                          name="gender"
-                          type="radio"
-                          as={Form.Check}
-                          value="Other"
-                          label="Other"
-                        />
-                      </div>
-                    </Form.Group>
-                  </Form.Row>
-                  {selectedSection === "Register" && error && (
-                    <Alert variant="danger" className="w-100 text-center">
-                      {error.message}
-                    </Alert>
-                  )}
-                </>
-              )}
-              <button
-                className={`orangeButton mb-5 mt-3 w-100`}
-                disabled={isSubmitting}
-                type="submit"
-              >
-                {selectedSection}
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </Col>
       <Col md="7" className="d-none d-md-block ml-lg-4 mt-5">
         <MemoLoginIlustrationSvg />
       </Col>

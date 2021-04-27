@@ -28,6 +28,7 @@ const SchedueleAppointment = ({
   const [type, setType] = useState("");
   const [toaster, setToaster] = useState(false);
   const [show, setShow] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const findAllowedUser = () => {
     const allowedUser = user.allowedUsers.find(
@@ -42,28 +43,39 @@ const SchedueleAppointment = ({
   const submitAppointment = async () => {
     setIsSubmiting(true);
     try {
-      const response = await addNewAppointment({
+      const body = {
         startDate: fullDate,
         doctor: profile.role === "doctor" ? profile._id : doctor,
         patient: user._id,
-        clinic:
-          profile.role === "clinic" ? profile._id : "6070bf650b1ce657b8807ec8",
+        clinic: profile.role === "clinic" ? profile._id : null,
         type: type,
         reason: reason,
-      });
+      };
+      if (!body.clinic) {
+        delete body.clinic;
+      }
+
+      const response = await addNewAppointment(body);
       if (response.status === 201) {
+        setErrors([]);
         setToaster(true);
         getDoctorAppointments();
         setIsSubmiting(false);
         setHour(null);
+        findAllowedUser();
         setTimeout(() => {
           setToaster(false);
         }, 4000);
-        findAllowedUser();
       }
     } catch (error) {
       setIsSubmiting(false);
-      // console.log(error.response.data);
+      if (error.response.status === 400) {
+        setToaster(true);
+        setErrors(error.response.data.errors);
+        setTimeout(() => {
+          setToaster(false);
+        }, 6000);
+      }
     }
   };
 
@@ -99,7 +111,25 @@ const SchedueleAppointment = ({
         user &&
         profile._id !== user._id && (
           <>
-            {toaster && <Toaster text="Appointment was successfuly booked" />}
+            {toaster && (
+              <Toaster
+                text={
+                  errors.length > 0 ? (
+                    errors.map((err) => (
+                      <p className="text-left mb-1">
+                        {err.message}
+                        <br />
+                      </p>
+                    ))
+                  ) : (
+                    <p className="text-left mb-1">
+                      Appointment was successfuly booked
+                    </p>
+                  )
+                }
+                color={errors.length > 0 ? "#dc3545" : "#67d6d3"}
+              />
+            )}
 
             <div className="mt-5 p-3">
               {profile.role === "clinic" && (

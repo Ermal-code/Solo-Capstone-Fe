@@ -47,6 +47,13 @@ h6.selectedLoginNavbar {
   text-align: center;
 }
 
+.divider strong {
+  background: #ddf4f5;
+  padding: 0 20px;
+  color: #aaa6a6;
+  font-size: 14px;
+}
+
 .orangeButton,
 .blueButton,
 .blueButtonV2,
@@ -144,7 +151,6 @@ h6.selectedLoginNavbar {
 
 .Toaster {
   border-radius: 5px;
-  background-color: #67d6d3;
   position: fixed;
   top: 30px;
   right: 20px;
@@ -153,7 +159,7 @@ h6.selectedLoginNavbar {
   padding: 8px 15px;
   text-align: center;
   animation-name: showToaster;
-  animation-duration: 4000ms;
+  animation-duration: 6000ms;
   animation-timing-function: linear;
   animation-iteration-count: 1;
 }
@@ -187,7 +193,7 @@ h6.selectedLoginNavbar {
 }
 
 .shadow {
-  box-shadow: 0 0.5rem 1rem #1012276b !important;
+  box-shadow: 0 0.2rem 0.5rem -1px rgba(16, 18, 39, 0.42) !important;
 }
 
 .hoursOfDay,
@@ -534,6 +540,7 @@ h6.selectedLoginNavbar {
   height: 120px;
   width: 100%;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .patientDocument:hover {
@@ -555,6 +562,7 @@ h6.selectedLoginNavbar {
   align-items: center;
   color: rgb(240, 234, 234);
   display: none;
+  border-radius: 8px;
 }
 
 .patientDocument:hover div:first-of-type {
@@ -625,6 +633,34 @@ h6.selectedLoginNavbar {
 .editProfileForm h4:hover {
   cursor: pointer;
   color: #306187;
+}
+
+.registerDoctorOrClinic {
+  text-align: right;
+  margin-top: 0.8rem;
+  font-size: 14px;
+}
+.registerDoctorOrClinic p strong {
+  text-decoration: underline;
+  color: #1d75e8;
+}
+
+.registerDoctorOrClinic p strong:hover {
+  cursor: pointer;
+  color: #1e4679;
+}
+
+.errorText {
+  color: #dc3545;
+  text-align: center;
+  width: 100%;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.errorInput {
+  border: 1px solid #dc3545;
+  background-color: #dc354623;
 }
 
 @media (max-width: 992px) {

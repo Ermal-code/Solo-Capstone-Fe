@@ -29,7 +29,7 @@ const Appointments = ({ match, history }) => {
       setLinks(null);
       setLoader(false);
 
-      if (error.response.status === 403) {
+      if (error.response.status === 403 || error.response.status === 400) {
         history.push("/");
       }
     }

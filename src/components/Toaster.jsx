@@ -1,9 +1,9 @@
 import React from "react";
 
-const Toaster = ({ text }) => {
+const Toaster = ({ text, color }) => {
   return (
-    <div className="Toaster">
-      <p className="mb-0">{text}</p>
+    <div className="Toaster" style={{ background: color }}>
+      {text}
     </div>
   );
 };
