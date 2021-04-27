@@ -42,6 +42,8 @@ const RegisterDoctorOrClinic = ({
       if (data.gender === null) delete data.gender;
 
       data.role = roleType;
+      data.specialization = [data.specialization];
+      data.specialization === "" && delete data.specialization;
 
       const response = await registerUser(data);
 
@@ -196,33 +198,21 @@ const RegisterDoctorOrClinic = ({
 
                 <Form.Row>
                   <Form.Group as={Col} sm="12">
-                    <FieldArray name="specialization">
-                      {(arrayHelpers) => (
-                        <>
-                          {values.specialization.map((element, index) => (
-                            <div key={`${element}specialization${index}`}>
-                              <Field
-                                name={`specialization.${index}`}
-                                as="select"
-                                className="form-control"
-                              >
-                                <option value="">Choose specialization</option>
-                                {specializationList.map(
-                                  (specialization, index) => (
-                                    <option
-                                      key={`${specialization._id}andofc${index}`}
-                                      value={specialization.field}
-                                    >
-                                      {specialization.field}
-                                    </option>
-                                  )
-                                )}
-                              </Field>
-                            </div>
-                          ))}
-                        </>
-                      )}
-                    </FieldArray>
+                    <Field
+                      name="specialization"
+                      as="select"
+                      className="form-control"
+                    >
+                      <option value="">Choose specialization</option>
+                      {specializationList.map((specialization, index) => (
+                        <option
+                          key={`${specialization._id}andofc${index}`}
+                          value={specialization.field}
+                        >
+                          {specialization.field}
+                        </option>
+                      ))}
+                    </Field>
                   </Form.Group>
                 </Form.Row>
                 {roleType === "doctor" && (
