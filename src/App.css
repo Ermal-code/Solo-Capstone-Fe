@@ -656,6 +656,7 @@ h6.selectedLoginNavbar {
   width: 100%;
   font-weight: 500;
   margin-bottom: 2px;
+  font-size: 14px;
 }
 
 .errorInput {
