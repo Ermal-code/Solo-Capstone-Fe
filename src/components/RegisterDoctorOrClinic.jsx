@@ -86,7 +86,7 @@ const RegisterDoctorOrClinic = ({
           email: "",
           password: "",
           gender: null,
-          specialization: [""],
+          specialization: [],
           clinicOrHospital: "",
         }}
         onSubmit={(data, { setSubmitting, resetForm }) => {
