@@ -26,11 +26,13 @@ const SingleSearchResult = ({ docOrhosp }) => {
             {docOrhosp.name} {docOrhosp.surname && docOrhosp.surname}
           </h5>
           <h6>{docOrhosp.specialization[0]}</h6>
-          <h6 style={{ color: "#a0a0a0", minHeight: "50px" }}>
-            {docOrhosp.street}, {docOrhosp.city}
-            <br />
-            {docOrhosp.state}
-          </h6>
+          <div style={{ color: "#a0a0a0", minHeight: "50px" }}>
+            <h6>
+              {docOrhosp.street}, {docOrhosp.city}
+              <br />
+              {docOrhosp.state}
+            </h6>
+          </div>
         </div>
         <div className="d-none d-sm-block">
           {[1, 2, 3, 4, 5].map((star, index) => (
