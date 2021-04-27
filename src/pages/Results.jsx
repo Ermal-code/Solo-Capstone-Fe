@@ -39,7 +39,7 @@ const Results = () => {
   };
 
   return (
-    <div style={{ minHeight: "90vh" }}>
+    <div style={{ minHeight: "90vh" }} className="mb-5">
       {loader ? (
         <div className="waitingScreen">
           <Loader height="150px" />
