@@ -136,19 +136,20 @@ const ReviewSection = ({ profile, doctorAppointments }) => {
             }
             onChange={(e) => setReviewText(e.currentTarget.value)}
           />
-          <Button
-            variant="success"
-            className="mt-3"
-            disabled={
-              !user ||
-              doctorAppointments.filter(
-                (appointment) => appointment.patient._id === user._id
-              ).length === 0
-            }
-            onClick={() => submitReview()}
-          >
-            Submit
-          </Button>
+          <div className="d-flex justify-content-end">
+            <button
+              className="mt-3 blueButton"
+              disabled={
+                !user ||
+                doctorAppointments.filter(
+                  (appointment) => appointment.patient._id === user._id
+                ).length === 0
+              }
+              onClick={() => submitReview()}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       )}
       {loader ? (
